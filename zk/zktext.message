@@ -1,0 +1,928 @@
+prefix zk$text_
+ident <X01.00-01>
+
+message accepted_you
+<The !AD hands the !AD to you.>/fao=2
+message accepted
+<The !AD accepts the !AD.>/fao=4
+
+message a_object_here
+<There is a !AD here.>/fao=2/bold
+
+message an_object_here
+<There is an !AD here.>/fao=2/bold
+
+message a_text
+<A !AD>/fao=2
+
+message an_text
+<An !AD>/fao=2
+
+message already_closed
+<The !AD is already closed.>/fao=2
+
+message already_open
+<The !AD is already open.>/fao=2
+
+message already_there
+<It's already there!>
+
+message already_verb
+<The !AD is already !ADed.>/fao=4
+
+message ast_keyword1
+<Primary keyword !UL>/fao=1
+message ast_please_keyword1
+<PLEASE Primary keyword !UL>/fao=1
+
+message ast_keyword2
+<Primary keyword !UL, secondary keyword !UL>/fao=2
+message ast_please_keyword2
+<PLEASE Primary keyword !UL, secondary keyword !UL>/fao=2
+
+message ast_number
+<Number !SL>/fao=1
+
+message ast_object
+<Object named "!AD">/fao=2
+
+message ast_object_from
+<Object named "!AD" from "!AD">/fao=4
+
+message ast_string
+<String "!AD">/fao=2
+
+message attributes
+<[TMass=!SL, Str=!SL, Vol=!SL, RCap=!SL, Size=!SL, RArea=!SL]>
+/FAO=6
+
+message badge_start
+<             _______________________________________________________>
+<            '                                                       `>
+<            |    ZK and Sons Inc, Master Temporary Badge Builders   |>
+<            |                                                       |>
+message badge_middle
+<            |        Name:    !AD                          |>/fao=2
+<            |                _______________                        |>
+<            |                                                       |>
+<            |        Firm:    Self                                  |>
+<            |                _______________                        |>
+<            |                                                       |>
+<            |        Issued:  !11%D !-!5%T                     |>/fao=1
+<            |                _______________                        |>
+message badge_end
+<            |                                                       |>
+<            |     Please return to reception desk before leaving    |>
+<            |                                                       |>
+<            |     Use of this badge constitutes acceptance of the   |>
+<            |     terms and conditions of the hacking code of ZK,   |>
+<            |     as amended from time to time.  If found, please   |>
+<            |     drop in any TMPMBX.                               |>
+<            `_______________________________________________________'>
+
+message ball_dark
+<Nothing can be seen in the !AD.>/fao=2
+
+message ball_explodes
+<The glowing crystal ball begins to shine very brightly and a great deal>
+<of heat is dissipated until finally the crystal ball explodes violently,>
+<killing you in the process.>
+
+message ball_smashed
+<The crystal ball begins to glow very brightly and a great deal of heat is>
+<dissipated until it shatters into a cloud of tiny particles which drift away.>
+
+message being_carried
+<The !AD is carrying>/fao=2
+
+message being_worn
+<The !AD is wearing>/fao=2
+
+message broadcast_inside
+<You hear something over the building's intercom:>
+message broadcast_outside
+<You hear something from an external loudspeaker:>
+
+message bugcheck/reverse
+<Internal consistency failure.  Contact the implementors.>
+
+message cabinet
+<As you touch the cabinet, the lights in the building flicker and you hear>
+<a loud agonizing scream. The implementors, returning though a hitherto unknown>
+<passage, are appalled at your bravado. (It seems that an ACL was set on the>
+<cabinets). Having no pity, they quickly destroy you by executing ZAP and then>
+<proceed to slice you into little pieces.>
+
+message cant_carry
+<The !AD can't find enough room to carry the !AD.>/fao=4
+
+message cant_close
+<You can't close the !AD with that!!>/fao=2
+
+message cant_damage
+<You can't damage the !AD.>/fao=2
+
+message cant_drink
+<You can't drink the !AD!!>/fao=2
+
+message cant_do_that
+<The !AD says, 'I can't do that.'>/fao=2
+
+message cant_expand
+<The !AD: There's no room for the !AD to expand>/fao=4
+<         inside the !AD.>/fao=2
+
+message cant_give_to_object
+<You can't give anything to the !AD!!>/fao=2
+
+message cant_go_back
+<Fools rush in where angels fear to tread...>
+
+message cant_go_that_way
+<You can't go that way.>
+
+message cant_install
+<The software product installation program, ZKINSTALL, isn't running.>
+
+message cant_open
+<You can't open the !AD with that!!>/fao=2
+
+message cant_use_to_damage
+<You can't damage anything with that!>
+
+message cant_use_to_heal
+<You can't repair anything with that!>
+
+message cant_verb_object
+<You can't !AD the !AD with that!!>/fao=4
+
+message cant_wear
+<The !AD can't find enough room to wear the !AD.>/fao=4
+
+message cant_wear_object
+<You can't wear the !AD!!>/fao=2
+
+message cant_read
+<You can't read the !AD!!>/fao=2
+
+message cant_use_string
+<I can't use the incantation '!AD' here.>/fao=2
+
+message cant_use_word
+<I can't use the word '!AD' here.>/fao=2
+
+message cant_use_number
+<I can't use the number !AD here.>/fao=2
+
+message cdd_devo_failure
+<The developer looks at you increduiously for a moment and then accepts>
+<the Coke with a big smile.  'Thanks!  I can really use this.'  As he opens>
+<the can the beverage foams and squirts out all over his work.  The can must>
+<have been dropped or shaken during your travels.  The developer looks quite>
+<angry now.  'Cretin! May the bugs of a thousand Bliss programs infest your>
+<code!'>
+message cdd_devo_open_coke
+<The developer looks at you increduiously for a moment and then accepts>
+<the Coke with a big smile.  'Thanks!  I can really use this.'  As he examines>
+<the can he notices that it's already open. 'Fleh!', he exclaims in typical>
+<hacker jargon, 'Who or what has been drinking out of this!?' The developer>
+<pours the Coke into his trash can and tosses the empty into the pile.>
+message cdd_devo_success
+<The developer looks at you increduiously for a moment and then accepts>
+<the Coke with a big smile.  'Thanks!  I can really use this.'  He then>
+<opens the can, downs its contents in a single gulp, and then tosses the empty>
+<into the pile. 'Ahhhhhhhh. That hit the spot.'  The developer opens his filing>
+<cabinet, searches around for a minute, and then retrieves a tape. 'Here's>
+<something for your trouble:  I'm afraid its a little obsolete, and not>
+<quite as dynamic as it should be...'.  The developer hands you the tape>
+<and then goes back to work.>
+
+message click_door
+<You hear an almost inaudible click from the crystal door.>
+message click_elevator
+<You hear an inaudible click (almost) from the elevator door.>
+message click_safe
+<You hear an click almost inaudible from the safe.>
+
+message closed_object
+<The !AD is closed.>/fao=2
+message closed_text
+<The !AD: closed.>/fao=2
+message closed_failure
+<The !AD: the !AD is closed.>/fao=4
+
+message coin_machine_failure
+<After the bill slides about half way into the slot, the machine produces>
+<a low whurring noise as the bill is drawn into the machine. Almost immediately>
+<the bill is spit back out.>
+
+message coin_machine_success
+<After the bill slides about half way into the slot, the machine produces>
+<a low whurring noise and the bill is drawn into the machine.  After a>
+<period of silence a loud rattling noise is heard as some coins spill>
+<onto the floor.>
+
+message coke_cant_close
+<You can't close a can of Coke once it's been opened!>
+message coke_drinking
+<Glug...Glug...Glug...Glug...Ahhhhhhhhh.  That really hit the spot!>
+message coke_shake_open
+<You quickly discover that shaking an open can of Coke was not such>
+<a good idea.  The liquid is splattered all over you and the room, and>
+<you are quite wet and sticky.>
+
+message coke_machine_success
+<After each coin slides into the slot you hear a quiet jingling as it falls>
+<into the depths of the machine.  The machine hums for a moment, after which>
+<you hear a loud thump as a can of soda falls onto the floor.>
+
+message collapse
+<Talking to yourself is said to be a sign of impending mental collapse.>
+
+message combination
+<[Combination is !SL]>/fao=1
+
+message console_initial
+<USE CONSOLE TO HALT SYSTEM>
+< >
+<   HLT FFFFFFFF>
+message console_message
+<You hear something printed on the console.>
+message console_disk
+<CONSOLE - Disk drive hardware error>
+message console_boot_failure
+<CONSOLE - Boot failure>
+message console_booted
+<Standalone ZKINSTALL is running.  To install a software product mount>
+<the tape in the drive and type 'INSTALL'.>
+message console_tape
+<ZKINSTALL - Tape drive hardware error>
+message console_prereq
+<ZKINSTALL - Prerequisite product required>
+message console_already
+<ZKINSTALL - Product already installed>
+message console_installed
+<ZKINSTALL - Product successfully installed>
+
+message contained_in
+<Inside the !AD is>/fao=2
+
+message contained_in_is
+<The !AD is inside the !AD.>/fao=4
+
+message contents_self
+<(objects being carried)>
+
+message crew_location
+<[The cleaning crew is now at room !UL]>/fao=1
+message crew_moved
+<Off in the distance you hear:>
+< 'Look at this!! Some hot shot left a !AD lying around.  We'll>/fao=2
+<  have to move it while we're cleaning.'>
+
+message dark_cant_see
+<It's too dark to do anything.>
+message dark_enter
+<It's now pitch black.  Fortunately there are no grues in ZK.  You'd>
+<better be careful, though, or you might walk into a wall and knock>
+<yourself unconscious.>
+message dark_exit
+<(You emerge from the darkness into a lighted area)>
+
+message debug
+<[Debug: !UL]>/fao=1
+
+message default_contents
+<(objects in the room)>
+
+message died_wall
+<Just like a developer! You walked into a wall and knocked yourself>
+<unconscious.>
+
+message doesnt_belong
+<The !AD reproaches the !AD saying>/fao=4
+<   'Watch it!! That !AD doesnt belong to you.'>/fao=2
+
+message doesnt_fit
+<The !AD doesn't fit in the !AD.>/fao=4
+
+message doesnt_talk_a
+<I suppose you have a theory on talking to a !AD?>/fao=2
+message doesnt_talk_an
+<I suppose you have a theory on talking to an !AD?>/fao=2
+message doesnt_talk_some
+<I suppose you have a theory on talking to some !AD?>/fao=2
+
+message doesnt_verb_a
+<I suppose you have a theory on !ADing a !AD?>/fao=4
+message doesnt_verb_an
+<I suppose you have a theory on !ADing an !AD?>/fao=4
+message doesnt_verb_some
+<I suppose you have a theory on !ADing some !AD?>/fao=4
+
+message done
+<Done.>
+
+message done_text
+<The !AD: Done.>/fao=2
+
+message dont_know_where
+<I don't know where the !AD is - it's not here.>/fao=2
+<Maybe if you asked someone else.>
+
+message dont_understand
+<I don't understand one of the commands in your last sentence yet.>
+
+message door_closes
+<The !AD closes behind you.>/fao=2
+
+message dropped_text
+<The !AD: Dropped.>/fao=2
+
+message examining_reveals
+<Examining the !AD reveals:>/fao=2/bold
+
+message failed
+<Failed.>
+
+message failure
+<The world around you shakes violently.  This appears to have been a>
+<really severe tremor; reality itself is threatened.  I can't guarantee>
+<things will be the consistent after this.  Suddenly a sinister, wraith->
+<like figure appears before you, seemingly to float in air. In a low,>
+<sorrowful voice he says:>
+
+message fondle
+<Fondling the !AD isn't very interesting.>/fao=2
+
+message fs_arrives
+<While you're examining the console someone walks up behind you.  What luck!>
+<Its an in-house field service representative.  The rep looks over your>
+<shoulder and examines the console log. He smiles broadly and says,>
+<'Booting problems...hmmmm...let me see your system volume.'>
+message fs_departs
+<The representative takes the disk and examines it closely. 'No wonder!>
+<This disk hasn't even been formatted yet!  Let me take care of this>
+<for you - don't go away, I'll be right back...'  The rep leaves before>
+<you can say anything at all.>
+message fs_returns_lab
+<Quickly rounding the corner of a standalone system, the field service>
+<representative appears. 'Here you go, good as new...'  He hands you your>
+<disk and leaves as quickly as he arrived.>
+message fs_returns
+<The field service representative catches up to you.  'Hey, I thought you were>
+<going to wait by the system...Anyway, here's your disk.'  The representative>
+<hands you your disk and leaves.>
+
+message glowing
+<The !AD is glowing brightly.>/fao=2
+message glowing_begin
+<The !AD begins to glow.>/fao=2
+
+message goes_to
+<[!AD goes to room !UL (!AD)]>/fao=5
+
+message guard_lights_on
+<The guard is sitting in front of a massive console which must control the>
+<the entire building.  He examines a bank of switches, some of which are in>
+<the down position.  'Sorry about that', he comments, 'we seem to have shut>
+<off some of the section lighting on you.'  The guard then flips the>
+<appropriate switches, one at a time.  'There you go, have a good evening.'>
+message guard_see_nurse
+<The guard says,>
+<  'Excuse me, aren't you that new employee we've been expecting?>
+<   You're supposed to report to the nurse for a physical.  Health>
+<   services is across the catwalk to the east, and north down the>
+<   blue hall.'>
+message guard_desk
+<The guard takes the !AD from the reception desk.>/fao=2
+
+message guard_physical
+<The guard stops you from proceeding. Raising his voice, he says 'You must go>
+<EAST, across the catwalk, to get to health services.'>
+message guard_disk
+<The guard stops you from leaving, saying 'That system disk is DIGITAL>
+<property.  It can't leave the building.'>
+message guard_interview
+<The guard stops you from leaving, saying 'Hold up, you have to go to personnel>
+<for your exit interview.'>
+message guard_keys
+<The guard stops you from leaving, saying 'Wait a minute, what about those>
+<keys that I gave you. You must return the keys to me before you leave.'>
+message guard_badge
+<The guard stops you from leaving, saying 'Hey, you must return the temporary>
+<badge to me before you leave.'>
+
+message guard_removes
+<One of the building's security guards comes up to you.  Not recognizing you>
+<as one of the building's late-night residents he checks to see if you are>
+<wearing a badge.  Not finding one, he promptly escorts you out of the>
+<building despite your protests.>
+message guard_passes_through
+<One of the building's security guards comes up to you.  Seeing that you're>
+<wearing a temporary badge he bids you a good evening and moves on.>
+
+message having_fun
+<Having fun?>
+
+message health_drop
+<The nurse looks at you as if you had no common sense.  'How can I take>
+<your weight while you're carrying objects?  I'll never understand why>
+<you people come though here with so much stuff!'>
+message health_nurse_entry
+<The nurse, sitting at her desk, looks up and seems pleased to see you.>
+<She stands up and walks over to you, twiddling her fingers. 'You must be>
+<here for your physical. Put your arm in that blood pressure machine over>
+<there and then stand on the scale.'>
+message health_nurse_exit
+<The nurse thanks you for cooperating, saying 'I'll inform security that>
+<you've passed all your tests.'>
+message health_not_done
+<The nurse says 'Wait! You haven't finished your physical!' and mumbles>
+<something under her breathe.>
+message health_scale
+<As you step on the scale the weights clatter loudly.  The nurse walks over>
+<and adjusts the balance.  She then looks you over, judging your build.>
+<'About right', she comments, 'although you do seem to be developing a bit>
+<of the "developer's spread"'. In the future, I would suggest avoiding the>
+<cafeteria's hackers special'. As you step off there's another clunk as the>
+<weights tip back to one side.>
+message health_bp
+<As you put your arm in the machine you feel bands of cloth contracting>
+<around it.  The pressure increases steadily for a few seconds and then>
+<decreases.  You remove your arm and rub it.  The nurse walks over and>
+<examines the machine's digital display.  'Not bad', she assures you,>
+<'although you should lay off all that soda and junk food. More greens.'>
+
+message hello_object
+<The !AD responds 'Good evening, nice weather we're having.'>/fao=2
+
+message here_is
+<[You are in room !UL (!AD)]>/fao=3
+
+message ignores
+<The !AD ignores the !AD.>/fao=4
+
+message in_where
+<In where?>
+
+message	incomplete
+<Your last command contains an incomplete sentence.>
+
+message inside_itself
+<You can't put the !AD inside itself!!>/fao=2
+
+message invalid_char
+<The character '!AD' is invalid here.>/fao=2
+
+message irritated
+<Look what you've done!! The !AD is irritated now.>/fao=2
+
+message keep_off
+<The !AD says 'Keep your hands to yourself, cretin!!'>/fao=2
+
+message kill_self
+<OK, you're dead.>
+
+message kill_cognizant
+<The !AD, already irritated by your foolish actions, grabs a sword>/fao=2
+<hidden from your view and runs you through.>
+
+message lamp_dimmer
+<The lamp is getting dimmer.>
+
+message lamp_no_power
+<The lamp has run out of power.>
+
+message line_not_moving
+<The line doesn't seem to be moving.>
+
+message locked_object
+<The !AD is locked.>/fao=2
+
+message looking_in
+<Looking in the !AD reveals...>/fao=2
+
+message looks_ok
+<The !AD looks OK to me.>/fao=2
+
+message lookup_what
+<What character do you want to look up?>
+
+message manager_success
+<The VMS manager stops what he's doing and stands up.  'I see from this card>
+<that you're the agent from the Software Demoli, er.. Distribution Center,>
+<we've been expecting you. I know you're anxious to be on your way, so here's>
+<the media you want.'  The manager hands you something and then goes back>
+<to work.>
+
+message mirror_reflection
+<An ugly hacker stares back at you.>
+
+message more_specific
+<You'll have to be more specific.>
+
+message movement
+<There is the slightest sensation of movement.>
+
+message no_lock
+<The !AD doesn't have a lock.>/fao=2
+
+message no_multiple
+<You can't use multiple objects with this command.>
+
+message no_switch
+<I can't see any switch for the !AD.>/fao=2
+
+message no_capacity
+<You can't put anything inside the !AD!!>/fao=2
+
+message no_objects_here
+<I can't see any !AD here.>/fao=2
+
+message no_objects_in
+<I can't see any !AD in the !AD.>/fao=4
+
+message no_objects_carried
+<The !AD doesn't have the !AD.>/fao=4
+
+message nothing_carried
+<The !AD isn't carrying anything.>/fao=2
+
+message nothing_happens
+<Nothing happens.>
+
+message nothing_interesting
+<Nothing interesting happens.  But if you wish to move the object in a>
+<particular direction maybe you should say so.>
+
+message nothing_special
+<I see nothing special about the !AD.>/fao=2
+
+message nothing_worn
+<The !AD isn't wearing anything special.>/fao=2
+
+message not_contained_in
+<There is nothing inside the !AD.>/fao=2
+
+message not_sitting_on
+<There is nothing on the !AD.>/fao=2
+
+message object_fixed
+<The !AD is firmly attached and cannot be removed.>/fao=2
+
+message object_reads
+<The !AD reads:>/fao=2/bold
+
+message object_says
+<The !AD says '!AD'>/fao=4
+
+message object_shaken
+<The !AD: shaken (not stirred).>/fao=2
+
+message object_verb
+<The !AD: !ADed.>/fao=4
+
+message officer_accepts
+<The petty cash officer thanks you for the gift and places the>
+<!AD on her desk.>/fao=2
+message officer_busy
+<You can't enter the Petty Cash office while the Chief Petty Cash Officer>
+<is busy closing and more than likely filling the safe.>
+message officer_departing
+<The Chief Petty Cash Officer quickly passes you on her way out of the>
+<building, giving you a brief wave and a half smile.>
+message officer_leaving
+<You hear a message over the intercom informing you that the Petty>
+<Cash Office will be closing shortly.>
+message officer_preparing
+<You can see the Chief Petty Cash Officer cleaning the office.>
+message officer_removes
+<The Chief Petty Cash Officer informs you that she is about to leave and>
+<then politely but firmly escorts you out of the office.>
+message officer_safe
+<As you watch the Chief Petty Cash Officer collects the remaining cash in>
+<office and walks over to the safe.  You see her type !SL on the keypad.>/fao=1
+<She then opens the safe, deposits the money, and closes it.  After glancing>
+<around the office one final time she leaves, shutting off the lights and>
+<closing the door.>
+
+message on_itself
+<You can't put the !AD on itself!!>/fao=2
+
+message open_object
+<(open !AD)>/fao=2
+
+message opened_text
+<The !AD: opened.>/fao=2
+
+message opening_reveals
+<Opening the !AD reveals>/fao=2
+
+message orange_button
+<There is the slightest sensation of movement, but the elevator does not>
+<come to rest. It seems to be caught in an infinite loop searching for the>
+<orange floor. After a prolonged period of time, you have used up all the>
+<air in the elevator and die of suffocation.>
+
+message personnel_correct
+<'Very good. You must have been reading the 'ZK Internals and Data Structures>
+<Manual.'>
+message personnel_incorrect
+<The personnel representative looks saddened by your response, saying,>
+<'I'm sorry, that's not the right answer.  Why don't you come back later>
+<and we'll try this again.'>
+message personnel_done
+<'Well, that's about it. You seems to know our facility quite well. You must>
+<have spent a long time working here! I'll inform security you've completed>
+<your interview. Thanks for dropping by.'>
+message personnel_not_done
+<The personnel representative says 'Wait! You haven't finished your exit>
+<interview!'>
+message personnel_entry
+<The personnel representative gets up and greets you.  'You must be here>
+<for your exit interview.  This won't take very long; I just have a few>
+<questions to ask you.  I'm only looking for certain keywords, so phrase>
+<your answers as you please.  If you wish to use numbers in your response>
+<use the numeric digits instead of the words.'>
+
+message player_died
+<"He's dead, Jim.">
+message player_won
+<You've won! All of ZK congratulates you!>
+
+message plugh
+<A hollow voice says 'Fool'.>
+
+message pray
+<The universe doesn't care about you.>
+
+message prime_time/bold
+<You really shouldn't be playing during prime time, but we'll make an>
+<exception just this once...>
+
+message question_coin_machine
+<'What is the status of the light on the working coin machine.>
+message question_dcu
+<'What happens if you wait in line at the DCU?'>
+message question_wall
+<'What color are the rectangular shaped bars?'>
+message question_bill
+<'Where is the picture of Bill the Cat located?'>
+message question_computers
+<'How many computers were did you see in your travels?'>
+message question_ambig
+<'Name a word beginning with 'C' in the ZK lexicon which is ambiguous>
+< in four letters?'>
+message question_enquirer
+<'How much is the copy of ZK ENQUIRER worth?'>
+message question_devo
+<'What does the CDD developer wish upon you when you give him>
+< a shaken coke can'>
+message question_corridor
+<'What is the color of the rooms which are described as "corridors"? '>
+message question_sword
+<'What can the sword be used for?'>
+message question_button
+<'What happens to you when you push the orange button? '>
+message question_hacker
+<'What can you ask the hacker (in the maze) to do for you? '>
+
+message refuses
+<The !AD looks at the !AD, saying 'What would I want with>/fao=4
+<a !AD?'>/fao=2
+
+message right_here
+<The !AD is right here.>/fao=2
+
+message room_name
+<!AD>/fao=2/underline
+
+message rub
+<Rubbing the !AD with the !AD isn't very interesting.>/fao=4
+
+message rub_ball
+<Not in public I hope!>
+
+message save_link
+<[!AD <- (!AD, !AD)]>/fao=6
+message save_create
+<[!AD <- !AD]>/fao=4
+message save_write
+<[Written: !AD]>/fao=2
+message save_dispose
+<[Disposed: !AD]>/fao=2
+
+message save_file_future
+<Save file format is from the future and is incompatible with this version>
+<of the game.>
+message save_file_obsolete
+<Save file format is obsolete and incompatible with this version of the game.>
+
+message save_wrong_record/reverse
+<Encountered unexpected or invalid record type in save file.>
+<File format is incorrect or corrupt.>
+message save_bugcheck/reverse
+<Save file internal consistency check failed.  Contact the implementors.>
+<This game is probably now corrupt.>
+
+message save_saving_game
+<(Saving game was version !AD-!UL, built on !11%D at !-!5%T)>/fao=4
+message save_saved_at
+<(This game was saved on !11%D at !-!5%T)>/fao=1
+message save_saving_system
+<(Saving system was a !AD (ID !XL) running !ADversion !AD)>/fao=7
+
+message say_please
+<A grin breaks out over the face of the !AD and he says, 'Say please.'>/fao=2
+
+message score
+<Your score is !SL (out of !SL points) using !SL turn!%S.>/fao=3
+<This qualifies you as a !AD.>/fao=2
+
+message scream
+<Arg! Ack! Oop!>
+
+message shut_off
+<You hear a loud thump from the ceiling as the lights are shut off in your>
+<area.  I bet the guard powered them down, not realizing you were here.>
+message shut_off_room
+<[Shutting off lights in !AD]>/fao=2
+
+message sitting_on
+<Sitting on the !AD is>/fao=2
+message sitting_on_wall
+<Mounted on the walls of the !AD is>/fao=2
+
+message sitting_on_is
+<The !AD is sitting on the !AD.>/fao=4
+
+message some_objects_here
+<There are some !AD here.>/fao=2/bold
+
+message some_text
+<Some !AD>/fao=2
+
+message stan_found
+<'The !AD is at the !AD right now.'>/fao=4
+message stan_not_found
+<'Can't find the !AD right now, maybe if you try again later.'>/fao=2
+message stan_non_static
+<The hacker looks up and seems quite pleased that you've asked a>
+<challenging question.  'This gives me a chance to try out my new>
+<program...'  He swivels around to his terminal and types a command in rapidly.>
+message stan_right_here
+<The hacker looks up at you and seems quite annoyed that you've>
+<interrupted him for so trivial a matter.  'The !AD>/fao=2
+<is right here, twit.'>
+message stan_static
+<The hacker looks up at you and seems almost disappointed that you>
+<didn't ask a harder question.  'The !AD is always>/fao=2
+<at the !AD.'>/fao=2
+
+message stand_failure
+<The !AD can't support your weight!!>/fao=2
+message stand_not_standing
+<You're not standing on the !AD!!>/fao=2
+message standing_already
+<You're already standing on the !AD!!>/fao=2
+message standing_on_it
+<You're standing on it.>
+message stand_cant_go
+<You can't go anywhere while you're standing on the documentation set!>
+message stand_get_off
+<You're back on your own two feet again.>
+message standing_on_doc
+<After a long and painful stretch, you're able get a leg up on the>
+<documentation set. The stack of binders wavers wildly to the left and>
+<right as you continue to scale the orange mountain. Finally, you made>
+<it to the top, exhausted and breathless.>
+message standing_on_doc_paren
+<(You're standing on the documentation set.)>
+
+message start
+<It's a late !AD night. The sky is gray and overcast. You find>/fao=2
+<yourself in a helicopter preparing to land. With a loud thud the helicopter>
+<comes to a rest and your door springs open. The pilot motions you out>
+<with his hand. Suddenly, from behind, a violent force pushes you out of>
+<the chopper and you land on your face. The pilot says, "See you s..." and>
+<then the door snaps shut. The helicopter takes off into the night.>
+
+message start_object
+<(start object)>
+
+message state_irritated	<The !AD looks irritated.>/fao=2
+message state_open	<The !AD is open.>/fao=2
+message state_on	<The !AD is turned on.>/fao=2
+message state_off	<The !AD is turned off.>/fao=2
+
+message strange_light
+<Your whole body is bathed in the strange, media-preserving light.>
+
+message table_start
+< _______________________________________________________________>
+<'                                                               `>
+<|                                              ZK and Sons, Inc.|>
+<|                                          Master Table Builders|>
+<|                                                               |>
+<|                                                               |>
+<|                                                               |>
+<|     Character       Binary       Octal       Decimal     Hex  |>
+<|                               .                               |>
+<|                               .                               |>
+<|                               .                               |>
+
+message table_entry
+<|        !1AD           !8AD       !3OB          !-!3ZB       !-!2XB   |>
+/fao=5
+
+message table_end
+<|                               .                               |>
+<|                               .                               |>
+<|                               .                               |>
+<`_______________________________________________________________'>
+
+message taken_text
+<The !AD: Taken.>/fao=2
+
+message text_error
+<!AS>/fao=2/reverse
+
+message text_no_area
+<The !AD: You can't put anything on the !AD!!>/fao=2
+
+message text_no_capacity
+<The !AD: You can't put anything inside the !AD!!>/fao=2
+
+message text_no_strength
+<The !AD: The !AD isn't strong enough to hold anything!!>/fao=2
+
+message the_text
+<The !AD>/fao=2
+
+message time_passes
+<Time passes...>
+
+message to_whom
+<To whom?>
+
+message too_much_mass
+<The !AD is too heavy for the !AD.>/fao=4
+
+message too_much_size
+<There's not enough room on the !AD for the !AD.>/fao=4
+
+message too_much_volume
+<There's not enough room inside the !AD for the !AD.>/fao=4
+
+message unknown_word
+<I don't know the word '!AD'.>/fao=2
+
+message unlock_put_key
+<(Put keys in !AD)>/fao=2
+message unlock_turn_key
+<(Turn keys)>
+message unlock_cant_self
+<Using your fingers to unlock the !AD just doesn't seem to be working.>/fao=2
+<Perhaps if you used something else...>
+
+message unnecessary_word
+<The word '!AD' is unnecessary.>/fao=2
+
+message using_hands
+<(using your hands)>
+
+message version
+<ZK: SPITBROOK Interactive Fiction>/bold
+<Copyright (c) 1985 by Digital Equipment Corporation.  All rights reserved.>
+/underline
+<You are playing version !AD-!UL, which was built on !11%D at !-!5%T.>/fao=4
+
+message want_to_verb
+<What do you want to !AD?>/fao=2
+
+message want_to_do
+<What do you want to do with the !AD?>/fao=2
+
+message warning
+<The world around you shakes momentarily; it appears to only have been>
+<a minor tremor.  Suddenly a sinister wraith-like figure appears before>
+<you, seeming to float in air.  In a low, sorrowful voice he says:>
+
+message which_mean
+<Which !AD do you mean?>/fao=2
+
+message which_way
+<Which way to you mean?>
+
+message won
+<You see the running lights of a familiar helicopter suddenly appear, rising>
+<over a ridge in the distance.  After what seems like an eternity the chopper>
+<approaches and lands.  The door swings open with a quiet swoosh; you can see>
+<the pilot at the controls frantically motioning you in. As you climb aboard,>
+<you hear the pilot saying: 'Wow! We were really worried about you. We didn't>
+<think you were going to make it.  Congratulations.'>
+< >
+<Now, on to the Mill?>
+< >
+end

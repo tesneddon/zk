@@ -1,0 +1,37 @@
+Dave's recent comments:
+
+(1) In lobby, guard's response to take keys has bad grammer.
+
+	This is the plural/singular problem again.  Use of 'set of keys'
+	has temporarily fixed this problem but its a crock.  The problem
+	is that the code which prefixes 'some' or 'a' or 'an' doesn't apply
+	to all messages.  Therefore for the messages which expect singular
+	objects, 'set of keys' works ok.  For messages which see an 's' on
+	the end of the object and append 'some', the object name
+	'some set of keys' doesn't make it.
+
+(2) Blue hall, N of elevator, a passage SW is described which is not
+    implemented.
+
+	TRUE.  I have fixed this.
+
+(3) Diet Quiz - delicacy is spelled wrong
+
+	TRUE.  I fixed this yesterday or the day before.  He's playing
+	Sunday's last production compile.
+
+(4) ED's office, examine listings. 
+
+	I suppose he means 'the listings reads'...
+	You seem to have changed this recently, removing READABLE from
+	the detail of the listings.  Again singular/plural problem.
+
+(5) The rooms RED_PASSAGE_1 and RED_PASSAGE_2 have the name
+    'End of red passage'.
+
+	This was a cut/paste problem.  We never noticed all the red
+	passage rooms said 'end of red passage'. I have fixed this.
+
+(6) Could the phrase EXAMINE WALL be implemented.
+
+	To mean LOOK ON ROOM, I guess, will consider

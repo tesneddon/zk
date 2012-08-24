@@ -1,0 +1,1029 @@
+-- Edit History:
+
+-- 08-JUL-85 WBL Cleaned up specification of object attributes.  Put all
+--		 'takes up' fields on one line, 'limit' fields on another.
+--		 Also remove reference to field if it is zero, and static
+--		 objects have no need of 'takes up' values.  If an object
+--		 can hold objects then it needs strength - for all objects but
+--		 self use 'infinite'.
+--
+-- 09-JUL-85 WBL Added READABLE attribute.  Objects should have DETAIL if they
+--		 are readable.  The message 'the foo reads:<cr><cr>' is appended
+--		 automatically.
+--
+-- 14-JUL-85 WBL Added OPENABLE bit.  These objects are initially CLOSED.
+--
+-- 15-JUL-85 WBL Added LOCKABLE bit.  These objects are initially LOCKED.
+--
+-- 17-JUL-85 WBL Added STARTABLE, MACHINE and COGNIZANT (aware) attributes.
+--		 All default to off
+--
+-- 01-AUG-85 EDS Changed the devo's (CDD,VMS,STAN) to be non-static. This
+--               way they will respond (COGNIZANT) rather than begin 'fixed'
+--
+-- 02-AUG-85 WBL Made cognizant objects static again just in case.  Changed
+--		 order of checks so that the 'keep off' message will come before
+--		 the 'fixed' message
+
+-- Attribute Summary:
+
+-- DETAIL identifier		Text for EXAMINE or READ command
+-- NAME string			Name of object
+-- INITIAL identifier		Identifier is a room name
+
+-- STRENGTH number or STRENGTH INFINITE
+--	Maximum total weight this object can hold.  If object has CAPACITY or
+--	AREA it must have strength.  Default is STRENGTH 0.
+
+-- CAPACITY number or CAPACITY INFINITE
+--	Max volume available to hold stuff put INSIDE. CAPACITY<=VOLUME
+--	Default is CAPACITY 0 (holds nothing).  For doors, capacity refers
+--	to the largest volume allowed to pass through.  The volume of the
+--	self and the thing you're pushing are checked.
+
+-- AREA number or AREA INFINITE
+--	Max area available to hold stuff put ON.  AREA<=SIZE
+--	Default is AREA 0 (nothing may be put on the object)
+
+-- MASS number
+--	How much of another object's STRENGTH this object takes up
+--	Default is MASS 0
+-- VOLUME number
+--	How much of another object's CAPACITY this object takes up
+--	Default is VOLUME 0
+-- SIZE number
+--	How much of another object's AREA this object takes up
+--	Default is SIZE 0
+
+-- STATIC	Object can't be TAKEN, PUT, DROPPED, etc
+-- READABLE	Detail text is words which can be read
+-- OPENABLE	OPEN/CLOSE work on this object.  Initial state is closed.
+-- LOCKABLE	LOCK/UNLOCK work on this object.  Initial state is locked.
+-- STARTABLE	START/STOP work on this object.  Initial state is stopped.
+-- COGNIZANT	Object is intelligent.  People, computers, etc
+-- MACHINE	Object is a machine.  Coke machine, lamp, computer, etc
+-- ROOM		Object is a room.
+-- FLEXIBLE	Does the effective volume of the object depend on what's
+--		currently inside it?
+--		Say sack is Vol=15, Cap=10
+--		If flexible and nothing inside it, its effective
+--		volume is 5 instead of 15
+
+prefix zk$obj_
+ident <X01.00-00>
+
+-- Special objects
+
+object all
+	name <objects> static
+--	synonym "ALL"
+object contents
+	name <room contents> static
+--	synonym "CONTENTS"
+object possessions
+	name <possessions> static
+--	synonym "POSSESSIONS"
+object current_room
+	name <room> static room
+	strength infinite	capacity infinite	area infinite
+--	synonym "ROOM"
+object self
+	name <self>
+	mass 50 volume 100 size 40
+	strength 150 capacity 60 area 20
+--	synonym "SELF"
+	cognizant flexible
+object building_lights
+	name <building lights>
+	static machine
+object arm
+	name <arm>
+	static
+
+-- Generic objects
+
+generic any_ball
+	name <crystal ball>
+	specific fluorescent_ball
+	specific neon_ball
+--  	synonym "BALL"
+--	synonym "SPHERE"
+--  	synonym "CRYSTAL BALL"
+--  	synonym "CRYSTAL SPHERE"
+
+generic any_board
+	name <board>
+	specific black_board
+	specific marker_board_ed
+	specific marker_board_will
+	specific bulletin_board
+--	"BOARD"
+
+generic any_button
+	name <button>
+	specific red_button
+	specific blue_button
+	specific yellow_button
+	specific orange_button
+
+generic any_card
+	name <card>
+	specific sdc_card
+	specific sdc_card_blank
+--	"CARD"
+--	"SDC CARD"
+
+generic any_coin_machine
+	name <coin changing machine>
+	specific broken_coin_machine
+	specific working_coin_machine
+-- 	synonym "COIN MACHINE"
+
+generic any_coke
+	name <can of Coke>
+	specific coke
+	specific empty_can
+	specific discarded_cans
+
+generic any_debris
+	name <debris>
+	specific debris_1
+	specific debris_2
+--	synonym "DEBRIS"
+--	synonym "JUNK"
+--	synonym "GARBAGE"
+
+generic any_desk
+	name <desk>
+	specific reception_desk
+	specific desk
+
+generic any_developer
+	name <developer>
+	specific vms_developer
+	specific cdd_developer
+	specific stan
+--	synonym "DEVO"
+--  	synonym "DEVELOPER"
+--  	synonym "HACKER"
+--  	synonym "PROGRAMMER"
+
+generic any_disk
+	name <hard disk medium>
+	specific system_disk
+	specific scratch_disk
+--  	synonym "DISK"
+
+generic any_door
+	name <door>
+	specific elevator_door
+	specific stair_door
+	specific health_door
+	specific petty_cash_door
+	specific personnel_door
+	specific crystal_door
+	specific glass_door
+	specific stall_door
+	specific library_door
+--  	synonym "DOOR"
+
+generic any_drive
+	name <drive>
+	specific tape_drive
+	specific disk_drive
+--  	synonym "DRIVE"
+
+generic any_light
+	name <light>
+	specific building_lights
+	specific strange_light
+	specific lamp
+
+generic any_lock
+	name <locking mechanism>
+	specific elevator_lock
+	specific keypad
+
+generic any_machine
+	name <machine>
+	specific working_coin_machine
+	specific broken_coin_machine
+	specific bp_machine
+	specific coke_machine
+	specific helicopter
+	specific disk_drive
+	specific tape_drive
+	specific computer
+	specific terminal
+	specific stans_terminal
+	specific console
+--  	synonym "MACHINE"
+
+generic any_marker_board
+	name <magic marker board>
+	specific marker_board_ed
+	specific marker_board_will
+--	"MARKER BOARD"
+--	"MAGIC MARKER BOARD"
+
+generic any_money
+	name <currency>
+	specific coins
+	specific bills
+--  	synonym "MONEY"
+
+generic any_newspaper
+	name <newspaper>
+	specific zk_today
+	specific zk_enquirer
+	specific zk_journal
+--	synonym "ZK NEWSPAPER"
+--	synonym "NEWSPAPER"
+
+generic any_pattern
+	name <pattern>
+	specific wall
+	specific compass
+--	synonym "PATTERN"
+--	synonym "DESIGN"
+
+generic any_person
+	name <person>
+	specific cdd_developer
+	specific vms_developer
+	specific stan
+	specific guard
+	specific nurse
+	specific personnel_rep
+	specific field_service_rep
+	specific people
+--  	synonym "PERSON"
+	
+generic any_rep
+	name <representative>
+	specific field_service_rep
+	specific personnel_rep
+--	"REPRESENTATIVE"
+--	"REP"
+
+generic any_sign
+	name <sign>
+	specific pad_sign
+	specific lobby_sign
+	specific health_sign
+	specific personnel_sign
+	specific petty_cash_sign
+--  	synonym "SIGN"
+	
+generic any_software
+	name <software>
+	specific dtr_tape
+	specific cdd_tape
+	specific vms_tape
+	specific listings
+--  	synonym "SOFTWARE"
+
+generic any_table
+	name <table>
+	specific cafe_table
+	specific ascii_table
+--	"TABLE"
+
+generic any_tape
+	name <tape>
+	specific dtr_tape
+	specific cdd_tape
+	specific vms_tape
+--  	synonym "TAPE"
+--  	synonym "KIT"
+
+generic any_terminal
+	name <VT100 terminal>
+	specific terminal
+	specific stans_terminal
+
+-- Specific objects
+
+object ascii_table
+	name <ASCII table>
+	area 5 size 5 volume 2 mass 2
+	detail zk$desc_ascii_table readable
+--	"ASCII TABLE"
+--	run-time placement in sack
+
+object badge
+	name <temporary badge>
+	mass 1 size 5 volume 4
+--	run time placement on reception desk
+
+object bars
+	name <black and white bars>
+	detail zk$desc_bars
+	static
+--	synonym "BARS"
+--	run-time placement on wall
+
+object bills
+	name <bills>
+	detail zk$desc_bills readable
+  	mass 5 volume 3 size 5
+ -- 	synonym "BILLS"
+ -- 	synonym "CASH"
+ -- 	run-time placement in safe
+
+object black_board
+	name <black board>
+	detail zk$desc_black_board readable
+  	initial zk$room_stall
+	static
+--	"BLACK BOARD"
+
+object blue_button name <blue button> static
+
+object bp_machine
+	name <blood pressure machine>
+	detail zk$desc_bp_machine readable
+--  	synonym "PRESSURE MACHINE"
+--  	synonym "BLOOD PRESSURE MACHINE"
+  	initial zk$room_health_services
+   	static machine
+
+object broken_coin_machine
+	name <coin machine>
+	detail zk$desc_broken_coin_machine
+--  	synonym "BROKEN COIN MACHINE"
+  	initial zk$room_yellow_corridor_5
+	strength infinite area 25 capacity 3
+   	static machine
+--	notes: the bills are the only items to fit in the coin machine.
+
+object bulletin_board
+	name <bulletin board>
+	detail zk$desc_bulletin_board readable
+--  	synonym "BULLETIN BOARD"
+  	initial zk$room_blue_hall_5
+   	static
+
+object cabinet
+	name <media cabinet>
+	detail zk$desc_cabinet
+	initial zk$room_vms_lab_2
+	static
+	openable
+--	"CABINET"
+--	"MEDIA CABINET"
+
+object cafe_table
+	name <cafeteria table>
+	detail zk$desc_table
+	static
+	strength infinite area 100
+--	run-time placement in cafe
+
+object cdd_developer
+	name <CDD developer>
+	strength infinite capacity infinite
+	detail zk$desc_cdd_developer
+--  	synonym "CDD DEVELOPER"
+--  	synonym "CDD HACKER"
+--  	synonym "CDD PROGRAMMER"
+  	initial zk$room_cdd_dev
+	cognizant
+
+object cdd_tape
+	name <CDD tape>
+	detail zk$desc_cdd_tape readable
+  	mass 10 volume 5 size 5
+	strength infinite area 5
+--  	synonym "CDD TAPE"
+--  	synonym "CDD KIT"
+
+object coins
+	name <coins>
+	detail zk$desc_coins readable
+  	mass 1 volume 1	size 5
+	strength infinite area 5
+--  	synonym "COINS"
+--  	initial location indside the working coin machine
+
+object coke_machine
+	name <Coke machine>
+	detail zk$desc_coke_machine
+	strength infinite area 25
+--  	synonym "COKE MACHINE"
+  	initial zk$room_stub
+   	static machine
+--	notes: the coins are the only item that can be put in the coke machine
+
+object coke
+	name <can of coke>
+	detail zk$desc_coke
+  	mass 5 volume 2 size 2
+	strength infinite area 2
+	readable openable
+--  	synonym "COKE"
+--	synonym "COKE CAN"
+--  	synonym "CAN"
+
+object console
+	name <computer console>
+   	static machine
+  	initial zk$room_vms_lab_2
+--  	synonym "CONSOLE"
+--  	synonym "PRINTER"
+
+object control_panel name <control panel> static
+
+object compass
+	name <compass design>
+--	"COMPASS"
+--	"COMPASS PATTERN"
+--	"COMPASS DESIGN"
+--	"COMPASS ROSE"
+--	"ROSE"
+	static
+--	run-time placement on rug
+
+object computer
+	name <prototype VAX computer>
+	detail zk$desc_computer
+-- 	synonym "COMPUTER"
+-- 	synonym "COMPUTER SYSTEM"
+--	synonym "PROTOTYPE COMPUTER"
+--	synonym "PROTOTYPE VAX"
+--	synonym "PROTOTYPE SYSTEM"
+--  	synonym "VAX"
+--  	synonym "VAX PROTOTYPE"
+--  	synonym "VAX PROTOTYPE COMPUTER"
+--  	synonym "VAX COMPUTER"
+--  	synonym "VAX COMPUTER PROTOTYPE"
+--  	synonym "VAX SYSTEM"
+  	static startable machine
+  	initial zk$room_vms_lab_2
+
+object crystal_door
+	name <crystal door>
+--  	synonym "CRYSTAL DOOR"
+	capacity 100
+   	static
+	openable lockable
+--	automatic placement
+
+object debris_1
+	name <debris>
+	detail zk$desc_debris
+   	static
+  	initial zk$room_middle_of_stairs_3
+
+object debris_2
+	name <debris>
+	detail zk$desc_debris
+   	static
+  	initial zk$room_middle_of_stairs_4
+
+object desk
+	name <mahogany desk>
+	detail zk$desc_desk
+	strength infinite area 50
+   	static
+	openable lockable
+  	initial zk$room_petty_cash 
+--  	synonym "DESK"
+--	synonyn "MAHOGANY DESK"
+
+object diet_quiz
+	name <dietary quiz>
+	detail zk$desc_diet_quiz readable
+  	mass 5 area 5 size 5 volume 2
+	readable
+--  	synonym "QUIZ"
+--  	synonym "DIETARY QUIZ"
+--	run-time placement on table
+
+object discarded_cans
+	name <discarded coke cans>
+  	mass 10 volume 5 size 5
+	strength infinite area 5
+  	initial zk$room_cdd_dev
+	static
+
+object disk_drive
+	name <disk drive>
+	detail zk$desc_disk_drive
+	strength infinite capacity 10
+--  	synonym "DISK DRIVE"
+	openable static machine
+--	Run time placement
+
+object doc
+	name <documentation set>
+	detail zk$desc_documentation readable
+  	mass 110 volume 200 size 50
+	strength infinite area 12
+  	initial zk$room_rsx_dev_2
+--  	synonym "DOCUMENTATION"
+--	synonym "DOC"
+--  	synonym "MANAULS"
+--  	synonym "BINDERS"
+
+object dtr_tape
+	name <DTR tape>
+	detail zk$desc_dtr_tape readable
+  	mass 10 volume 5 size 5
+	strength infinite area 5
+--	Run time placement inside plant
+--	"DATATRIEVE"
+--	"DATATRIEVE TAPE"
+--	"DATATRIEVE KIT"
+--	"DTR"
+--	"DTR TAPE"
+--	"DTR KIT"
+
+object elevator_door
+	name <elevator door>
+	capacity infinite
+	static openable lockable
+
+object elevator_lock
+	name <elevator master lock>
+	detail zk$desc_master_lock
+	strength infinite capacity 2
+	static
+--	"LOCK"
+--	"ELEVATOR LOCK"
+
+object empty_can
+	name <empty can of Coke>
+  	mass 10 volume 5 size 5
+	strength infinite area 5
+
+object field_service_rep
+	name <field service representative>
+	strength infinite capacity infinite
+--	"FIELD SERVICE REPRESENTATIVE"
+--	"SERVICE REPRESENTATIVE"
+--	"FIELD REPRESENTATIVE"
+	cognizant
+
+object fluorescent_ball
+	name <fluorescent ball>
+	detail zk$desc_fluorescent_ball
+  	mass 20 volume 10 size 10
+--	Run time placement in ed's office
+--	note: no area, things slide off surface
+--  	synonym "FLUORESCENT BALL"
+-- 	synonym "FLUORESCENT CRYSTAL BALL"
+
+object glass_door
+	name <glass door>
+--  	synonym "GLASS DOOR"
+	capacity infinite -- teaser, crystal door has limit
+   	static
+	openable
+--	automatic placement
+
+object guard
+	name <guard>
+	detail zk$desc_guard
+	strength infinite capacity infinite
+	cognizant
+--	Run-time placement in lobby
+--  	synonym "GUARD"
+--	synonym "SECURITY GUARD"
+
+object health_door
+	name <door>
+	capacity infinite
+   	static 
+	openable
+--	automatic placement
+
+object health_sign
+	name <sign>
+	detail zk$desc_health_sign readable
+   	static
+  	initial zk$room_blue_hall_8
+
+object helicopter
+	name <helicopter>
+--  	synonym "HELICOPTER"
+   	static machine
+
+object keys
+	name <keys>
+  	mass 5 volume 2 size 2
+--  	synonym "KEYS"
+--	Run time placement on guard
+
+object keypad
+	name <keypad>
+	detail zk$desc_keypad
+	static
+--	synonym "KEYPAD"
+--	Run-time placement on safe
+
+object lamp
+	name <familiar looking brass lantern>
+  	mass 10 volume 7 size 7
+	strength infinite area 7
+--	run-time placement in woods
+--  	synonym "LAMP"
+--  	synonym "LANTERN"
+	startable machine
+
+object library_door
+	name <tape library door>
+	static openable lockable -- automatic placement
+	capacity infinite
+
+object liquid
+	name <dark liquid>
+	mass 1 size 1 volume 1
+	static	-- don't want them putting the liquid in the disk drive, etc
+--	"DRINK"
+--	"LIQUID"
+--	"DARK LIQUID"
+	
+object listings
+	name <old program listings>
+	detail zk$desc_listings readable
+	initial zk$room_ed_office
+	strength 95 area 25 size 25 volume 10 mass 10
+--	"LISTINGS"
+
+object lobby_sign
+	name <lobby sign>
+	detail zk$desc_lobby_sign readable
+	initial zk$room_lobby
+	static
+
+object mail_message
+	name <copy of a mail message>
+	detail zk$desc_mail_message readable
+	static
+	initial zk$room_dtr_dev
+--	Run time placement on wall of DTR dev
+
+object manager
+	name <VMS product manager>
+	strength infinite capacity infinite
+--  	synonym "MANAGER"
+--  	synonym "PRODUCT MANAGER"
+--  	synonym "VMS MANAGER"
+--  	synonym "VMS PRODUCT MANAGER"
+   	cognizant
+  	initial zk$room_vms_dev_3 
+
+object marker_board_ed
+	name <magic marker board>
+	detail zk$desc_marker_board_ed
+	initial zk$room_ed_office
+	static
+
+object marker_board_will
+	name <magic marker board>
+	initial zk$room_will_office
+	static
+
+object menu
+	name <menu>
+	detail zk$desc_menu readable
+   	static readable
+  	initial zk$room_cafe
+--  	synonym "MENU"
+
+object mirror
+	name <mirror>
+	detail zk$desc_mirror
+--  	synonym "MIRROR"
+   	static
+--	Run time placement in rest room
+
+object notes
+	name <operator's notes>
+	detail zk$desc_notes
+  	mass 5 area 5 size 5 volume 2
+	readable
+	initial zk$room_operators_room
+
+object needle
+	name <compass needle>
+	static
+--	synonym "NEEDLE"
+--	synonym "COMPASS NEEDLE"
+--	run-time placement on compass (which is on rug)
+
+object neon_ball
+	name <neon ball>
+	detail zk$desc_neon_ball
+  	mass 20 volume 10 size 10
+--	run-time placement in Will's office
+-- 	synonym "NEON BALL"
+--  	synonym "NEON CRYSTAL BALL"
+
+object nurse
+	name <nurse>
+	strength infinite capacity infinite
+	detail zk$desc_nurse
+--  	synonym "NURSE"
+	cognizant
+  	initial zk$room_health_services
+
+object officer
+	name <petty cash officer>
+	strength infinite capacity infinite
+	cognizant
+  	initial zk$room_petty_cash
+--  	synonym "OFFICER"
+
+object orange_button
+	name <brightly-colored orange button>
+	static
+--	"ORANGE BUTTON"
+
+object pad_sign
+	name <sign>
+	detail zk$desc_pad_sign readable
+   	static
+  	initial zk$room_pad
+
+object people
+	name <people>
+	detail zk$desc_people
+	static cognizant
+	initial zk$room_dcu
+--  	synonym "PEOPLE"
+
+object petty_cash_sign
+	name <sign>
+	detail zk$desc_petty_cash_sign readable
+   	static
+  	initial zk$room_non_descript_hall_2
+
+object petty_cash_door
+	name <door>
+   	static
+	capacity infinite
+	openable
+--	automatic placement
+
+object personnel_door
+	name <door>
+	capacity infinite
+   	static
+	openable
+
+object personnel_rep
+	name <personnel representative>
+	strength infinite capacity infinite
+--  	synonym "PERSONNEL REPRESENTATIVE"
+   	cognizant
+  	initial zk$room_personnel
+
+object personnel_sign
+	name <sign>
+	detail zk$desc_personnel_sign readable
+   	static
+  	initial zk$room_blue_hall_4
+
+object plant
+	name <hanging plant>
+	static
+--	Run time placement in DTR dev
+--	"PLANT"
+
+object reception_desk
+	name <reception desk>
+	static
+	strength infinite area 50
+	initial zk$room_lobby
+--	"DESK"
+--	"RECEPTION DESK"
+
+object red_button name <red button> static
+
+object rug
+	name <rug>
+	static
+--	run-time placment in lobby
+--	synonym "RUG"
+
+object sack
+	name <burlap sack>
+  	mass 5 volume 150 size 30
+	strength infinite capacity 145 area 30
+--  	synonym "SACK"
+--  	synonym "BURLAP SACK"
+--  	synonym "BAG"
+--  	synonym "BURLAP BAG"
+--	run-time placment in woods
+	openable
+	flexible
+
+object safe
+	name <safe>
+	strength infinite capacity 50 area 20
+--  	synonym "SAFE"
+   	static
+--	run-time placement in petty cash
+	openable lockable
+
+object sailor
+	name <sailor>
+	static cognizant
+--	synonym "SAILOR"
+--	Never appears in the game
+
+object scale
+	name <manual scale>
+	detail zk$desc_scale readable
+--  	synonym "SCALE"
+--  	synonym "MANUAL SCALE"
+   	static machine
+  	initial zk$room_health_services
+
+object scratch_disk
+	name <scratch disk>
+  	mass 15 volume 10 size 7
+	detail zk$desc_scratch_disk
+	strength infinite area 7
+--  	synonym "SCRATCH DISK"
+  	initial zk$room_operators_room
+
+object sdc_card
+	name <card from the SDC>
+	detail zk$desc_sdc_card
+  	mass 5 volume 2 size 2
+	strength infinite area 2
+
+object sdc_card_blank
+	name <blank card>
+	detail zk$desc_sdc_card_blank
+  	mass 5 volume 2 size 2
+	strength infinite area 2
+	initial zk$room_stall
+--  	synonym "CARD"
+--  	synonym "BLANK CARD"
+
+object stair_door
+	name <stairwell door>
+	static openable	-- automatic placement
+	capacity 150
+
+object stall_door
+	name <bathroom stall door>
+	static openable	-- automatic placement
+	capacity 45
+
+object stan
+	name <mathematician/hacker>
+	strength infinite
+	detail zk$desc_stan
+--  	synonym "DEVELOPER"
+-- 	synonym "HACKER"
+--  	synonym "PROGRAMMER"
+  	initial zk$room_maze_6
+	cognizant static
+
+object stans_terminal
+	name <developers terminal>
+	detail zk$desc_stans_terminal readable
+--  	synonym "TERMINAL"
+--	synonym "VT100"
+--	synonym "VT100 TERMINAL"
+--	synonym "VIDEO"
+--	synonym "VIDEO TERMINAL"
+  	static machine
+  	initial zk$room_maze_6
+
+object strange_light
+	name <strange light>
+	static
+	initial zk$room_tape_library
+--	synonym "LIGHT"
+--	synonym "STRANGE LIGHT"
+
+object sword
+	name <elvish sword of great antiquity>
+  	mass 25 volume 12 size 12
+	strength infinite area 12
+  	initial zk$room_woods
+	mass 50
+--  	synonym "SWORD"
+--  	synonym "ELF SWORD"
+--  	synonym "ELVISH SWORD"
+--  	synonym "ELVISH OLD SWORD"
+--  	synonym "OLD SWORD"
+--  	synonym "OLD ELVISH SWORD"
+
+object system_disk
+	name <system disk>
+	detail zk$desc_system_disk
+  	mass 15 volume 10 size 7
+	strength infinite area 7
+--  	synonym "SYSTEM DISK"
+--  	initial from Field Service
+
+object tape_drive
+	name <tape drive>
+	detail zk$desc_tape_drive
+	strength infinite capacity 5
+-- 	synonym "TAPE DRIVE"
+  	static machine openable
+--	Run time placement
+
+object tape_racks
+	name <tape racks>
+	static
+	initial zk$room_tape_library
+--	synonym "RACKS"
+--	synonym "TAPE RACKS"
+
+object terminal
+	name <terminal>
+	detail zk$desc_terminal readable
+--  	synonym "TERMINAL"
+--	synonym "VT100"
+--	synonym "VT100 TERMINAL"
+--	synonym "VIDEO"
+--	synonym "VIDEO TERMINAL"
+  	static machine
+  	initial zk$room_lobby
+
+object tidbit
+	name <tidbits of information>
+	detail zk$desc_tidbit readable
+	static
+--  	synonym "TERMINAL"
+
+object vms_tape
+  	mass 10 volume 5 size 5
+	strength infinite area 5
+	name <VMS tape>
+	detail zk$desc_vms_tape readable
+--  	synonym "VMS TAPE"
+--  	synonym "VMS KIT"
+--  	initial from manager
+
+object vms_developer
+	name <VMS developer>
+	strength infinite capacity infinite
+	detail zk$desc_vms_developer
+--  	synonym "VMS DEVELOPER"
+-- 	synonym "VMS HACKER"
+--  	synonym "VMS PROGRAMMER"
+  	cognizant
+  	initial zk$room_vms_dev_2
+
+object wall
+	name <brightly-colored orange wall>
+	detail zk$desc_wall
+--	run-time placement at entrance
+	static
+--	"WALL"
+--	"ORANGE WALL"
+
+object working_coin_machine
+	name <coin machine>
+	detail zk$desc_working_coin_machine
+	strength infinite area 25 capacity 3
+--  	synonym "WORKING COIN MACHINE"
+   	static machine
+  	initial zk$room_maze_4
+ 
+object yellow_button name <yellow button> static
+
+object zk_enquirer
+  	mass 10 volume 10 size 5
+	strength infinite area 5
+	name <copy of the ZK Enquirer>
+	detail zk$desc_zk_enquirer readable
+-- 	synonym "ENQUIRER"
+-- 	synonym "ZK ENQUIRER"
+--  	synonym "ENQUIRER NEWSPAPER"
+-- 	synonym "ZK ENQUIRER NEWSPAPER"
+  	initial zk$room_anti_chamber
+
+object zk_journal
+	name <copy of the ZK Journal>
+	detail zk$desc_zk_journal readable
+  	mass 10 volume 10 size 5
+	strength infinite area 5
+--  	synonym "JOURNAL"
+--	synonym "ZK JOURNAL"
+--  	synonym "JOURNAL NEWSPAPER"
+--  	synonym "ZK JOURNAL NEWSPAPER"
+  	initial zk$room_anti_chamber
+
+object zk_today
+	name <copy of ZK TODAY>
+	detail zk$desc_zk_time_magazine readable
+  	mass 10 volume 10 size 5
+	strength infinite area 5
+--  	synonym "TODAY"
+--	synonym "ZK TODAY"
+--  	synonym "TODAY NEWSPAPER"
+--  	synonym "ZK TODAY NEWSPAPER"
+ 	initial zk$room_anti_chamber
+
+end

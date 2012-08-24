@@ -1,0 +1,85 @@
+			InFuckingCredible
+
+(1) The Coke machine no longer has capacity, for better or for worse.
+    You can still put the coins in it, of course.
+
+(2) The Coke can is now openable, with a dark liquid inside.  Implemented the
+    drink command.  If you drink the can or the liquid, the Coke_can becomes
+    the empty_can.  Changed the former empty_cans to discarded_cans (the ones
+    in the CDD devo's office).  Made a generic ANY_CANS.  If you give the devo
+    an open can he bitches.  If you shake an open can you get splattered.
+    Added SODA as a synonym.
+
+(3) Changed the 'nothing interesting happens' message when you move something
+    to hint about specifying a direction.
+
+(4) Removed the text about the guard being friendly.  Brought back 'dressed in
+    typical guardly attire'.
+
+(5) If you say PUT ALL or GIVE ALL, then ALL-->POSSESSIONS
+
+(6) Put a kludge in to check for V4.0, V4.1 systems.  If so, start the text
+    at the bottom of the screen to prevent the status line getting blown
+    away.
+
+(7) Added the personnel door.  We can't have a health door, since there already
+    is a stair door in BLUE_HALL_8.  I changed the text accordingly.
+
+(8) Added a "the foo says 'See you later'" when you leave a room with a
+    cognizant object in it.
+
+(9) Added the health services problem.  The guard now directs you to health
+    services on entry to the building.  The nurse gives you directions when
+    you enter her room.  Commands: STAND ON SCALE, PUT ARM IN MACHINE.
+    If you do both, a temp badge is left on the reception desk.  Oh yes,
+    I added an object: reception desk.  The nurse bitches if you leave
+    in the middle of the physical.
+
+(10) Implemented the roving guard.  Once every 75 moves after you've
+     had the physical.  He escorts you out if you're not WEARING the
+     badge.
+
+(11) New wizard mode commands:
+	NURSE - Set the bits to indicate the physical has been taken
+	SYSTEM - Set the bits to indicate all the LPs have been installed
+
+(12) Exit conditions:
+	Can't leave lobby except by catwalk when not taken physical
+	Can't leave lobby to antichamber when:
+		System disk is visible (must hide in sack)
+		Keys not returned
+		Badge not returned
+		Installed all LP's and haven't completed exit interview
+
+(13) Implemented the exit interview.  The rep asks you three questions
+     out of six.  Must use SAY <answer>.  Doesn't care about syntax, only
+     that certain keywords are in the string.  Also, I rewrote the
+     description of personnel.
+
+<'What color are the rectangular shaped bars?'>
+	Answer must contain:	BLACK
+<'Where is the picture of Bill the Cat located?'>
+	Answer must contain:	ED
+<'How many stairwells are there?'>
+	Answer must contain:	4
+<'Name a word in the ZK lexicon which is ambiguous in four letters?'>
+	Answer must contain:	COMP
+<'What color are the rooms described as "passages"? '>
+	Answer must contain:	YELLOW
+<'How much is the copy of ZK ENQUIRER worth?'>
+	Answer must contain:	1BIT
+
+(14) Random fine tuning.  If you put something on the reception desk
+     the guard picks it up.
+
+-----------------------------------------------------------------
+
+please describe the following objects:
+	TEMP BADGE
+	RECEPTION DESK
+	PERSONNEL REP
+	FS REP (if not done already)
+Also, please cruise through ZK$TEXT and tune up my new messages
+
+
+Will

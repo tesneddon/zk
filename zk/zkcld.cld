@@ -1,0 +1,3 @@
+define verb ZK
+    image ZK$MAIN
+    parameter P1		value(type=$rest_of_line)

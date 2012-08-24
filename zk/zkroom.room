@@ -1,0 +1,659 @@
+-- Edit history:
+
+-- 09-JUL-85 WBL Added directions IN and OUT.  Use only when particularly 
+--		 obvious - we don't want to make things too easy
+-- 14-JUL-85 WBL Added doors using DOOR attribute
+
+-- Classes
+--	0 Default
+--	1 Maze
+--	2 Outside
+--	3 Path Petty Cash Officer takes on way out (along with 2)
+--	4 Always dark
+--	5 Places guard shouldn't bother you (along with 2)
+--	  Bathroom, elevator, personnel, health services
+
+prefix zk$room_
+ident <X01.00-00>
+
+room anti_chamber
+	name <Antechamber>
+	description zk$desc_anti_chamber
+	class 3
+	north lobby in lobby door zk$obj_glass_door
+	south entrance out entrance door zk$obj_crystal_door
+
+room blue_hall_1
+	name <Blue Hall>
+	description zk$desc_blue_hall_1
+	north non_descript_hall_1
+	east blue_hall_2
+	south rsx_dev_1
+
+room blue_hall_2
+	name <Blue Hall>
+	description zk$desc_blue_hall_2
+	west blue_hall_1
+	south rsx_dev_2
+	east lobby
+
+room blue_hall_3
+	name <Blue Hall>
+	description zk$desc_blue_hall_3
+	east maze_1
+	west catwalk_east_1
+	north blue_hall_4
+
+room blue_hall_4
+	name <Blue Hall>
+	description zk$desc_blue_hall_4
+	west personnel in personnel door zk$obj_personnel_door
+	south blue_hall_3
+	north blue_hall_8
+
+room blue_hall_5
+	name <Blue Hall>
+	description zk$desc_blue_hall_5
+	east blue_hall_6
+	west cafe
+	south non_descript_hall_1
+	north top_of_stairs_1 in top_of_stairs_1 door zk$obj_stair_door
+
+room blue_hall_6
+	name <Blue Hall>
+	description zk$desc_blue_hall_6
+	east blue_hall_7
+	west blue_hall_5
+
+room blue_hall_7
+	name <Blue Hall>
+	description zk$desc_blue_hall_7
+	east end_of_blue_hall
+	west blue_hall_6
+	south non_descript_hall_2
+
+room blue_hall_8
+	name <Blue Hall>
+	description zk$desc_blue_hall_8
+	east maze_7
+	west health_services
+	north top_of_stairs_3 in top_of_stairs_3 door zk$obj_stair_door
+	south blue_hall_4
+
+room bottom_of_stairs_1
+	name <Bottom of Stairwell>
+	description zk$desc_bottom_of_stairs_1
+	south end_of_red_passage_1 out end_of_red_passage_1
+		door zk$obj_stair_door
+	up middle_of_stairs_1
+
+room bottom_of_stairs_2
+	name <Bottom of Stairwell>
+	description zk$desc_bottom_of_stairs_2
+	south end_of_red_passage_2 out end_of_red_passage_2
+		door zk$obj_stair_door
+	up middle_of_stairs_2
+
+room cafe
+	name <Cafe>
+	description zk$desc_cafe
+	east blue_hall_5
+
+room catwalk_east_1
+	name <East End of Catwalk>
+	description zk$desc_catwalk_east_1
+	east blue_hall_3
+	west catwalk_west_1
+
+room catwalk_east_2
+	name <East End of Catwalk>
+	description zk$desc_catwalk_east_2
+	west catwalk_west_2
+	east yellow_corridor_4
+
+room catwalk_west_1
+	name <West End of Catwalk>
+	description zk$desc_catwalk_west_1
+	east catwalk_east_1
+	south dcu
+	west lobby
+
+room catwalk_west_2
+	name <West End of Catwalk>
+	description zk$desc_catwalk_west_2
+	east catwalk_east_2
+	west yellow_corridor_3
+
+room clearing
+	name <Clearing>
+	description zk$desc_clearing
+	class 2
+	west woods
+	north entrance
+
+room cdd_dev
+	name <CDD development>
+	description zk$desc_cdd_dev
+	south maze_17
+
+room dcu
+	name <DCU office>
+	description zk$desc_dcu
+	north catwalk_west_1
+
+room dtr_dev
+	name <DTR Development>
+	description zk$desc_dtr_dev
+	south maze_16
+
+room ed_office
+	name <Ed's Office>
+	description zk$desc_ed_office
+	east yellow_corridor_5
+	south yellow_corridor_1
+
+room elevator_blue
+	name <Elevator>
+	description zk$desc_elevator
+	class 5
+	east non_descript_hall_1 out non_descript_hall_1
+		door zk$obj_elevator_door
+
+room elevator_red
+	name <Elevator>
+	description zk$desc_elevator
+	class 5
+	east stub_red out stub_red door zk$obj_elevator_door
+
+room elevator_yellow
+	name <Elevator>
+	description zk$desc_elevator
+	class 5
+	east stub_yellow out stub_yellow door zk$obj_elevator_door
+
+room end_of_blue_hall
+	name <End of Blue Hall>
+	description zk$desc_end_of_blue_hall
+	west blue_hall_7
+	north top_of_stairs_2 in top_of_stairs_2 door zk$obj_stair_door
+
+room end_of_red_passage_1
+	name <End of Red Passage>
+	description zk$desc_end_of_red_passage_1
+	north bottom_of_stairs_1 in bottom_of_stairs_1 door zk$obj_stair_door
+	east red_passage_1
+
+room end_of_red_passage_2
+	name <End of Red Passage>
+	description zk$desc_end_of_red_passage_2
+	north bottom_of_stairs_2 in bottom_of_stairs_2 door zk$obj_stair_door
+	west red_passage_2
+
+room end_of_yellow_corridor
+	name <End of Yellow Corridor>
+	description zk$desc_end_of_yellow_corridor
+	east yellow_corridor_8
+	north middle_of_stairs_1 in middle_of_stairs_1 door zk$obj_stair_door
+
+room entrance
+	name <Building Entrance>
+	description zk$desc_entrance
+	class 2
+	south clearing
+	north anti_chamber in anti_chamber door zk$obj_crystal_door
+
+room lab_of_implementors
+	name <Lab of Implementors>
+	description zk$desc_lab_of_implementers
+	class 4
+	east yellow_corridor_7
+	north yellow_corridor_1 
+	west tape_library
+
+room lobby
+	name <Lobby>
+	description zk$desc_lobby
+	class 3
+	north non_descript_hall_1
+	west blue_hall_2
+	south anti_chamber out anti_chamber door zk$obj_glass_door
+	north non_descript_hall_2
+	east catwalk_west_1
+
+room health_services
+	name <Health Services>
+	description zk$desc_health_services
+	class 5
+	east blue_hall_8
+
+room maze_1
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_1
+	class 1
+	west maze_7
+	east maze_2
+	south_east maze_2
+	south_west blue_hall_3
+
+room maze_2
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_2
+	class 1
+	east maze_3
+	west maze_1
+	south_east maze_3
+	south_west maze_1
+
+room maze_3
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_3
+	class 1
+	east maze_9
+	west maze_2
+	south_west maze_2
+
+room maze_4
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_4
+	class 1
+	north maze_5
+	south maze_5
+	south_east maze_4
+	north_west maze_4
+	south_west maze_4
+	north_east maze_4
+
+room maze_5
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_5
+	class 1
+	east maze_5
+	west maze_5
+	north maze_8
+	north_east maze_6
+	north_west maze_4
+	south_east maze_6
+	south_west maze_4
+
+room maze_6
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_6
+	class 1
+	north maze_5
+	south maze_5
+	south_east maze_6
+	north_west maze_6
+	south_west maze_6
+	north_east maze_6
+
+room maze_7
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_7
+	class 1
+	west maze_1
+	east maze_8
+	north_east maze_8
+	north_west blue_hall_8
+
+room maze_8
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_8
+	class 1
+	east maze_9
+	west maze_7
+	south maze_5
+	north_east maze_9
+	north_west maze_7
+
+room maze_9
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_9
+	class 1
+	east maze_3
+	west maze_8
+	north_west maze_8
+	north top_of_stairs_4 in top_of_stairs_4 door zk$obj_stair_door
+
+room maze_10
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_10
+	class 1
+	east maze_11
+	north_east maze_14
+	north maze_13
+
+room maze_11
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_11
+	class 1
+	west maze_10
+	east maze_12
+	north maze_14
+
+room maze_12
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_12
+	class 1
+	north maze_15
+	west maze_11
+	north_west maze_14
+
+room maze_13
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_13
+	class 1
+	south maze_10
+	east maze_14
+	north maze_16
+
+room maze_14
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_14
+	class 1
+	north maze_17
+	north_east maze_18
+	east maze_15
+	south_east maze_12
+	south maze_11
+	south_west maze_10
+	west maze_13
+	north_west maze_16
+
+room maze_15
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_15
+	class 1
+	west maze_14
+	north maze_18
+	south maze_12
+
+room maze_16
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_16
+	class 1
+	north dtr_dev
+	south maze_13
+	south_west yellow_corridor_4
+	south_east maze_14
+
+room maze_17
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_17
+	class 1
+	north cdd_dev
+	south maze_14
+
+room maze_18
+	name <Maze of Twisty Cubicles>
+	description zk$desc_maze_18
+	class 1
+	north middle_of_stairs_4 in middle_of_stairs_4 door zk$obj_stair_door
+	south_west maze_14
+	south maze_15
+
+room middle_of_stairs_1
+	name <Middle of Stairwell>
+	description zk$desc_middle_of_stairs_1
+	up top_of_stairs_1
+	south end_of_yellow_corridor out end_of_yellow_corridor
+		door zk$obj_stair_door
+	down bottom_of_stairs_1
+
+room middle_of_stairs_2
+	name <Middle of Stairwell>
+	description zk$desc_middle_of_stairs_2
+	up top_of_stairs_2
+	south yellow_corridor_3 out yellow_corridor_3 door zk$obj_stair_door
+	down bottom_of_stairs_2
+
+room middle_of_stairs_3
+	name <Middle of Stairwell>
+	description zk$desc_middle_of_stairs_3
+	up top_of_stairs_3
+	south yellow_corridor_4 out yellow_corridor_4 door zk$obj_stair_door
+
+room middle_of_stairs_4
+	name <Middle of Stairwell>
+	description zk$desc_middle_of_stairs_4
+	class 1
+	up top_of_stairs_4
+	south maze_18 out maze_18 door zk$obj_stair_door
+
+room non_descript_hall_1
+	name <Non-descript Hall>
+	description zk$desc_non_descript_hall_1
+	north blue_hall_5
+	south blue_hall_1
+	west elevator_blue in elevator_blue door zk$obj_elevator_door
+
+room non_descript_hall_2
+	name <Non-descript Hall>
+	description zk$desc_non_descript_hall_2
+	class 3
+	north blue_hall_7
+	south lobby
+	east petty_cash in petty_cash door zk$obj_petty_cash_door
+
+room operators_room
+	name <Operator's Room>
+	description zk$desc_operators_room
+	north vms_lab_2
+
+room pad
+	name <Helicopter Pad>
+	description zk$desc_pad
+	class 2
+	east woods
+
+room personnel
+	name <Personnel>
+	description zk$desc_personnel
+	class 5
+	east blue_hall_4 out blue_hall_4 door zk$obj_personnel_door
+
+room petty_cash
+	name <Petty Cash>
+	description zk$desc_petty_cash
+	west non_descript_hall_2 out non_descript_hall_2
+		door zk$obj_petty_cash_door
+
+room red_passage_1
+	name <Red Passage>
+	description zk$desc_red_passage_1
+	north vms_dev_1
+	east red_passage_2
+	west end_of_red_passage_1
+	south vms_lab_1
+	south_west stub_red
+
+room red_passage_2
+	name <Red Passage>
+	description zk$desc_red_passage_2
+	north vms_dev_2
+	east end_of_red_passage_2
+	west red_passage_1
+	south vms_lab_2
+
+room rest_room 
+	name <Unisex Rest Room>
+	description zk$desc_rest_room
+	class 5
+	east stall in stall door zk$obj_stall_door
+	west yellow_corridor_7
+
+room rsx_dev_1
+	name <RSX development>
+	description zk$desc_rsx_dev_1
+	north blue_hall_1
+	east rsx_dev_2
+
+room rsx_dev_2
+	name <RSX development>
+	description zk$desc_rsx_dev_2
+	north blue_hall_2
+	west rsx_dev_1
+
+room stall
+	name <Bathroom Stall>
+	description zk$desc_stall
+	class 5
+	west rest_room out rest_room door zk$obj_stall_door
+
+room stub
+	name <Corridor Stub>
+	description zk$desc_stub
+	north yellow_corridor_4
+
+room stub_red
+	name <Corridor Stub>
+	description zk$desc_stub_red
+	north_east red_passage_1
+	west elevator_red in elevator_red door zk$obj_elevator_door
+
+room stub_yellow
+	name <Corridor Stub>
+	description zk$desc_stub_yellow
+	north_east yellow_corridor_8
+	west elevator_yellow in elevator_yellow door zk$obj_elevator_door
+
+room tape_library
+	name <Tape library>
+	description zk$desc_tape_library
+	class 4
+	north yellow_corridor_8 out yellow_corridor_8 door zk$obj_library_door
+	east lab_of_implementors
+
+room top_of_stairs_1
+	name <Top of Stairwell>
+	description zk$desc_top_of_stairs_1
+	down middle_of_stairs_1
+	south blue_hall_5 out blue_hall_5 door zk$obj_stair_door
+
+room top_of_stairs_2
+	name <Top of Stairwell>
+	description zk$desc_top_of_stairs_2
+	down middle_of_stairs_2
+	south end_of_blue_hall out end_of_blue_hall door zk$obj_stair_door
+
+room top_of_stairs_3
+	name <Top of Stairwell>
+	description zk$desc_top_of_stairs_3
+	down middle_of_stairs_3
+	south blue_hall_8 out blue_hall_8 door zk$obj_stair_door
+
+room top_of_stairs_4
+	name <Top of Stairwell>
+	description zk$desc_top_of_stairs_4
+	class 1
+	down middle_of_stairs_4
+	south maze_9 out maze_9 door zk$obj_stair_door
+
+room woods
+	name <Woods>
+	description zk$desc_woods
+	class 2
+	east clearing
+	west pad
+
+room vms_dev_1
+	name <VMS Development>
+	description zk$desc_vms_dev_1
+	south red_passage_1
+	north vms_dev_3
+
+room vms_dev_2
+	name <VMS Development>
+	description zk$desc_vms_dev_2
+	north vms_dev_4
+	south red_passage_2
+
+room vms_dev_3
+	name <VMS Development>
+	description zk$desc_vms_dev_3
+	south vms_dev_1
+	east vms_dev_4
+
+room vms_dev_4
+	name <VMS Development>
+	description zk$desc_vms_dev_4
+	south vms_dev_2
+	west vms_dev_3
+
+room vms_lab_1
+	name <VMS Lab>
+	description zk$desc_vms_lab_1
+	north red_passage_1
+	east vms_lab_2
+
+room vms_lab_2
+	name <VMS Lab>
+	description zk$desc_vms_lab_2
+	north red_passage_2
+	west vms_lab_1
+	south operators_room
+
+room yellow_corridor_1
+	name <Yellow Corridor>
+	description zk$desc_yellow_corridor_1
+	west yellow_corridor_8
+	east yellow_corridor_2
+	north ed_office
+	south lab_of_implementors
+
+room yellow_corridor_2
+	name <Yellow Corridor>
+	description zk$desc_yellow_corridor_2
+	south yellow_corridor_7
+	east yellow_corridor_3
+	north yellow_corridor_5
+	west yellow_corridor_1
+
+room yellow_corridor_3
+	name <Yellow Corridor>
+	description zk$desc_yellow_corridor_3
+	north middle_of_stairs_2 in middle_of_stairs_2 door zk$obj_stair_door
+	west yellow_corridor_2
+	east catwalk_west_2
+
+room yellow_corridor_4
+	name <Yellow Corridor>
+	description zk$desc_yellow_corridor_4
+	south stub
+	west catwalk_east_2
+	north middle_of_stairs_3 in middle_of_stairs_3 door zk$obj_stair_door
+	east maze_16
+
+room yellow_corridor_5
+	name <Yellow Corridor>
+	description zk$desc_yellow_corridor_5
+	west ed_office
+	south yellow_corridor_2
+	north yellow_corridor_6
+
+room yellow_corridor_6
+	name <Yellow Corridor>
+	description zk$desc_yellow_corridor_6
+	south yellow_corridor_5
+	west will_office
+
+room yellow_corridor_7
+	name <Yellow Corridor>
+	description zk$desc_yellow_corridor_7
+	north yellow_corridor_2
+	west lab_of_implementors
+	east rest_room
+
+room yellow_corridor_8
+	name <Yellow Corridor>
+	description zk$desc_yellow_corridor_8
+	south_west stub_yellow
+	west end_of_yellow_corridor
+	east yellow_corridor_1
+	south tape_library in tape_library door zk$obj_library_door
+
+room will_office
+	name <Will's Office>
+	description zk$desc_will_office
+	east yellow_corridor_6
+
+end

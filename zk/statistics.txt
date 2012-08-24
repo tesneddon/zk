@@ -1,0 +1,11 @@
+As of X1.0-459
+
+PSect		Use		Bytes		% of Image
+
+$IFC$DATA	Text,		48111		57%
+		obj tables,
+		room tables
+
+$CODE		All routines	32132		38%
+
+$LOCAL		Keyword tables	4712		5.5%

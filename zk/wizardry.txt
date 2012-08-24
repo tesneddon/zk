@@ -1,0 +1,151 @@
+
+ZK problems: Total of 150 points
+----------------------------------
+
+Ranks: (they may perfectly into DEC's system)
+
+	0          - Diagnostic Programming Aid
+	1   to 24  - Entry Level Software Engineer
+	25  to 49  - Software Engineer II
+	50  to 99  - Senior Software Engineer
+	100 to 124 - Principal Software Engineer
+	125 to 149 - Consulting Engineer
+	       150 - Hacker
+
+
+Entrance in the Building: (25 points)
+
+	- magic word is "digitalsoftwareengineering"
+		- verb: say digitalsoftwareengineering
+
+
+Getting Past the Guards on the way in: (25 points)
+
+	- the gaurds escort you to Health Services
+		- you must follow the guards or die
+			- verb: follow
+
+	- the nurse performs a physical on you
+		- blood pressure machine
+			- verb: give arm to nurse
+		- scale
+			- verb: stand on scale
+	- the guards escort you back to lobby
+		- you must follwo the guards or die
+			- verb: follow
+
+	- the guards give you a temporary badge
+			- you can't go until you take the badge
+
+
+CDD Tape: (25 points)
+
+	- 10 points for the getting the bills
+	-  5 for changing the bills to coins
+	-  5 for getting Coke from macine
+	-  5 for giving Coke to CDD dev
+
+	- find cyrstal balls in Ed's and Will office
+	- rub both balls (print obsence message)
+	- give a ball to petty cash officier
+		- verb: give ball to officier
+	- wait til petty cash closes (indicated by a reply message - 50 moves)
+	- the petty cash door locks
+	- look in your ball and see officer say magic words
+		- verb: look in ball
+	- goto petty cash and unlock safe
+		- verb: say magic_word
+	- take bills from safe
+		- verb: take bills from safe
+	- change bill to coins using working money changer
+		- verb: put bills in machine
+	- put coins in coke machine
+		- verb: put coins in machine
+	- take the coke
+		- verb: take coke from machine
+	- give the coke to CDD developer
+		- veb: give coke to developer
+
+
+DTR tape: (25 points)
+
+	- cant take documentation set
+	- bring documentation to DTR office
+		- need to put doc in elevator
+		- can't bring doc past doors
+	- put doc under the planter
+		- verb: put doc under planter
+	- climb up doc
+		- verb: climb up doc (or) up
+	- take the DTR tape
+		- verb: take tape
+	- get back down
+		- verb: down
+
+VMS tape: (25 points)
+
+	- find card in the maze
+	- bring card to lab of implementors
+	- turn off other lights (lamp) by putting them in sack
+		- verb: put lamp in sack
+	- put card under ultra-violet light which make letters appear on card
+		- lettes last on card for 15 turns then fade away
+	 	- verb: put card under ultraviolet light
+	- go to VMS developer who asks for the card (need to see the lettering)
+		- give card to developer
+	- take VMS tape
+		- verb: take tape
+
+Installation of Tapes: (25 points)
+
+	- goto VMS lab
+	- get scratch disk
+		- verb: take scatch disk
+	- give disk and VMS tape to field service who builds system disk
+		- verb: give disk to field service
+	- put disk in disk drive
+		- verb: put disk in disk drive
+	- boot vax
+		- verb: boot [vax]
+	- put CDD tape in tape drive
+		- verb: put tape in tape drive
+	- install CDD
+		- verb: install cdd
+	- take tape from tape drive
+		- verb: take tape from tape drive
+	- put DTR tape in tape drive
+		- verb: put tape in tape drive
+	- install DTR
+		- verb: install dtr
+	- take disk from disk drive
+		- verb: take disk from disk drive
+
+Getting out of ZK past guards: (25 points)
+
+	- goto lobby
+	- if you try to leave with the system disk the guards escort you
+	  to personnel
+		- must follow guards or die
+		- verb: follow
+	- personnel asks you questions about the game
+		- must answer correctly or "you're not ready"
+		- verb: answer to question
+	- personnel rep escorts you out of building
+		- verb: follow
+
+
+Random Occurences:
+
+	- Wandering Guard checking for badge
+	- Roaming night crew radomizing objects you touched only in maze
+	- Random shutdown of lights in entire building (you must WAIT)
+	- Guard to put lights back on
+	- lamp runs down
+
+Special Cases:
+
+	- Any cognizant object will kill you when you try to kill (any form)
+	  it
+	- Try taking the packs from our cabinet and you die
+
+

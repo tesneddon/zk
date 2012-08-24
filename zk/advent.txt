@@ -1,0 +1,72 @@
+35,You are obviously a rank amateur.  Better luck next time.
+100,Your score qualifies you as a novice class adventurer.
+130,You have achieved the rating: "experienced adventurer".
+200,You may now consider yourself a "seasoned adventurer".
+250,You have reached "junior master" status.
+300,Your score puts you in master adventurer class C.
+330,Your score puts you in master adventurer class B.
+349,Your score puts you in master adventurer class A.
+9999,All of adventuredom gives tribute to you, adventurer grandmaster!
+
+142,If you want to end your adventure early, say "quit".  To suspend your
+142,adventure such that you can continue later, say "suspend" (or "pause"
+142,or "save").  To see what hours the cave is normally open, say "hours".
+142,To see how well you're doing, say "score".  To get full credit for a
+142,treasure, you must have left it safely in the building, though you get
+142,partial credit just for locating it.  You lose points for getting
+142,killed, or for quitting, though the former costs you more.  There are
+142,also points based on how much (if any) of the cave you've managed to
+142,explore; in particular, there is a large bonus just for getting in (to
+142,distinguish the beginners from the rest of the pack), and there are
+142,other ways to determine whether you've been through some of the more
+142,harrowing sections.  If you think you've found all the treasures, just
+142,keep exploring for a while.  If nothing interesting happens, you
+142,haven't found them all yet.  If something interesting *does* happen,
+142,it means you're getting a bonus and have an opportunity to garner many
+142,more points in the master's section.  I may occasionally offer hints
+142,if you seem to be having trouble.  If I do, I'll warn you in advance
+142,how much it will affect your score to accept the hints.  Finally, to
+142,save paper, you may specify "brief", which tells me never to repeat
+142,the full description of a place unless you explicitly ask me to.
+
+51,I know of places, actions, and things.  Most of my vocabulary
+51,describes places and is used to move you there.  To move, try words
+51,like forest, building, downstream, enter, east, west, north, south,
+51,up, or down.  I know about a few special objects, like a black rod
+51,hidden in the cave.  These objects can be manipulated using some of
+51,the action words that I know.  Usually you will need to give both the
+51,object and action words (in either order), but sometimes I can infer
+51,the object from the verb alone.  Some objects also imply verbs; in
+51,particular, "inventory" implies "take inventory", which causes me to
+51,give you a list of what you're carrying.  The objects have side
+51,effects; for instance, the rod scares the bird.  Usually people having
+51,trouble moving just need to try a few more words.  Usually people
+51,trying unsuccessfully to manipulate an object are attempting something
+51,beyond their (or my!) capabilities and should try a completely
+51,different tack.  To speed the game you can sometimes move long
+51,distances with a single word.  For example, "building" usually gets
+51,you to the building from anywhere above ground except when lost in the
+51,forest.  Also, note that cave passages turn a lot, and that leaving a
+51,room to the north does not guarantee entering the next from the south.
+
+000,There are a few recent issues of "Spelunker Today" magazine here.
+
+126,You are on the edge of a breath-taking view.  Far below you is an
+126,active volcano, from which great gouts of molten lava come surging
+126,out, cascading back down into the depths.  The glowing rock fills the
+126,farthest reaches of the cavern with a blood-red glare, giving every-
+126,thing an eerie, macabre appearance.  The air is filled with flickering
+126,sparks of ash and a heavy smell of brimstone.  The walls are hot to
+126,the touch, and the thundering of the volcano drowns out all other
+126,sounds.  Embedded in the jagged roof far overhead are myriad twisted
+126,formations composed of pure white alabaster, which scatter the murky
+126,light into sinister apparitions upon the walls.  To one side is a deep
+126,gorge, filled with a bizarre chaos of tortured rock which seems to
+126,have been crafted by the devil himself.  An immense river of fire
+126,crashes out from the depths of the volcano, burns its way through the
+126,gorge, and plummets into a bottomless pit far off to your left.  To
+126,the right, an immense geyser of blistering steam erupts continuously
+126,from a barren island in the center of a sulfurous lake, which bubbles
+126,ominously.  The far right wall is aflame with an incandescence of its
+126,own, which lends an additional infernal splendor to the already
+126,hellish scene.  A dark, foreboding passage exits to the south.

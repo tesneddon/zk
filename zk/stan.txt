@@ -1,0 +1,471 @@
+From:	VAXUUM::DYER         "Frankie say `Relax'" 15-JAN-1985 11:31
+To:	ED,HELENE,RAY,WILL
+Subj:	Your favorite program and mine...
+
+From:	AMBER::CHABOT       "l s chabot"   15-JAN-1985 11:25  
+To:	DDB,PAMELA,VAXUUM::DYER
+Subj:	pass along if you haven't seen this yet
+
+From:	AMBER::EIRIKUR      "Eirikur Hallgrimsson" 10-JAN-1985 11:30
+To:	SWTEAM
+Subj:	A day in the life... (Running a program on VMS)
+
+From:	REGINA::LOMICKAJ     10-JAN-1985 11:12
+To:	AMBER::EIRIKUR
+Subj:	If you haven't seen it yet, re-distribute to your group.
+
+From:	RANI::GLANTZ          9-JAN-1985 13:54  
+To:	KRYPTN::BLACK, REGINA::GLASSON, REGINA::LOMICKAJ, LEICHTERJ
+Subj:	FIXED IN NEXT RELEASE
+
+
+	    A Day in the Life of the Image Activator
+
+	as recounted to Stanley Rabinowitz on 7-Jan-1985
+
+MONITOR:	Good morning sir!  I am your command language
+		interpreter today.  That was a flawlessly executed LOGIN.
+		How may I help you today?
+
+USER:		Good morning to you too computer.
+		I think today I want to do some data retrieving.
+
+MONITOR:	A wonderful choice sir!  A finer day it couldn't be
+		for looking over your data.  How will you have it today?
+		Sunny side up?  Once over lightly?
+
+USER:		I think I'll use DATATRIEVE.  Would you kindly activate
+		DATATRIEVE please?
+
+MONITOR:	Most certainly sir!  An excellent choice!
+		One moment while I image-activate it.
+
+MONITOR:	Oh, image activator: would you please image-activate
+		that DTR32 image that I notice on SYS$SYSTEM?  My user
+		desires to play with it a bit now.
+
+IMAGE ACTIVATOR: No problem.  Shouldn't take but a jiff.
+
+		<pause>
+
+MONITOR:	Any problems?
+
+IMAGE ACTIVATOR: No sir, not a one.  It's just that I'm surprised to
+		see that DTR32 is composed of 21 image sections.
+		Quite an unusual number for a VMS utility.  Most
+		images only have 3 or 4 sections.  This one really
+		sets a record!  But no problem - I just \love/ to map
+		in all these sections.  After all - that's my primary
+		purpose in life.
+
+		<pause>
+
+IMAGE ACTIVATOR: Well, that should do it.  They're all mapped in.
+
+MONITOR:	Then we can start her up now?
+
+IMAGE ACTIVATOR: Well not quite.  I just noticed that this image
+		invokes some shared images.  Oh well, I guess I'll
+		have to go image-activate them too.  At least we'll
+		only have to activate those images that this program
+		really needs.
+
+MONITOR:	How many shared images does it require?
+
+IMAGE ACTIVATOR: Oh mi gosh!  It references 15 shared images!
+		Another record!  I can't believe it!
+		Oh well, here goes...
+
+IMAGE ACTIVATOR: The first one it wants is DTRSHR.  That should be
+		an easy one.
+
+		<pause>
+
+IMAGE ACTIVATOR: Oh no! Not another one. That's two in one day!
+		DTRSHR.EXE uses 20 image sections!
+
+MONITOR:	Have you enough room for them all?
+
+IMAGE ACTIVATOR: No sweat. This is a virtual memory machine. And this disk
+		I/O is real fast.  I'll have it in a minute.
+
+		<pause>
+
+IMAGE ACTIVATOR: There. Now on to the other shared images.  Next
+		comes CDDSHR.  Guess it's important that we share
+		all this data.
+
+MONITOR:	Yup.  What next?
+
+IMAGE ACTIVATOR: Now we'll need a database manager, so I guess
+		we'll just have to go off and image-activate DBMSHR,
+		the database management system.
+
+MONITOR:	Sounds reasonable.
+
+USER:		How's it coming there computer?
+
+MONITOR:	No sweat.  It'll be just another moment.
+
+IMAGE ACTIVATOR: And now we'll activate RDBSHR.
+
+MONITOR:	But I thought you just brought in your database manager?
+
+IMAGE ACTIVATOR: Yes, but this one is the \relational/ database system.
+		It's a whole different ballgame.
+
+MONITOR:	Well, hurry it along.
+
+IMAGE ACTIVATOR: Okay. Next comes RDMSHR, the relational database
+		manager.
+
+MONITOR:	But how does that differ from RDBSHR?
+
+IMAGE ACTIVATOR: I don't know.  I just activate 'em.  They tell me
+		to image-act and I image-act.
+
+MONITOR:	Well, I hope that's it for database managers.
+
+IMAGE ACTIVATOR: Not quite. There's still RDBBSHR.  This company
+		specializes in its excellent collection of managers.
+
+MONITOR:	Great! I guess that's it then.
+
+IMAGE ACTIVATOR: Not on your life! Do you think our user merely
+		wants to look at relationships?  What if he wants
+		to sort his data?
+
+MONITOR:	Oh.
+
+IMAGE ACTIVATOR: Didn't think of that did you?  I guess we'll just
+		have to go image-activate SORTSHR.
+
+MONITOR:	I guess so.
+
+USER:		But I don't plan to do any sorting today.
+		I just wanted to prepare a short report.
+
+IMAGE ACTIVATOR: Sorry. SORTSHR comes with this image.
+		It's a free option.
+
+MONITOR:	What next?
+
+IMAGE ACTIVATOR: Hmm.  Looks like a request to bring in COBRTL,
+		the COBOL run-time library.
+
+MONITOR:	Why would they want that?  Is DATATRIEVE written in
+		COBOL?
+
+IMAGE ACTIVATOR: No, but the COBOL run time library has many precious
+		gems of useful routines that one might wish to call...
+		Guess, I'll just go image-activate it now.
+
+MONITOR:	Good thing you don't also need the FORTRAN run-time
+		library too.
+
+IMAGE ACTIVATOR: Now you've done it! You've given me the evil eye.
+		Either that or I just got up out of the wrong side
+		of the bed this morning.  Here look at this: this
+		image is also requesting FORRTL and LIBRTL.
+		OH! and now look: It wants MTHRTL too!
+
+MONITOR:	You never know when our user might want to do some
+		computation.  He might need to compute some arc
+		cosines you know.  Better safe than sorry.
+
+USER:		What's taking so long?
+
+MONITOR:	(still trying to be pleasant) We're almost there now.
+		Shant be much longer.  After all, you want a
+		user-friendly system don't you?
+
+IMAGE ACTIVATOR: That's right.  I guess that's why I've been
+		instructed to image activate LBRSHR.  You never
+		know when the user might request some on-line help
+		so we've got to have our librarian ready to answer
+		his questions.
+
+MONITOR:	That's nice.  I'm sure our user will appreciate that.
+
+IMAGE ACTIVATOR: And oh yeah - we'll need SCRSHR too, the screen
+		package.  Only the best on \this/ system.  Can't
+		let our user make do without fancy graphics!
+
+MONITOR:	A wonderful thought.  But will SCRSHR be enough?
+
+IMAGE ACTIVATOR: No. you're right of course.  We'll also have to
+		bring in EDTSHR.  SCRSHR is only the low level
+		graphics.  EDTSHR will really let our user edit
+		his data in style.
+
+USER:		But I wasn't planning to change the data today.
+		Just one simple report...
+
+MONITOR:	Keep your shirt on.  When this image finally comes
+		up, it will really blow your mind.
+
+MONITOR:	But image activator, will EDTSHR really be enough?
+		Isn't the big thing these days forms?
+
+IMAGE ACTIVATOR: Right you are monitor, baby.  Guess we'll need
+		FDVSHR, the forms management system.  Won't take
+		but another moment. (sigh) I think that was the last
+		one.
+
+MONITOR:	Great! Then I can report back that we're ready to go?
+
+IMAGE ACTIVATOR: One second. Let me make one last check...
+
+MONITOR:	Never pays to be hasty.
+
+IMAGE ACTIVATOR: Ah nuts! Some of these new images that we just
+		activated are requesting further attention.
+		It looks like they too want to activate other
+		shared images.
+
+MONITOR:	Don't we have enough images?  That's been 16 already!
+
+IMAGE ACTIVATOR: Well, security is an important issue too.
+		Wouldn't want our user to lose any data.
+		Look here: CDDSHR wants us to bring in SECURESHR.
+		Guess I'll just have to image-activate another one...
+
+USER:		(getting impatient) What's taking so long?
+
+MONITOR:	We're putting all the pieces together for you now.
+		Shouldn't be much longer.
+
+USER:		Putting them together?  Doesn't it come all assembled?
+
+MONITOR:	Not to worry.  There's no extra charge for installation.
+
+IMAGE ACTIVATOR: There.  And now what?  Look at this: CDDSHR also wants
+		us to activate LIBRTL, the common run-time library.
+
+MONITOR:	But didn't you already activate LIBRTL?
+
+IMAGE ACTIVATOR: Right on baby!  Let me just look around.
+
+		<pause>
+
+IMAGE ACTIVATOR: Oh there it is.  We have it mapped into memory already.
+		I guess I'll just throw this request away.
+
+MONITOR:	Do you get many of these redundant requests?
+
+IMAGE ACTIVATOR: Yeah, they happen all the time. Nothing to worry about.
+		You get used to it.  Look here, SCRSHR wants LIBRTL too;
+		and so does SORTSHR, and COBRTL, and FORRTL, and ...
+
+MONITOR:	Well hurry it along please.
+
+IMAGE ACTIVATOR: ... and FDVSHR and MTHRTL and ...
+		Oh and look at this duplicate request for LBRSHR and
+		RDMSHR and RDBBSHR and VMSRTL and ...
+
+MONITOR:	VMSRTL?  I don't remember seeing that one before.
+		What is it and who wants it?
+
+IMAGE ACTIVATOR: Oops, you're right.  I almost overlooked this request
+		by RDBSHR.  It's easy to overlook this one; it's so
+		small.  Only contains a few transfer vectors...
+
+MONITOR:	Guess it should be easy to activate then?
+
+IMAGE ACTIVATOR: On the contrary.  This one attempts to activate
+		the entire RTL!  Imagine that.  Oh well. That's life.
+		Fortunately, I've already brought in most of the RTL.
+		Let's see now, what else will we need?  Oh yes,
+		BASRTL.  Can't imagine how we overlooked that one.
+
+MONITOR:	Is that it then?
+
+IMAGE ACTIVATOR: Yup. That's it.  She's all here.  You can go start
+		her up!
+
+USER:		(pounding on keyboard) Where's my data!
+
+MONITOR:	Please use voice input sir! Those CTRL/T's are
+		MOST annoying.  They cause the most insidious
+		asynchronous traps to interrupt what I'm trying
+		to do.  We're starting your image now.
+
+USER:		It's about time.
+
+MONITOR:	There. How's that?  Lovely data isn't it?
+
+USER:		I wouldn't know.  Where's my prompt?
+
+MONITOR:	I don't know. Let me look into it.
+
+MONITOR:	Control unit, where's his prompt?
+
+CONTROL UNIT:	We're executing instructions as fast as we can!
+		Oh my god! An exception!
+
+MONITOR:	An exception! Is that serious?
+
+CONTROL UNIT:	My mistake; it's not a hardware exception, it's merely
+		a software exception.  Looks like the program signalled.
+
+MONITOR:	Why'd it do that?
+
+CONTROL UNIT:	Well, this program is naturally user friendly, so it
+		wants to start up by printing a welcome message
+		on the terminal.
+
+MONITOR:	So why doesn't it do that?
+
+CONTROL UNIT:	Well the message is in a message file, sir.
+
+MONITOR:	Well get it!
+
+CONTROL UNIT:	That's what we're trying to do.  You'll have to
+		check with the system message handling facility.
+		It takes care of those things.
+
+SYSTEM:		Ah, I have the message request now.  I'll have the
+		message in a moment.
+
+MONITOR:	Well, how do you get it?
+
+SYSTEM:		No sweat, we'll just image activate the appropriate
+		message section.
+
+IMAGE ACTIVATOR: Oh no.  I thought I had a deserved rest coming.
+
+SYSTEM:		Sorry, just a little bit longer.
+
+USER:		WHERE'S MY PROMPT!!!!!
+
+MONITOR:	Keep your pants on.  Just be glad you're not
+		trying to activate any subprocesses.
+
+IMAGE ACTIVATOR: Okay, one last time.  Which message section do
+		you need activated?
+
+SYSTEM:		I'm not sure.  Let's try DBMMSG. DBMSHR alerted
+		us to this one.
+
+IMAGE ACTIVATOR: (struggling) Okay. There it is. I've image-activated
+		DBMMSG.
+
+SYSTEM:		Sorry. It wasn't in that one. Try CDDSHR's message
+		section, CDDEXC.  Maybe it's in there.
+
+IMAGE ACTIVATOR: Okay. (grumble)
+
+SYSTEM:		Nope. It wasn't there either.  Try RDMSMSG.
+
+IMAGE ACTIVATOR: Look. I'm getting tired of this.  Couldn't you just
+		give me the complete list of message sections to
+		activate?  I'll keep bringing them in until we
+		find that damn message.  Exactly what message
+		are we looking for?
+
+SYSTEM:		Not sure yet, all I have is a number, but it's
+		probably something like "Welcome to VAX DATATRIEVE".
+
+IMAGE ACTIVATOR: Well...
+
+SYSTEM:		Well what?
+
+IMAGE ACTIVATOR: That list of message sections...
+
+SYSTEM:		Oh yeah.  Well RDBSHR wants RDBMSGS, and not to be outdone,
+		RDBBSHR wants RDBBMSGS, not to be confused with RDBMSGS,
+		and DTRSHR wants DTRMSGS, and SORTSHR wants SHRIMGMSG,
+		and lots of other guys are asking for SHRIMGMSG also - but
+		I'm too smart for them.  I'll just get it once and no one
+		will ever know the difference.
+
+IMAGE ACTIVATOR: Working...
+
+SYSTEM:		And don't forget FDVMSG.  The message might be in there too.
+
+MONITOR:	OH NO!
+
+SYSTEM:		What is it?
+
+IMAGE ACTIVATOR: Are you all right?
+
+MONITOR:	An interrupt!
+
+IMAGE ACTIVATOR: An interrupt?
+
+MONITOR:	That's what I said, an interrupt.
+		Image activator: stop what you're doing.
+
+IMAGE ACTIVATOR: Why?  Just when I was getting the hang of it.
+
+MONITOR:	The user has typed CTRL/Y.
+
+IMAGE ACTIVATOR: Okay, everything has been suspended.  Can I go
+		to sleep now?
+
+MONITOR:	No, you better stick around in case the user wants
+		to continue.  And notify the exit routines to stand by.
+		And the rundown procedures.  Also, I need moral support.
+		Maybe if I flash a dollar sign in front of his eyes,
+		he'll stop looking so angry.
+
+USER:		Computer, I'm really getting tired of this.
+
+MONITOR:	But we were so close...
+
+USER:		A likely story.
+
+MONITOR:	Well what can I do for you instead?
+
+USER:		I still want my report.  Let's try some other
+		way of retrieving my data.
+
+MONITOR:	A wonderful idea sir!  A finer day it couldn't be
+		for looking over your data.  How will you have it today?
+		Sunny side up?  Once over lightly?
+
+USER:		How about SCRAMBLED?
+
+MONITOR:	No problem sir.  Wait one moment while I activate
+		ENCRYPTSHR...
+
+the curtain falls as the dance begins again...
+
+
+	The players:
+
+	DTR32		VAX DTR V3.1
+	DTRSHR		VAX DTR V3.1
+	CDDSHR		CDD T3.1-0
+	DBMSHR		VAX DBMS V2.2-3
+	RDBSHR		03-06
+	RDMSHR		Rdb/VMS T1.1
+	RDBBSHR		03-05		also known as RDBBSTUB
+	SORTSHR		V04-000
+	COBRTL		V04-000
+	FORRTL		V04-000
+	LIBRTL		V04-000
+	MTHRTL		V04-000
+	FDVSHR		FMS V2.2
+	LBRSHR		V04-000
+	SCRSHR		V04-000
+	EDTSHR		V04-000
+	SECURESHR	V04-000
+	VMSRTL		V04-000
+	BASRTL		V04-000
+	DTRMSGS		03-05
+	CDDEXC		CDD T3.1-0
+	DBMMSG		03-03
+	RDMSMSG		03-05
+	RDBMSGS		03-06
+	RDBBMSGS	03-05
+	SHRIMGMSG	V04-000
+	FDVMSG		V2.1-003
+
+	for a grand total of 27 shared images and 153 image sections.
+
+Posted:	Tue 8-Jan-1985 14:48 EST
+To:	ROGER_W,@STAFF
+
+Posted:	Tue 8-Jan-1985 16:41 EST
+To:	@FRIENDS

@@ -1,0 +1,43 @@
+EDSWBL/EDS/WBL {GO n, KEYPAD, WHERE, TAKE object }
+
+command. command[.] command THEN command THEN command
+[the] object AND object
+object FROM object
+
+N, S, E, W, NE, NW, SE, SW, U, D, IN, OUT, BACK
+NORTH, SOUTH, EAST, WEST, NORTH WEST/EAST, SOUTH WEST/EAST
+
+JUMP, SCREAM, XYZZY, PLUGH, WAIT, PRAY
+
+VERSION, SCORE, LOOK, EXIT/LEAVE, ENTER, SAVE, RESTORE, RESTART, QUIT/^Z
+BRIEF/QUIET, VERBOSE, HELLO
+
+GO/WALK/RUN <direction>
+PUSH/PULL/MOVE <object> [<direction>]
+
+INVENTORY [<object>]	READ <object>	EXAMINE <object>
+DROP <object>		BOOT <object>	INSTALL <object>
+FOLLOW <object>		WEAR <object>	BOARD <object>
+DISEMBARK <object>	GET/TAKE/DISMOUNT/REMOVE <object>
+LOCATE <object>		SHUT <object>	SHAKE/WAVE <object>
+
+LOCK <object> [WITH <object>]	UNLOCK <object> [WITH <object>]
+OPEN <object> [WITH <object>]	CLOSE <object> [WITH <object>]
+STOP <object> [WITH <object>]	LIGHT/START <object> [WITH <object>]
+DESTROY/BREAK/KILL/SMASH/MUNG <object> [WITH <object>]
+CURE/HEAL/REPAIR/FIX <object> [WITH <object>]
+RUB/FONDLE <object> [WITH <object>]
+
+MOUNT/PUT <object> IN/ON <object>
+GIVE <object> TO <object>
+
+TURN ON/OFF <object>	TURN <object> ON/OFF
+SHUT OFF <object>	SHUT <object> OFF
+PLAY WITH <object>	LOOK AT <object>	LOOK IN <object>
+PUT ON <object>		PUT <object> ON		PICK UP <object>
+PUT DOWN <object>	PUT <object> DOWN	STAND ON <object>
+STEP ON/OFF <object>	GET ON/OFF <object>	WHERE IS <object>
+
+SAY token [token...]
+TELL/ASK <object>, <command>
+TYPE digits	LOOK UP "<text>"

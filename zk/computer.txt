@@ -1,0 +1,89 @@
+From:	GUIDO::LEES         "Will (ZKO1-2/D01, 381-1326)"  6-AUG-1985 09:45
+To:	ED
+Subj:	comments?
+
+	Work Items for Computer Problem
+
+1.	Fixing the game such at you can only put logical things in the
+	disk drive and the tape drive.
+
+	check.
+
+2.	Distinguish between START and BOOT.  START means turn on, while
+	BOOT means get the OS running.
+
+	there must be instructions somewhere for these suttle differences.
+	how about on a hardware manaual lieing around.
+
+3.	Make console work:
+		Have variable, last message on console.  When you read
+		the console you get the last message sent there.
+
+	good. 'EXAM CONSOLE'
+
+4.	Error for BOOT with no disk in drive
+
+	message on console "ZK-F- must have a valid system disk, no scratch"
+
+5.	If BOOT with scratch disk in drive
+		Failure
+		Service gnome appears
+		give disk to field service rep
+		returns system disk
+
+6.	If BOOT with system disk in drive, message on console
+		"Standalone ZKINSTALL is running and waiting..."
+
+7.	If take disk out while booted, what happens?
+
+	They die. They get a face full of magnetic disk.
+
+8.	if INSTALL <product> with no tape in drive, error
+
+	ZKINSTALL-F- media not in drive.
+
+9.	if INSTALL <product> with different product in drive, error
+
+	ZKINSTAL-F- INVAILID TAPE ON DRIVE ! see comment below.
+
+10.	Order of installation is VMS, CDD, DTR
+
+11.	If wrong order then "ZKINSTAL-W- PREREQUISITE PRODUCT REQUIRED"
+
+12.	If already installed then "ZKINSTAL-W- PRODUCT ALREADY INSTALLED"
+
+13.	What happens when they boot the vax with all products installed?
+	SPAWN to $ level?
+
+	Fine. No, Great.
+
+14.	What happens if they just install VMS.  and don't install CDD!!!!!
+
+	Well??
+
+
+
+
+Commands:
+
+	start vax
+	boot vax
+	put system disk in disk drive
+	put vms tape in tape drive
+	install vms
+						! What if they stop here
+	take vms tape from disk drive
+	put cdd tape in tape drive
+	install cdd
+						! What if they stop here
+	take cdd tape from disk drive
+	put dtr tape in tape drive
+	install dtr
+
+
+Comments:
+
+	I think the command 'INSTAL [product]' should be just 'INSTALL'.
+	Having the product name buys you nothing except error checking.
+	Beside people will try '*' and stuff like that. The instructions
+	for install say that it will install whatever's on the mag tape.

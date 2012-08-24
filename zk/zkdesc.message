@@ -1,0 +1,1111 @@
+-- Edit History:
+-- 10-JUL-85 WBL Objects which can be read should be described as follows:
+--		 <stuff that is read>
+--		 <blank>
+--		 <General comments, if any (like, the foo is so big, etc)>
+
+prefix zk$desc_
+ident <X01.00-00>
+
+message anti_chamber
+<This is a small cramped room with large glass doors to the north and south.>
+<The floor is lined with mats and in the corner of the room are several>
+<newspaper dispensers.>
+
+message ascii_table
+<............................................................................>
+<|                                                                          |>
+<|  ASCII Conversion Table, by ZK and Sons Inc., Master Table Builders      |>
+<|                                                                          |>
+<|  Directions for use: LOOK UP "ascii_character"                           |>
+<|                                                                          |>
+<|                                                                          |>
+<|  No warranty is expressed or implied. Subject to change without notice.  |>
+<|  Check ANSI standard for further details.                                |>
+<|                                                                          |>
+<|..........................................................................|>
+
+message bars
+<The bars are actually hollow tubes, each about eight feet high and about two>
+<inches in diameter.  The white bars are cylindrical while the black bars are>
+<rectangular.  Although impressive at a distance, up close you notice that the>
+<white and black coloring is beginning to chip away; the material beneath the>
+<paint, it turns out, is stainless steel (which shows no sign of wear).  The>
+<bars are firmly attached to the wall by small steel bolts.>
+
+message bills
+< >
+<  ......................................................................  >
+<  |  1                                                               1 |  >
+<  |                           In ZK We Trust                           |  >
+<  |                          .................                         |  >
+<  |        (o)              /                 \             (o)        |  >
+<  |         .              /   (~~~~~~~~~~)    \             .         |  >
+<  |        / \            /   (~~~~~~~~~~~~)    \           / \        |  >
+<  |       /   \          |    .0  ~~~~~~~~~~)    |         /   \       |  >
+<  |      /     \         |   /     ```( )~~~)    |        /     \      |  >
+<  |     /       \        |  /_           ~~~)    |       /       \     |  >
+<  |    /   Z K   \       |    |~~         ~~)    |      /  1 Byte \    |  >
+<  |   /           \       \    `_-'        )    /      /           \   |  >
+<  |   _____________        \   (____     _)    /      _______________  |  >
+<  |                         \       `   '     /                        |  >
+<  |                           .......|__|.....                         |  >
+<  | 1                                                                1 |  >
+<  |....................................................................|  >
+< >
+
+message black_board
+<  ......................................................................  >
+<  |                                                                    |  >
+<  |                                                                    |  >
+<  |                        E = M * C ** 2                              |  >
+<  |                                                                    |  >
+<  |                                                                    |  >
+<  |          Employment = Marriage times Connections squared           |  >
+<  |                                                                    |  >
+<  |                                                                    |  >
+<  ......................................................................  >
+< >
+<This is obviously the work of a genius.>
+
+message blue_hall_1
+<You're in a Blue hall. The exits from here are to the south, north and>
+<east.>
+
+message blue_hall_2
+<You're in a Blue hall. The hall continues to both the east and west with a>
+<stub leading to the south.>
+
+message blue_hall_3
+<You're traveling in a Blue hall. To the west you can see a narrow corridor.>
+<But there are two other exits, a particularly inviting passage leads to the>
+<east and a more secure passage leads unassumingly to the north.>
+
+message blue_hall_4
+<You're in a Blue hall. The hall continues to both the north and south. To>
+<the west, a sign is hung just above a closed door.>
+
+message blue_hall_5
+<You're in a Blue hall. The hall continues to both the east and west. To the>
+<the north is a door and to the south is another corridor.  On the wall is a>
+<bulletin board containing a dizzying array of declarations.>
+
+message blue_hall_6
+<You're in a long East/West Blue hall.>
+
+message bottom_of_stairs_1
+<You're at the bottom of a the stairwell. A huge door blocks the southern exit.>
+
+message bottom_of_stairs_2
+<You're at the bottom of a the stairwell. A huge door blocks the southern exit.>
+
+message blue_hall_7
+<You're in a Blue hall. A passage leads to the south and the hall continues>
+<to the east and west.>
+
+message blue_hall_8
+<You're in a Blue hall. There's a enticing passage that beckons you to the>
+<east. To the north is a closed door, and to the west, a sign is hung just>
+<above an entrance.>
+
+message broken_coin_machine
+<The machine is brown and about waist-high with a slot to insert paper money.>
+<There is a light on the machine which is dimly lit.>
+
+message bp_machine
+<Your try to read the funny looking gauge on the blood pressure machine>
+<but you can't quite make it out. It appears that your vision has gotten>
+<worse from staring into terminal screen for so long.>
+
+message bulletin_board
+< >
+<             ...........................................>
+<             |                                         |>
+<             | main ()                                 |>
+<             | { char (* (*x()) []) (); }              |>
+<             |                                         |>
+<             |.........................................|>
+< >
+
+message cabinet
+<The cabinet is about six feet high and three feet wide.  A sliding plastic>
+<panel forms its front surface.  On top of the media cabinet is a white label.>
+<Written in magic marker are the words:>
+< >
+<                  Media cabinet of the implementers>/bold
+<               Keep cabinet doors closed at all times>/bold
+< >
+
+message cafe
+<You're in the Cafeteria. On the wall is a menu of the day's selection.>
+<The cafeteria is unusually clean and orderly, except for a few ice cream>
+<dishes scattered among the 50 some odd tables. In the center of each table>
+<is a dietary quiz for the person who gets bored eating alone. Unfortunately,>
+<things don't look promising for a midnight feedbag because the cafeteria has>
+<closed. There's not a scrap left for any hungry adventures. Looking out the>
+<window you can see the helicopter pad.>
+
+message catwalk_east_1
+<You're in the east end of the catwalk. The plants here are well hung.>
+
+message catwalk_east_2
+<You're in the east end of the catwalk. The plants here are hung well.>
+
+message catwalk_west_1
+<You're in the west end of the catwalk. There are plants here that line the>
+<narrow passage on both sides. You hear some disgruntled mumbling to the south.>
+
+message catwalk_west_2
+<You're in the west end of the catwalk. There are plants here that line the>
+<narrow passage on both sides.>
+
+message cdd_dev
+<This area is used by the CDD development group. There is a developer here>
+<who is working feverishly at the terminal, his hands flying over the keyboard>
+<with a synchronous rhythm. Every once and a while the terminal beeps and>
+<the developer's hand quickly flash along the surface of the desk, but the>
+<frenzied pace never ceases, his eyes glued to the screen. The office is>
+<relatively bare, except for a large number of discarded soda cans scattered>
+<around the office. There is an exit to the south.>
+
+message cdd_developer
+<The developer is tall, lanky and could use a shave. His eyes are red and it>
+<appears that he has been working diligently for some time.>
+
+message cdd_tape
+< >
+<         _____________________________________>
+<        '                                     `>
+<        |                                     |>
+<        | CDD (top-secret) internal baselevel |>
+<        |                                     |>
+<        `_____________________________________'>
+< >
+<I think this could be company confidential.>
+
+message clearing
+<The trees have cleared into an open space just in front of the building.>
+<The building's entrance lies to the north and a trail to the west leads off>
+<into deep, dark woods. As you look around, you can see that the building is>
+<recessed into the woods. It appears to be divided into two sections which are>
+<joined by a mirrored connector. Off in the distance you can see the site's>
+<parking lot.  It's quite full for this time of night; there must be some>
+<hackers staying after hours.>
+
+message coke
+<    "Coke, with sugar and caffeine.">
+< >
+<Fortunately, this is the real 'hackers' Coke; the can is red and white.>
+
+message coke_machine
+<The Coke machine is operable and making a low humming sound. There is a slot>
+<for coins on the front panel of the machine.>
+
+message coins
+<                               .    .   .                                   >
+<                          .                  .                              >
+<                       .       ~~~~~~~~~        .                           >
+<                      .     ~~~~~~~~~~~~~~~       .                         >
+<                    .      ~~~~~~~~~~~~~~~~~~      .                        >
+<                   .       ~~~~     ~      ~~~~     .                       >
+<                  .      (~    (o)    (o)     ~)     .                      >
+<                  .       |        ..         |      .                      >
+<                  .       |        ^^         |      .                      >
+<                  .       \    ^        ^    /       .                      >
+<                   .        \   `-_-_-_'   /        .                       >
+<                     .       `____________'       .                         >
+<                       .          |___|          .                          >
+<                          .       /    \       .                            >
+<                             .   / Z  K \    .                              >
+<                                .  .  .  .                                  >
+<                                                                            >
+<The coin is poorly shaped and bears no resemblance to the implementers.>
+
+message computer
+<It's a prototype VAX-11/780. The sign on the front panel reads "ROUTE3".>
+
+message desk
+<The desk is made of mahogany and is situated in front of the safe.>
+
+message debris
+<The material seem to be remains from some GIGO processing.>
+
+message dcu
+<This is the Digital Credit Union's office. Even though the office should be>
+<closed at this time of night, there's a long line of people here with their>
+<arms folded. The line winds its way along the wall towards the corridor. They>
+<are impatiently tapping there feet in unison. The only exit is to the north.>
+
+message documentation
+<As you flip through one of the manuals you notice the following:>
+< >
+<    The direct data  path is slower than  buffered data  paths because>
+<    each UNIBUS transfer cycle corresponds to a backplane interconnect>
+<    cycle.  One word or byte is transferred per backplane interconnect>
+<    cycle.  On some hardware  configurations, the direct data  path is>
+<    unable  to transfer a  word  of data  to an  odd-numbered physical>
+<    address.  Therefore, an FDT routine for a DMA device that uses the>
+<    direct  data path  should check  that the specified buffer is on a>
+<    word boundary.>
+< >
+<This appears to be a documentation set for Digital's VAX/VMS operating>
+<system.  It consists of many large, orange binders which are quite heavy>
+<and difficult to manage. Roughly, they must measure a good 6 feet.>
+
+message diet_quiz
+<   ........................................................................>
+<   |                                                                      |>
+<   | Name one diet food that tastes good?                                 |>
+<   |                                                                      |>
+<   | How many calories are there in a lentil walnut burger?               |>
+<   |                                                                      |>
+<   | Name a hacker delicacy that doesn't cause cancer or an ulcer?        |>
+<   |                                                                      |>
+<   |......................................................................|>
+< >
+
+message disk_drive
+<The disk drive looks like a top-loading washing machine.>
+
+message dtr_dev
+<This area is used by the VAX Datatrieve (DTR) development group. No one>
+<is here right now but lining the walls are several printouts of mail>
+<messages. The area is nicely decorated with plants and other greenery.>
+
+message dtr_dev_low
+<In fact there's a plant hanging just above your head.  Unfortunately,>
+<you're not tall enough to see much more than that.>
+
+message dtr_dev_high
+<If fact, you're right next to one now.  You can easily see inside it.>
+
+message dtr_tape
+<         _____________________________________>
+<        '                                     `>
+<        |                                     |>
+<        | DTR (top-secret) internal baselevel |>
+<        |                                     |>
+<        `_____________________________________'>
+< >
+<I think this could be company confidential.>
+
+message ed_office
+<You're in Ed's Office. Although he doesn't seem to be around at the moment,>
+<there are definitely indications that he was recently present. The office is>
+<littered with burnt listings and documentation, and other arcane items of>
+<some ancient hacking rituals. The magic-marker board has faint traces of>
+<problem schematics, bizarre schema definitions, and many other weird drawings>
+<that need further study. From your observations one thing has become quite>
+<clear: there's no quiche to be found here.>
+
+message elevator
+<You're in a very large padded elevator. On the wall are four colored buttons,>
+<Blue, Yellow, Red and Orange.>
+
+message end_of_blue_hall
+<You're at the end of the blue hall. There is a door to the north. Looking>
+<outside the east window you see the top of a connector upon which lie a>
+<bed of little stones.>
+
+message end_of_yellow_corridor
+<You're at the end of a yellow corridor. There is a door to the north and>
+<a long dark corridor leading east.>
+
+message end_of_red_passage_1
+<This is the west end of the red passage. There is a door to the north and a>
+<long dark corridor leads east.>
+
+message end_of_red_passage_2
+<This is the east end of the red passage. There is a door to the north and a>
+<long dark corridor leads west.>
+
+message entrance
+<The building is a deep, dark brown color with mirrored windows. As you survey>
+<the building's outer wall you notice a pattern of black and white rods>
+<attached to a brightly colored orange wall.  To the north is a large crystal>
+<door trimmed with silver. To the south lies a clearing.>
+ 
+message fluorescent_ball
+<The fluorescent colored ball is about one foot in diameter and about 3 feet>
+<in circumference. It is skillfully crafted and has no apparent damage.>
+
+message guard
+<The guard is smoking a cigar and is dressed in typical guardly attire.>
+<He is standing behind a large console that controls the operations of the>
+<building.>
+
+message lobby
+<This is the Lobby. It's quite tastefully (as well as appropriately) decorated.>
+<Obviously, this is the work of a generous facility manager. In the center>
+<of the lobby lies a rug with a giant compass rose embroidered on it. The>
+<needle points to the north north-east. Off in the right hand corner of the>
+<lobby is the reception desk. There is no one here right now, except for>
+<the building's security guard. He is well equipped both in armaments and>
+<recreational devices. He watches your every move quite closely. In the north>
+<west corner of the lobby are VT100 video terminals. There's a sign above them.>
+
+message lobby_sign
+< >
+<   .........................................>
+<  |                                        |>
+<  | ZKINFO : Facility Information System   |>
+<  |                                        |>
+<   .........................................>
+< >
+<If this is your first time in ZK, I'd advise you to check it out.>
+
+message health_services
+<This room is well equipped with the latest in health-care equipment.>
+<Why, just over to your left is a fully manual scale. And over the your right>
+<is the most amazing blood pressure machine, it doesn't even have a slot for>
+<a quarter. Looking over your shoulder, you notice all the accouterments of an>
+<exceptionally prepared staff. The walls are lined with the wittiest tidbits>
+<of information.>
+
+message health_sign
+< >
+<                        _____________________>
+<                       '                     `>
+<                       |    Health Service   |>
+<                       `_____________________'>
+< >
+
+message lab_of_implementers
+<This is the lab of the implementers. In the leftmost portion of the room>
+<are the two 780s and the single 785 that compose the ZK development VAX>
+<cluster. The machines are labeled AURORA, GUIDO and NOD. They are being>
+<kept quite busy and there's the smell of fried CPU in the air. There might>
+<be a danger that one of the CPU's could blow; I'd be careful.  There's a>
+<dark passage to the west.>
+
+message keypad
+< >
+<       ............................................................>
+<       |                                                          |>
+<       |                  ZK and Sons Inc., Master Safe Builders. |>
+<       |                                                          |>
+<       |                                                          |>
+<       | Directions for use: TYPE digits                          |>
+<       |                                                          |>
+<       | No warranty is expressed or implied. Subject to change   |>
+<       | without notice. Suitable for most safes, foreign and     |>
+<       | domestic.                                                |>
+<       |                                                          |>
+<       |..........................................................|>
+
+message listings
+<Like a true hacker, the author of the source listings has burnt them>
+<to a crisp, making them impossible to read and securing his job.>
+
+message master_lock
+<............................................................................>
+<|                                                                          |>
+<|                             ZK and Sons Inc, Master Master-Lock Builders |>
+<|                                                                          |>
+<|                         .........     .........                          |>
+<|                        |        | ___ |       |                          |>
+<|                        |       ..     ..      |                          |>
+<|                        |       .       .      |                          |>
+<|                        |       .. ___ ..      |                          |>
+<|                        |         |    |       |                          |>
+<|                        |.........|    |.......|                          |>
+<|                                                                          |>
+<|..........................................................................|>
+
+message mail_message
+<MONITOR:       Good morning sir!  I am your command language>
+<               interpreter today.  That was a flawlessly executed LOGIN.>
+<               How may I help you today?>
+< >
+<USER:          Good morning to you too computer.>
+<               I think today I want to do some data retrieving.>
+< >
+<MONITOR:       A wonderful choice sir!  A finer day it couldn't be>
+<               for looking over your data.  How will you have it today?>
+<               Sunny side up?  Once over lightly?>
+< >
+<USER:          I think I'll use DATATRIEVE.  Would you kindly activate>
+<               DATATRIEVE please?>
+<                          .>
+<                          .>
+<                          .>
+
+message marker_board_ed
+<Among the other scribbling is, in the lower left-hand corner, a surprisingly>
+<well-drawn picture of Bill the cat.  Bill's tongue, colored bright red, is>
+<sticking out of his gaping mouth as usual, his hair is standing on end as his>
+<eyes bulge out if his head. Some locals smirk that this frenzied expression>
+<of Bill's is an accurate statement of the software development cycle at DEC.>
+
+message maze_1
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_2
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_3
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_4
+<You're in a maze of twisty cubicles all alike.  Along one of the walls is a>
+<short brown money-changer machine.>
+
+message maze_5
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_6
+<You're in a maze of twisty cubicles all alike.  In one cube you notice>
+<a hacker working late.>
+
+message maze_7
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_8
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_9
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_10
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_11
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_12
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_13
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_14
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_15
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_16
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_17
+<You're in a maze of twisty cubicles all alike.>
+
+message maze_18
+<You're in a maze of twisty cubicles all alike.>
+
+message middle_of_stairs_1
+<You're in the middle of a stairwell. To the south is a heavy door.>
+<The stairwell continues to wind its menacing way both up and down.>
+
+message middle_of_stairs_2
+<You're in the middle of a stairwell. To the south is a heavy door.>
+<The stairwell continues to wind its menacing way both up and down.>
+
+message middle_of_stairs_3
+<You're in the middle of a stairwell. To the south is a heavy door.>
+<The stairwell is blocked by debris and prohibits any passage further down.>
+
+message middle_of_stairs_4
+<You're in the middle of a stairwell. To the south is a heavy door.>
+<The stairwell continues to wind its menacingly way both up and down.>
+<The stairwell is blocked by debris and prohibits any passage further down.>
+
+message menu
+<                            **  Today's Menu **>
+< >
+<                         **  A Hacker's Special  **> 
+< >
+< Main Selection:  ZK$GL_BURGER>
+< >
+<                    Modifiers:>
+<                               ZK$M_CHEESE>
+<                               ZK$M_BACON>
+<                               ZK$M_LETTUCE>
+<                               ZK$M_TOMATO>
+< >
+< >
+<    Side Orders: ZK$GL_FRIED_FOOD>
+< >
+<                   Modifiers:>
+<                               ZK$M_FRIES>
+<                               ZK$M_TATER_TOTS>
+<                               ZK$M_ONION_RINGS>
+< >
+<           Soup: Cream of Broccoli>
+
+message mirror
+<An ugly hacker stares back at you.>
+
+message neon_ball
+<The neon colored ball is about one foot in diameter and about 3 feet>
+<in circumference. It is skillfully crafted and has no apparent damage.>
+
+message non_descript_hall_1
+<You're in a nondescript hall that continues to the north and south.>
+<On the western wall are some elevator door. Next to the doors is what>
+<seems to be the master lock for the elevator system.>
+
+message non_descript_hall_2
+<You're in a nondescript hall that continues north and south. To the east>
+<there's a door with a sign next to it.>
+
+message notes
+<........................................................................... >
+<|                                                                         | >
+<|                                                                         | >
+<|	VAX - START, BOOT, STOP.                                           | >
+<|                                                                         | >
+<|                                                                         | >
+<|.........................................................................| >
+< >
+<The notes seem to be cryptic instructions describing the operations of>
+<the VAX.>
+
+message nurse
+<I think the nurse would rather examine you! Either way she's not impressed by>
+<your affectionate gestures.>
+
+message operators_room
+<This is the operator's room. The room seems totally abandoned, (There never>
+<seems to be an operator around when you need one).>
+
+message	pad
+<You're at the helicopter pad. To the east you can see a seemingly perilous>
+<trail leading into a deep-dark woods. There is a sign here.>
+
+message pad_sign
+<..............................................................................>
+<|                                                                            |>
+<| Welcome to ZK, the interactive fiction game that honors DIGITAL's Spitbrook|>
+<| facility. In this game you are an adventurer pitting your wits and other   |>
+<| acquired skills against the exhaustive complexities of the Spitbrook       |>
+<| Software Facility. If you think you have what it takes to escape with your |>
+<| life and one of Digital's most prized possessions, then good luck; but be  |>
+<| forewarned, this game is not for the faint of heart.                       |>
+<|                                                                            |>
+<| If you choose to accept this mission, I will accompany you as your guide,  |>
+<| acting as your eyes, ears and hands. Give me commands and I will try to    |>
+<| perform them.  To move, specify the direction you wish to go.  The eight   |>
+<| directions of the compass can be used, as well as UP and DOWN. Other       |>
+<| useful commands include TAKE, DROP, PUT, INVENTORY and SAY. Magic words    |>
+<| and literal phrases may or may not be helpful. You might have to           |>
+<| experiment.                                                                |>
+<|                                                                            |>
+<| Rooms have both a short name and a long description.  The first time you   |>
+<| visit a room you see its long description.  Upon subsequent visits to the  |>
+<| room you only see its short name.  The command LOOK can be used to describe|>
+<| a room in full detail.  To see more detail about an object, use the EXAMINE|>
+<| command.  Some objects have special qualities that can only be discovered  |>
+<| this way.                                                                  |>
+<|............................................................................|>
+
+message people
+<The crowd is in a nasty mood, I wouldn't want to provoke a riot.>
+
+message personnel
+<You're in the facility's personnel office.  The room is actually quite>
+<large, with several partitions forming individual interviewing areas.  In>
+<one corner is a research area, with a long bookshelf containing various>
+<job-search publications.  Most of this area is dark, except for one cubicle>
+<where someone is working late.>
+
+message personnel_sign 
+< >
+<                        _____________________>
+<                       '                     `>
+<                       |      Personnel      |>
+<                       `_____________________'>
+< >
+
+message petty_cash
+<You're in the Petty Cash office. The office is small and cramped and could>
+<use a bit of a dusting, but otherwise it's very sanitary. We wouldn't want>
+<any dirty money in here. In the center of the room is the Chief Petty>
+<Officers' impressive mahogany desk which is also very neat and tidy.>
+message petty_cash_stocked
+<Near the desk is a rather large, and I would assume well-stocked safe.>
+message petty_cash_ransacked
+<Near the desk is a rather large safe, which appears to have been recently>
+<ransacked.>
+
+message petty_cash_sign
+< >
+<                        _____________________>
+<                       '                     `>
+<                       |      Petty Cash     |>
+<                       `_____________________'>
+< >
+
+message health_services_sign
+< >
+<                        _____________________>
+<                       '                     `>
+<                       |    Health Services  |>
+<                       `_____________________'>
+< >
+
+message red_passage_1
+<You're in a red East/West passage. There are exits to the north and south.>
+<To the southwest is a narrow corridor stub.>
+
+message red_passage_2
+<You're in a red East/West passage. There are exits to the north and south.>
+
+message rest_room
+<You're a bit timid as you enter this room, since you don't know which one of>
+<your senses will be offended first. After a long second or two you get your>
+<wits about you and feel more at home, fully recognizing the familiar>
+<surroundings. The rest room is clean and appealing to your recovering senses.>
+<On the east side of the room is metal box with four poles going from the >
+<ceiling to the floor. On the wall is a large mirror for a quick touch up.>
+
+message rsx_dev_1
+<You're in the RSX development section. There's not much happening here.>
+<The exits are to the east and north.>
+
+message rsx_dev_2
+<You're in the RSX development section. The exits are to the west and north.>
+
+message rug
+<The rug is blue and beige. It spans the entire surface of the lobby and is>
+<dirtied from the constant procession of people entering and exiting the site.>
+
+message scale
+<Your try to read the measurement on the arm of the scale but your vision>
+<blurs. It appears that your vision has gotten worse from staring into>
+<a terminal screen for so long.>
+
+message sdc_card
+< >
+<.............................................................................>
+<|                                                                           |>
+<|  ._____________.                                                          |>
+<|  | | | | | | | |                                                          |>
+<|  |d|i|g|i|t|a|l|                                                          |>
+<|  |_|_|_|_|_|_|_|                                                          |>
+<|                                                                           |>
+<|                                                                           |>
+<|                        Freddie Fabricator                                 |>
+<|                                                                           |>
+<|                        Software Distribution Center Representative        |>
+<|                        "Give us your huddled media                        |>
+<|                        Yearning to breathe free"                          |>
+<|                                                                           |>
+<|...........................................................................|>
+
+message sdc_card_blank
+< >
+<.............................................................................>
+<|                                                                           |>
+<|                                                                           |>
+<|                                                                           |>
+<|                                                                           |>
+<|                                                                           |>
+<|                                                                           |>
+<|                                                                           |>
+<|                                                                           |>
+<|                                                                           |>
+<|                                                                           |>
+<|                                                                           |>
+<|                                                                           |>
+<|                                                                           |>
+<|...........................................................................|>
+
+message scratch_disk
+<The label reads: "Scratch Media".>
+
+message stall
+<The room here is quite cramped: this is certainly not the handicapped stall.>
+<Fortunately, there is room to maneuver. You are certain that this is>
+<indeed a public stall due to the lack of soft bathroom tissue. On the wall>
+<is a blackboard for the person who does his best thinking here, and can't>
+<afford to wait another minute.>
+
+message stan
+<The hacker seems to be thinking deeply about something. He's bent over his>
+<terminal, peering into a black and white screen.  There are listings in the>
+<office that cover the entire floor in roughly chronological order. Rumors>
+<have it that somewhere near the bottom is a one line TECO macro to calculate>
+<PI, but this has never been confirmed. On his desk are a number of soda cans>
+<and a half-emtpy cup of coffee, presumably left over from this morning.>
+
+message stans_terminal
+<As you peer into the developers terminal you see the obscure code: >
+< >
+<   .......................................................................>
+<   |                                                                     |>
+<   |		$ZKDEF                                                    |>
+<   |             .                                                       |>
+<   |             .                                                       |>
+<   |             .                                                       |>
+<   |           PUSHAL   object_name            ; this is very important  |>
+<   |		PUSHAL	 location               ; Hi mom                  |>
+<   |           CALLS    #2, ZK$FIND_OBJECT     ; user interface: where is|>
+<   |             .                                                       |>
+<   |             .                                                       |>
+<   |             .                                                       |>
+<   |.....................................................................|>
+< >
+<Alas, the rest is off the screen.>
+
+message stub
+<This is a short corridor stub. There really should be a lot more vending>
+<machines but there is only a Coke Machine. No Pepsi. I think we're in luck>
+<because the Coke Machine appears to be operable today.>
+
+message stub_red
+<You're at a red stub. There are elevator doors to the west and a passage>
+<is visible to the northeast.>
+
+message stub_yellow
+<You're at a yellow stub. There are elevator doors to the west and a corridor>
+<is visible to the northeast.>
+
+message system_disk
+<Written on a new label are the following words:>
+< >
+<                        ___________________________________>
+<                       '                                   `>
+<                       | Formatted, 3 Bad Blocks, Bootable |>
+<                       `___________________________________'>
+< >
+<It's an older-series disk. No surprise.>
+
+message table
+<The table is round with a white Formica surface.>
+
+message tape_drive
+<The tape drive is a TU77. No surprise. (Guaranteed not to load the first>
+<couple of times). It looks like a large kitchen cabinet with a swinging door>
+<on the front.>
+
+message tape_library
+<You're in the tape library.  A passage leads back to the east and there's>
+<a door to the north.  Through the windows of the door you can see a yellow>
+<corridor.  There are large tape racks here as well as a strange lamp that>
+<is firmly attached to the ceiling high above.>
+
+message terminal
+<..............................................................................>
+<|                                                                            |>
+<|Advanced information for ZK:                                                |>
+<|                                                                            |>
+<| Keypad control  or application keys, can be defined to be commonly used    |>
+<| commands. To define your terminal keys first create a text file containing |>
+<| DCL standard DEFINE/KEY commands. Note that these commands are NOT         |>
+<| proceeded by the dollar-sign symbol.  Then equate the name of this file to |>
+<| the logical ZK$KEY_DEF.  These definitions are loaded at game startup.     |>
+<|                                                                            |>
+<| The phrase 'FROM object' can be used to qualify an ambiguous object        |>
+<| reference, for example TAKE BALL FROM SACK.  Some objects are intelligent  |>
+<| and will respond to commands and actions directed at them.  The following  |>
+<| phrase may be useful: 'TELL person, command'.  The command may either      |>
+<| declarative or interrogative.  The comma is required punctuation.          |>
+<|                                                                            |>
+<| Special commands:                                                          |>
+<|                                                                            |>
+<|    IN, OUT, RESTART, VERSION, SCORE, BRIEF, VERBOSE                        |>
+<|    SAVE file, RESTORE file, "TELL person, command"                         |>
+<|                                                                            |>
+<| Special objects:                                                           |>
+<|                                                                            |>
+<|    ALL, POSSESSIONS, CONTENTS, ROOM, SELF                                  |>
+<|                                                                            |>
+<|............................................................................|>
+
+message tidbit
+<The tidbits are so dumb they are not worth repeating.>
+
+message top_of_stairs_1
+<You're at the top of the stairwell. To the south is a door. The stairwell>
+<has a dimly-lit passage that spirals its way downward.>
+
+message top_of_stairs_2
+<You're at the top of the stairwell. To the south is a door. The stairwell>
+<has a dimly-lit passage that spirals its way downward.>
+
+message top_of_stairs_3
+<You're at the top of the stairwell. To the south is a door. The stairwell>
+<has a dimly-lit passage that spirals its way downward.>
+
+message top_of_stairs_4
+<You're at the top of the stairwell. To the south is a door. The stairwell>
+<has a dimly-lit passage that spirals its way downward.>
+
+message vms_developer
+<The developer is busy at his terminal and does seem to be in a chatty mood.>
+
+message vms_dev_1
+<You're in the VMS development section. You can hear the rhythmic beating>
+<of typewriter keys nearby. There is a letter "A" chiseled in the wall and>
+<inscribed just beneath it is: >
+< >
+<             You see but you do not observe.>
+< >
+<                           -The Memoirs of Sherlock Holmes>
+<                            Sir Arthur Conan Doyle>
+< >
+< >
+<And just below that is written:>
+< >
+<             A chain is only as strong as its weakest link.>
+< >
+<                           -Proverb>
+< >
+
+message vms_dev_2
+<You're in the VMS development section. You can hear the rhythmic beating>
+<of typewriter keys here. There is a letter "B" chiseled in the wall and>
+<inscribed just beneath it is: >
+< >
+<             Treat nature in terms of the cylinder, the sphere, the cone,>
+<             all in perspective.>
+< >
+<                           -Paul Cezanne>
+< >
+< >
+<And just below that is written:>
+< >
+<             Nothing in progression can rest on its original plan. We may>
+<             as well think of rocking a grown man in the cradle of an infant.>
+< >
+<                           -Edmund Burke>
+< >
+
+message vms_dev_3
+<You're in the VMS development section. You can hear the rhythmic beating>
+<of typewriter keys nearby. There is a letter "C" chiseled in the wall and>
+<inscribed just beneath it is: >
+< >
+<             To be awake is to be alive.>
+< >
+<                           -Walden, Henry David Thoreau>
+< >
+< >
+<And just below that is written:>
+< >
+<             The price one pays for pursuing any profession, or calling,>
+<             is an intimate knowledge of its ugly side.>
+< >
+<                           -James Baldwin>
+< >
+
+message vms_dev_4
+<You're in the VMS development section. You can hear the rhythmic beating>
+<of typewriter keys nearby. There is a letter "D" chiseled in the wall and>
+<inscribed just beneath it is: >
+< >
+<             Software stands between the user and the machine.>
+< >
+<                           -Harlan D. Mills>
+< >
+< >
+<And just below that is written:>
+< >
+<             There is nothing more requisite in business than dispatch.>
+< >
+<                           -Joseph Addison>
+< >
+
+message vms_lab_1
+<You're at the west end of a large machine lab which seems overcrowded>
+<with computers and peripherals.  Although several configurations are>
+<distinct, a number of the blue computer cabinets are connected together>
+<forming systems of impressive size and power.  A huge disk farm occupies>
+<part of the lab; the status lamps of its storage controllers blink>
+<occasionally yielding a few bright flashes to a poorly lit environment.>
+<An incredible number of blue wires runs upward from these machines into metal>
+<tracks which traverse the ceiling of the lab.>
+
+message vms_lab_2
+<You're at the east end of a large machine lab.  The machines at this end>
+<are apparently arranged into standalone testing systems.  Several cabinets>
+<can be seen along the walls; the few that are open reveal multi-platter>
+<disks labeled with obscure names and numbers. In the corner of the room is a>
+<Prototype VAX-11/780 who's name is ROUTE3. The computer is configured with>
+<a disk drive, a tape drive, and a console. To the south a small cubby-like>
+<opening is visible.>
+
+message vms_tape
+<         _____________________________________>
+<        '                                     `>
+<        |                                     |>
+<        | VMS (top-secret) internal baselevel |>
+<        |                                     |>
+<        `_____________________________________'>
+< >
+<I think this could be company confidential.>
+
+message yellow_corridor_1
+<You're in a East/West yellow corridor. There are exits to the north and south.>
+
+message yellow_corridor_2
+<You're at an intersection of two corridors.>
+
+message yellow_corridor_3
+<You're traveling in a East/West yellow corridor. There's a heavily laden door>
+<to the north.>
+
+message yellow_corridor_4
+<You're traveling in a East/West yellow corridor. There's a heavily laden door>
+<to the north. To the south a dingy white light is visible. You can hear a low>
+<murmur coming from that direction.>
+
+message yellow_corridor_5
+<You're traveling in a north/south yellow corridor. A dark and threatening>
+<passage is visible to the west. The corridor continues to the north and>
+<south. Along one of the walls of the corridor is a short brown money-changer>
+<machine. The dim white light on the coin machine is flickering.>
+
+message yellow_corridor_6
+<You've come to the northern end of a north/south yellow corridor. Gazing out>
+<a window you can see a thick green woods, but it's too dark to see much>
+<more. There's a narrow and dimly-lit passage visible to the west. No doubt>
+<it will lead you to no good.>
+
+message yellow_corridor_7
+<You've come to the southern end of a north/south yellow corridor. This room is>
+<just a short distance from the intersecting corridors and there's really> 
+<nothing of interest here. Alternate exits are to the east and to the west,>
+<but I must warn you that the eastern exit appears to be a rest room, and I>
+<can't quite figure out if its a Men's or Women's rest room.>
+
+message yellow_corridor_8
+<You're in an east/west yellow corridor.  There is a passage to the south west,>
+<and to the south is a door with windows in it.  A sign on the wall says:>
+< >
+<   "Facility tape library.  WARNING: media preserving light in use">
+< >
+<Although the room inside is dark, you can make out several large magnetic>
+<tape racks.>
+
+message wall
+<The wall contains a pattern of white and black rods. The pattern is>
+<divided into two rows. Each row is further sub-divided into a series>
+<of thirteen blocks. Each block contains seven rods. It's difficult to>
+<describe beyond that so I'll draw a picture where "w" stands for a white>
+<rod and "b" symbolizes a black rod.>
+<The first row looks like this:>
+<bbwwbww bbwbwwb bbwwbbb bbwbwwb bbbwbww bbwwwwb bbwbbww>/bold/reverse
+<bbbwwbb bbwbbbb bbwwbbw bbbwbww bbbwbbb bbwwwwb        >/bold/reverse
+<The second row looks like this:>
+<bbbwwbw bbwwbwb bbwwbwb bbwbbbw bbwwbbb bbwbwwb bbwbbbw>/bold/reverse
+<bbwwbwb bbwwbwb bbbwwbw bbwbwwb bbwbbbw bbwwbbb        >/bold/reverse
+
+message will_office
+<You're in Will's old office, which looks recently vacated.  A long, empty desk>
+<fills the longest wall of this gray-metallic cubicle.  Underneath the desk are>
+<power and communications cables, which are coiled haphazardly.  The shelves>
+<are filled with operating system and compiler manuals, which look to have been>
+<used quite heavily.  The two magic marker boards in the office still retain>
+<faint traces of pseudo-code and elaborate data structures diagrams that>
+<resemble the Interactive Fiction Compiler. Despite the emptiness of the office>
+<you still sense that great hacking was once performed here.>
+
+message woods
+<The woods really aren't that dark and deep after all, but they're dense enough>
+<to block your vision beyond the trail. The narrow trail continues to the east>
+<and to the west where small floor lamps illuminate your path.>
+
+message working_coin_machine
+<The machine is brown and about waist-high with a slot to insert paper money.>
+<The light on the machine is dark.>
+
+message zk_enquirer
+<.............................................................................>
+<|                                                                    1 bit  |>
+<|                         [The ZK Enquirer]                                 |>
+<|                                                                           |>
+<|                                                                           |>
+<|                 *** Man Gets Computer Pregnant ***                        |>
+<|                                                                           |>
+<|  Officials at the Digital Spitbrook Facility are expected to confirm      |>
+<|  tomorrow that Maurice Interleave, a night operator, has impregnated a    |>
+<|  stand-alone VAX-11/780. When asked how a man could get a computer        |>
+<|  pregnant, software engineers at Spitbrook stated that it was obviously   |>
+<|  a hardware problem. Sources close to the scene say that DEC is thankful  |>
+<|  that the incident did not occur with the new VAX clusters, which would   |>
+<|  have greatly increased the sensitivity and complexity of the problem.    |>
+<|  The delivery is expected to be in nine months through an undisclosed I/O |>
+<|  port, but industry analysts have frowned on that date, insisting that    |>
+<|  nothing comes out of Spitbrook on time.                                  |>
+<|                                                                           |>
+<|                                                                           |>
+<`...........................................................................'>
+
+
+message zk_journal
+<.............................................................................>
+<|                                                                   2 bits  |>
+<|                                                                           |>
+<|                           [The ZK Journal]                                |>
+<|                                                                           |>
+<|                                                                           |>
+<|           *** Heard on the Bus:  Speaking the language of ZK  ***         |>
+<|                                                                           |>
+<|  If you've played other interactive fiction games, you'll find the parser |>
+<|  employed in this game to be quite similar. Words longer than four        |>
+<|  letters can be abbreviated to four letters. Actually, a few words are    |>
+<|  still ambiguous in four letters.  Frequently used commands can be        |>
+<|  abbreviated to just one letter.                                          |>
+<|                                                                           |>
+<|  Multiple commands can be typed on the same line if they are separated by |>
+<|  a period or the word THEN.  Multiple objects can be separated by the     |>
+<|  word AND. Objects can be contained in or sit on other objects to any     |>
+<|  desired level of nesting.  Physical limits of strength, capacity and     |>
+<|  area will apply.  Some 'containers' are rigid, while others expand and   |>
+<|  contract.                                                                |>
+<|                                                                           |>
+<|  The vocabulary of ZK is over two hundred and seventy words, many of      |>
+<|  which are synonyms. The parser understands basic English sentences of    |>
+<|  one to eight words.  The names of objects can be from one to three       |>
+<|  words; the parser understands over one hundred and seventy object names. |>
+<|                                                                           |>
+<|                                                                           |>
+<`...........................................................................'>
+
+message zk_time_magazine
+<.............................................................................>
+<|                                                                           |>
+<|                                                                   2 bits  |>
+<|                                                                           |>
+<|                           [The ZK Today]                                  |>
+<|                                                                           |>
+<|          *** Hackers Announce New Game: ZK Interactive Fiction ***        |>
+<|                                                                           |>
+<| The announcement of a new interactive fiction game was made yesterday at  |>
+<| the Sheraton Tara Hotel, Nashua N.H. by 2 DEC software engineers who work |>
+<| at the nearby Spitbrook facility. The following is a brief excerpt from a |>
+<| prepared speech given by one of the developers.                           |>
+<|                                                                           |>
+<|                                                                           |>
+<|        "The ZK Interactive Fiction game was the result of a               |>
+<|        series of extended late night hacks that began in May 1985         |>
+<|        and ended in August 1985.  The game itself is written in a         |>
+<|        VAX native mode language; its data tables are built using          |>
+<|        an interactive fiction compiler developed exclusively for          |>
+<|        this project. As a result it will only run on VAX/VMS.             |>
+<|                                                                           |>
+<|        One of the goals in designing ZK was to create an accurate         |>
+<|        model of the Spitbrook Facility. A majority of the descriptions,   |>
+<|        events and situations portrayed in the game are closely            |>
+<|        tied to reality. However, the game should not be construed         |>
+<|        as a negative comment against DEC or its people. Indeed,           |>
+<|        it should be interpreted as a confirmation of the significant      |>
+<|        contributions Spitbrook makes to the discipline of Software        |>
+<|        Engineering.                                                       |>
+<|                                                                           |>
+<|        The game is based on its classic predecessors ADVENTURE and        |>
+<|        DUNGEON, the fore fathers of all true interactive fiction.         |>
+<|        It is our hope that ZK will bring to you the same amount of        |>
+<|        joy and frustration that these original games brought to us.       |>
+<|                                                                           |>
+<|                                               The Implementers,           |>
+<|                                                                           |>
+<|                                               William B. Lees             |>
+<|                                               Edmund D. Sullivan          |>
+<|                                                                           |>
+<|                                               August, 1985.               |>
+<|                                                                           |>
+<`...........................................................................'>
+end
