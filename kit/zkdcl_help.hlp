@@ -1,0 +1,37 @@
+1  ZK
+   The Halls Of ZK is an sophisticated adventure game which takes
+   place at Digital's Spitbrook software engineering facility.
+   Meet famous Spitbrook personalities!  Incredible treasures and
+   mind-boggling encounters await you.  Exercise your computer-
+   related skills to solve the myriad of obstacles that lead to
+   the acquisition of the ultimate treasure!
+
+   Format
+
+     ZK
+
+2  Credits
+
+   The Halls of ZK was written by William Lees and Edmund Sullivan
+   sometime in August 1985.  Since that time a VAX binary and a
+   VEST'd Alpha binary (with some source) has been floating around
+   the 'net at various websites.
+
+   Recently the full source code, including the source for the
+   Interactive Fiction Compiler (IFC) was located by John Reagan.
+   The code generator for IFC was re-written to output MACRO-32
+   source modules by Tim Sneddon and as such there are now native
+   versions for all OpenVMS supported architectures available.
+
+   Thanks also go to Joe Ferraro for starting the quest to find
+   and port the game from OpenVMS VAX to I64.
+
+2  Support
+
+   There is no formal support for The Halls Of ZK, it is provided
+   "as is".  The product website can be found here:
+
+      ...
+
+   At this website there is documentation, downloads and a
+   community mailing list, please feel free to join.
