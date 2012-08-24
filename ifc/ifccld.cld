@@ -1,0 +1,46 @@
+module ifc$command_table
+
+! Edit History:
+! 13 Sep 2009  TES  Changed qualifiers now that we generate MACRO-32.
+!
+!
+
+define verb exit
+	routine ifc$exit
+
+define syntax compile_objects
+	routine ifc$compile_objects_main
+	parameter p1, value(required)
+	parameter p2, label=filename, prompt="Object filename"
+		value(required, type=$file)
+	qualifier macro, value(required)
+	qualifier definitions, value(required)
+
+define syntax compile_rooms
+	routine ifc$compile_rooms_main
+	parameter p1, value(required)
+	parameter p2, label=filename, prompt="Room filename"
+		value(required, type=$file)
+	qualifier macro, value(required)
+	qualifier definitions, value(required)
+
+define syntax compile_messages
+	routine ifc$compile_messages_main
+	parameter p1, value(required)
+	parameter p2, label=filename, prompt="Message filename"
+		value(required, type=$file)
+	qualifier macro, value(required)
+	qualifier definitions, value(required)
+
+define type compile_param
+	keyword messages, syntax=compile_messages
+	keyword rooms, syntax=compile_rooms
+	keyword objects, syntax=compile_objects
+
+define verb compile
+	parameter p1, value(required, type=compile_param)
+	prompt="What"
+
+define verb help
+	routine ifc$help
+	parameter p1, label=help_keys, value(type=$rest_of_line)
