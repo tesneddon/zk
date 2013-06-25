@@ -1,6 +1,6 @@
-./alpha
-./ia64
-./vax
+alpha
+ia64
+vax
 .\$ADF\$*
 *\;*
 *-*/*
