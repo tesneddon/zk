@@ -22,7 +22,7 @@ function pas$fab(var file_variable : text) : fab$type_ptr;
 	extern;
 
 begin
-	open(options_file, 'ZK$LINK_TIME.OPT', history:=new);
+	open(options_file, 'ZKLINK_TIME.OPT', history:=new);
 	rewrite(options_file);
 
 	$gettim(now);
