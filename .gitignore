@@ -1,6 +1,7 @@
 alpha
 ia64
 vax
+kit
 .\$ADF\$*
 *\;*
 *-*/*
