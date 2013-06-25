@@ -1,3 +1,4 @@
+.title ifc$msg
 .facility ifc, 200/prefix=ifc$_
 
 .severity informational
