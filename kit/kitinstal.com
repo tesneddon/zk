@@ -52,7 +52,7 @@ $ type sys$input:
         For support, downloads and other things related to ZK, visit
   the ZK webpage, here:
 
-        ...
+        http://hallsofzk.org
 
 $
 $ save_set = f$element(_arch_type,",",",B,C,D") - ","
