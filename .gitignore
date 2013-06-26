@@ -1,0 +1,12 @@
+alpha
+ia64
+vax
+kit/zk*/
+.\$ADF\$*
+*\;*
+*-*/*
+*.jou
+*.tex
+*.dvi_*
+*.int_*
+*.tc[befi]
