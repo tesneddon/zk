@@ -2,7 +2,6 @@ module ifc$command_table
 
 ! Edit History:
 ! 13 Sep 2009  TES  Changed qualifiers now that we generate MACRO-32.
-! 01 Jul 2013  TES  Add support for MAP.
 !
 !
 
@@ -40,23 +39,6 @@ define type compile_param
 
 define verb compile
 	parameter p1, value(required, type=compile_param)
-	prompt="What"
-
-define syntax draw_map
-	routine ifc$draw_map
-	parameter p1, value(required)
-	qualifier rooms, value(required, type=$file), nonnegatable, default
-	qualifier descriptions, value(required, type=$file), nonnegatable
-			default
-	qualifier objects, value(required, type=$file), nonnegatable, default
-	qualifier start, value(required), nonnegatable, default
-	qualifier output, value(required, type=$file), nonnegatable, default
-
-define type draw_param
-	keyword map, syntax=draw_map
-
-define verb draw
-	parameter p1, value(required, type=draw_param)
 	prompt="What"
 
 define verb help

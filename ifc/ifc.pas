@@ -9,10 +9,6 @@
 
 program ifc(input, output);
 
-(* Edit History                                                             *)
-(* 01-Jul-2009  TES  Added MAP command.					    *)
-(*                                                                          *)
-
 var	command_table : [external(ifc$command_table)] unsigned;
 
 [asynchronous] function condition_handler(
@@ -119,11 +115,6 @@ end;
 [global] function ifc$exit : unsigned;
 begin
 	ifc$exit:=rms$_eof;
-end;
-
-[global] function ifc$draw_map : unsigned;
-begin
-	ifc$draw_map:=ss$_normal;
 end;
 
 procedure main;
