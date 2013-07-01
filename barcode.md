@@ -216,8 +216,6 @@ then read:
 Sadly, since then the barcode wall has been taken down completely and replaced
 by a covered walkway:
 
-<img src>
-
 However, there is now a new barcode in the cafeteria.....
 
 Links
