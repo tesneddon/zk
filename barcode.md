@@ -219,4 +219,7 @@ by a covered walkway:
 However, there is now a new barcode in the cafeteria.....
 
 Links
-*
+
+* Steve Lionel
+* groups.google.com posts?
+* ...
