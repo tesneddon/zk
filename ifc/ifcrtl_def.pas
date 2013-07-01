@@ -59,4 +59,13 @@ module ifc$rtl_def;
 [external(ifc$output_broadcast_messages)] function
 		$output_broadcast_messages : unsigned;
 	extern;
+
+[external(ifc$draw_map)] function $draw_map(
+        var room_table : unsigned;
+        var object_table : unsigned;
+        var desc_table : unsigned;
+        start_room : integer;
+        map_filename : varying[$u1] of char) : unsigned;
+	extern;
+
 end.
