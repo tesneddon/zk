@@ -62,10 +62,9 @@ module ifc$rtl_def;
 
 [external(ifc$draw_map)] function $draw_map(
         var room_table : unsigned;
-        var object_table : unsigned;
-        var desc_table : unsigned;
-        start_room : integer;
-        map_filename : varying[$u1] of char) : unsigned;
+        room_max : integer;
+	graph_name : varying[$u1] of char;
+        map_filename : varying[$u2] of char) : unsigned;
 	extern;
 
 end.

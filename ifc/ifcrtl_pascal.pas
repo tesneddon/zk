@@ -1,5 +1,6 @@
 [inherit('lib$:typedef',
 	 'lib$:rtldef',
+	 'lib$:ifc$def',
 	 'lib$:ifc$msg_def'),
 ident('X01.00-00')]
 module ifc$rtl_pascal; (* IFC Run-Time System code in PASCAL *)
@@ -7,6 +8,7 @@ module ifc$rtl_pascal; (* IFC Run-Time System code in PASCAL *)
 (* Edit History                                                             *)
 (* 13-Sep-2009  TES  Changed to support conversion from VAX object to	    *)
 (*                   MACRO-32 code generation.				    *)
+(* 02-Jul-2013  TES  Move IFC$DRAW_MAP in here.				    *)
 (*                                                                          *)
 
 type	$room = packed record
@@ -24,6 +26,18 @@ type	$room = packed record
 			info : packed array[1..16] of integer;
 		end;
 
+	$string = packed record
+			length : $ubyte;
+			buffer : packed array[1..256] of char;
+		end;
+
+	$message = packed record
+			length : $ubyte;
+			count : $ubyte;
+			attributes : $ubyte;
+			buffer : packed array[1..256] of char;
+		end;
+
 	$pointer = [unsafe, long] packed record
 			case integer of
 			1 : (address : unsigned);
@@ -32,6 +46,8 @@ type	$room = packed record
 			4 : (long_ptr : ^unsigned);
 			5 : (room_ptr : ^$room);
 			6 : (object_ptr : ^$object);
+			7 : (string_ptr : ^$string);
+			8 : (message_ptr : ^$message);
 		   end;
 
 [global] function ifc$get_room_info(
@@ -100,6 +116,78 @@ begin
 	if (not odd(return)) then $signal(return);
 
 	ifc$get_object_info:=1;
+end;
+
+[global] function ifc$draw_map(
+	var room_table : unsigned;
+	room_max : integer;
+	graph_name : varying[$u1] of char;
+	map_filename : varying[$u2] of char) : unsigned;
+
+const	number_directions = 10;
+	direction_length = 10;
+
+type	$direction_table = array[1..number_directions] of $symbol_string;
+
+var	map_file : text;
+	chr : char;
+	i,j : integer;
+	d, n, p : $pointer;
+	direction_table : $direction_table := (
+		'north', 'south', 'east', 'west', 'north east',
+		'north west', 'south east', 'south west',
+		'up', 'down');
+
+begin
+	establish($sig_to_ret);
+
+	(* test to null stuff *)
+
+        open(map_file, map_filename, history:=new, record_type:=stream_lf,
+		record_length:=32767);
+        rewrite(map_file);
+        writeln(map_file, 'graph ', graph_name,' {');
+	writeln(map_file, 'overlap=scale;');
+	writeln(map_file, 'node [shape=box,style=filled];');
+
+        for i:=1 to room_max do
+          begin
+		p:=iaddress(room_table) + (i-1)*68;
+		d:=p.room_ptr^.message;
+		n:=p.room_ptr^.name;
+
+		write(map_file, i, ' [');
+		write(map_file, 'label="', substr(n.string_ptr^.buffer,1,
+						  n.string_ptr^.length),'",');
+		write(map_file, 'tooltip="');
+		while (d.word_ptr^ <> 0) do
+		  begin
+			for j:=1 to d.message_ptr^.length do
+			  begin
+			    chr:=d.message_ptr^.buffer[j];
+			    if (chr = '"') then
+			      write(map_file, '\');
+			    write(map_file, chr);
+			  end;
+			write(map_file, ' ');
+			d:=d.address+d.message_ptr^.length+3;
+		  end;
+		write(map_file, '"');
+
+		writeln(map_file, '];');
+
+		for j:=1 to 10 do
+		  if (p.room_ptr^.link[j] <> 0) then
+		    begin
+		      writeln(map_file, i, ' -- ', p.room_ptr^.link[j],
+				' /* ', direction_table[j], '*/');
+		    end;
+          end;
+
+        writeln(map_file, '};');
+        close(map_file);
+
+        ifc$draw_map:=1;
 end;
 
 end.
