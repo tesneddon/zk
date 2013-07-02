@@ -3,10 +3,13 @@
     <a class="toggle" gumby-trigger="#navbar-main-nav $main-nav" href="#">
       <i class="icon-menu"></i>
     </a>
-    <h1 class="four columns logo">
-      <img src="{{ site.url }}/img/barcode-new.png" width="200" height="55" alt="The Halls of ZK">
+    <h1 class="five columns logo">
+      <img src="{{ site.url }}/img/barcode-new.png"
+	   width="200" height="55" alt="The Halls of ZK"
+	   onmouseover="this.src='{{ site.url }}/img/barcode-old.png}}'"
+	   onmouseout="this.src='{{ site.url }}/img/barcode-new.png}}'">
     </h1>
-    <div class="eight columns pull_right">
+    <div class="six columns pull_right">
       <ul id="main-nav">
         <li>
           <a href="#">About</a>
