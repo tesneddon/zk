@@ -1,4 +1,4 @@
-program mk$map
+program zk$map
     option type = explicit,						  &
 	   constant type = integer,					  &
 	   size = (integer long, real double)
@@ -8,7 +8,7 @@ program mk$map
 %include "STR$ROUTINES"		%from %library "SYS$LIBRARY:BASIC$STARLET.TLB"
 
     external long function ifc$draw_map
-    external long zk$room_max
+    external long constant zk$room_max
     external long zk$room_table
 
     declare string command
@@ -35,7 +35,8 @@ program mk$map
 	print "%ZKMAP-I-NAME, graph will be named "; map_name
 	print "%ZKMAP-I-OUTPUT, writing graph to "; map_filename
 
-	sstatus = ifc$draw_map(zk$room_table, zk$room_max, map_name,	  &
-			       map_filename)
+	sstatus = ifc$draw_map(zk$room_table by ref,			  &
+			       zk$room_max by ref, map_name by desc,	  &
+			       map_filename by desc)
     end if
 end program
