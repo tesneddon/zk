@@ -6,6 +6,7 @@ module ifc$room(output);
 
 (* Edit History                                                             *)
 (* 13-Sep-2009  TES  Converted to generate MACRO-32, not VAX objects.       *)
+(* 03-Jul-2013  TES  Output MAX symbol in MACRO too.			    *)
 (*                                                                          *)
 
 const	directions = [north_keyword, south_keyword, east_keyword, west_keyword,
@@ -121,6 +122,7 @@ begin
 	writeln(macro_file, '.psect ZZZ$IFC$DATA noexe,quad,pic,rel,gbl,shr,rd');
 
 	writeln(def_file,'const',tab,ast.prefix,'MAX = ',ast.number:0,';');
+	writeln(macro_file,tab,ast.prefix,'MAX==',ast.number:0);
 
 	writeln(macro_file, ast.prefix + 'TABLE::');
 	for i:=1 to ast.number do
