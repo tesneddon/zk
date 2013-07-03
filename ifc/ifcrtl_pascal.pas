@@ -121,8 +121,9 @@ end;
 [global] function ifc$draw_map(
 	var room_table : unsigned;
 	room_max : integer;
-	graph_name : varying[$u1] of char;
-	map_filename : varying[$u2] of char) : unsigned;
+	graph_name : [class_s] packed array[$l3..$u3:integer] of char;
+	map_filename : [class_s] packed array[$l4..$u4:integer] of char
+	) : unsigned;
 
 const	number_directions = 10;
 	direction_length = 10;
@@ -130,13 +131,38 @@ const	number_directions = 10;
 type	$direction_table = array[1..number_directions] of $symbol_string;
 
 var	map_file : text;
-	chr : char;
 	i,j : integer;
 	d, n, p : $pointer;
 	direction_table : $direction_table := (
 		'north', 'south', 'east', 'west', 'north east',
 		'north west', 'south east', 'south west',
 		'up', 'down');
+
+procedure writexml(
+	buffer : varying[$u] of char;
+	length : integer);
+
+var	j : integer;
+	chr : char;
+
+begin
+
+	for j:=1 to length do
+	  begin
+		chr:=buffer[j];
+		case (chr) of
+		'<':	write(map_file, '&lt;');
+		'>':	write(map_file, '&gt;');
+		'&':	write(map_file, '&amp;');
+		otherwise
+		  begin
+			if (chr = '"') then
+			  write(map_file, '\');
+			write(map_file, chr);
+		  end;
+		end;
+	  end;
+end; (* writexml *)
 
 begin
 	establish($sig_to_ret);
@@ -157,22 +183,41 @@ begin
 		n:=p.room_ptr^.name;
 
 		write(map_file, i, ' [');
+
 		write(map_file, 'label="', substr(n.string_ptr^.buffer,1,
 						  n.string_ptr^.length),'",');
+
 		write(map_file, 'tooltip="');
+		write(map_file, '<h1>', substr(n.string_ptr^.buffer,1,
+					       n.string_ptr^.length), '</h1>');
+		write(map_file, '<h2>Description</h2>');
+		write(map_file, '<p>');
 		while (d.word_ptr^ <> 0) do
 		  begin
-			for j:=1 to d.message_ptr^.length do
-			  begin
-			    chr:=d.message_ptr^.buffer[j];
-			    if (chr = '"') then
-			      write(map_file, '\');
-			    write(map_file, chr);
-			  end;
+			writexml(d.message_ptr^.buffer, d.message_ptr^.length);
 			write(map_file, ' ');
 			d:=d.address+d.message_ptr^.length+3;
 		  end;
+		write(map_file, '</p>');
+		write(map_file, '<h2>Objects</h2>');
 		write(map_file, '"');
+
+(*
+
+--Try making the rooms and elipse ---
+
+Tooltip=
+<h1>room name</h1>
+<h2>Description</h2>
+<p>
+...descirption
+</p>
+<h2>Objects</h2>
+<ul>
+  <li>object</li>
+</ul>
+
+*)
 
 		writeln(map_file, '];');
 
@@ -181,6 +226,18 @@ begin
 		    begin
 		      writeln(map_file, i, ' -- ', p.room_ptr^.link[j],
 				' /* ', direction_table[j], '*/');
+
+(*
+
+Check to see if the room we are connecting to is less than us (this means it
+has already been described).  It must be less so that paths to ourselves are
+not dropped.  This should fix it so that we only get one link between rooms,
+rather than two.
+
+Not sure how this will look, so try it out and see.
+
+*)
+
 		    end;
           end;
 
