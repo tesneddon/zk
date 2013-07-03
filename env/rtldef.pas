@@ -36,6 +36,13 @@ const	lib$m_cli_ctrlt = %x00100000;
 	character : char) : unsigned;
 	extern;
 
+[asynchronous, external(str$element)] function $element(
+	var dst_str : varying[$u1] of char;
+	element : integer;
+	delimeter : varying[$u3] of char;
+	src_str : varying[$u4] of char) : unsigned;
+	extern;
+
 [asynchronous, external(lib$find_file)] function $find_file(
 	file_spec : varying[$u1] of char;
 	var result_spec : varying[$u2] of char;
