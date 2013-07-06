@@ -13,8 +13,9 @@ However, this blank file is available if you prefer
 
 #inner-nav {
 	margin-bottom: 20px;
+	padding : 10px 0;
 }
 
-#navbar-main-nav #inner-nav {
+#navbar-main-nav {
 	padding: 5px 0;
 }
