@@ -1,0 +1,21 @@
+---
+layout: page
+title: Photos
+---
+<script src="galleria/galleria-1.2.9.min.js"></script>
+<script src="galleria/plugins/flickr/galleria.flickr.min.js"></script>
+
+<div class="row">
+  <div class="tweleve columns">
+    <div id="galleria"></div>
+  </div>
+</div>
+
+<script>
+Galleria.run('#galleria', {
+    flickr: 'set:72157634383159373',
+    flickrOptions: {
+        sort: 'date-posted-asc'
+    }
+});
+</script>
