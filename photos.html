@@ -2,9 +2,20 @@
 layout: default
 title: Photos
 ---
-<script src="galleria/galleria-1.2.9.min.js"></script>
-<script src="galleria/plugins/flickr/galleria.flickr.min.js"></script>
+<style>
+    #galleria {
+	width: 940px; height: 600px; background: #e9e9e9
+    }
+</style>
 
+<div class="row">
+  <div class="twelve columns">
+    <p>
+      The following are a collection of photos of the ZKO facility as well as
+      some related to the different groups that inhabited its walls.
+    </p>
+  </div>
+</div>
 <div class="row">
   <div class="tweleve columns">
     <div id="galleria"></div>
@@ -12,10 +23,15 @@ title: Photos
 </div>
 
 <script>
+// <![CDATA[
+Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
 Galleria.run('#galleria', {
     flickr: 'set:72157634383159373',
     flickrOptions: {
-        sort: 'date-posted-asc'
+	description: true,
+        sort: 'date-posted-asc',
+	max: 100,
     }
 });
+// ]]>
 </script>
