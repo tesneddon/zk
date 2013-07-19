@@ -1,3 +1,9 @@
+-- Edit History:
+
+-- 19-JUL-2013 TES Adjusted badge_middle message to cope with multi-user
+--		   changes.
+--
+
 prefix zk$text_
 ident <X01.00-01>
 
@@ -62,7 +68,7 @@ message badge_start
 <            |    ZK and Sons Inc, Master Temporary Badge Builders   |>
 <            |                                                       |>
 message badge_middle
-<            |        Name:    !AD                          |>/fao=2
+<            |        Name:    !32AD     |>/fao=2
 <            |                _______________                        |>
 <            |                                                       |>
 <            |        Firm:    Self                                  |>
