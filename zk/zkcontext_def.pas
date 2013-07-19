@@ -2,8 +2,13 @@
 	 'lib$:zk$obj', 
 	 'lib$:zk$room')]
 module zk$context_def;
+(* Edit History:							    *)
 
-type	$object_flags = [long, unsafe] record
+(* 19-JUL-2013 TES Changed to add a length for username and full buffer of  *)
+(*		   32 characters.					    *)
+(*									    *)
+
+type	$object_flags = [long, unsafe] record
 				case integer of
 				1: (long : unsigned);
 				2: (
@@ -88,7 +93,8 @@ type	$object_flags = [long, unsafe] record
 	$room_array = array[1..zk$room_max] of $room_info;
 
 	$context_block = record
-				username : packed array[1..12] of char;
+				username : packed array[1..32] of char;
+				username_length : integer;
 				flags : $context_flags;
 				room : $room_array;
 
