@@ -2,13 +2,14 @@
 	 'lib$:zk$obj', 
 	 'lib$:zk$room')]
 module zk$context_def;
+
 (* Edit History:							    *)
 
 (* 19-JUL-2013 TES Changed to add a length for username and full buffer of  *)
 (*		   32 characters.					    *)
 (*									    *)
 
-type	$object_flags = [long, unsafe] record
+type	$object_flags = [long, unsafe] record
 				case integer of
 				1: (long : unsigned);
 				2: (
@@ -64,6 +65,7 @@ module zk$context_def;
 				interview :	[bit, pos(17)] boolean;
 				elevator_unlocked : [bit, pos(18)] boolean;
 				messages_pending : [bit, pos(19)] boolean;
+				multi_user :	[bit, pos(20)] boolean;
 				)
 			  end;
 
