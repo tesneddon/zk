@@ -96,7 +96,7 @@ type	$object_flags = [long, unsafe] record
 
 	$context_block = record
 				username : packed array[1..32] of char;
-				username_length : integer;
+				username_length : $uword;
 				flags : $context_flags;
 				room : $room_array;
 

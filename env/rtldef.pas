@@ -139,7 +139,7 @@ function lib$get_input : unsigned; extern;
 
 [asynchronous, external(lib$get_logical)] function $get_logical(
 	%stdescr log_nam : packed array[$l1..$u1:integer] of char;
-	var res_str : varying[$u2] of char;
+	var res_str : packed array[$l2..$u2:integer] of char;
 	var res_len : $uword := %immed 0;
 	tbl_nam : varying[$u4] of char := %immed 0;
 	var max_index : integer := %immed 0;
