@@ -272,6 +272,15 @@ begin
 
 	initialize_run_time(context);
 
+	(* The ZK$MULTI_USER logical is used for the ZK punlic access login.
+	 * Defining it will swich on the multi_user flag in the context
+	 * block that changes certain security sensitive actions (like save
+	 * and restore).
+	 *
+	 * It will also set the username, that appears on the user's badge
+	 * However, if the equivalence is empty, it will revert to the
+	 * actual process username, like it originaly did.
+	 *)
 	return:=$get_logical('ZK$MULTI_USER',context.username,
 			     context.username_length);
 	if ( odd(return) ) then
