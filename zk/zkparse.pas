@@ -1,8 +1,18 @@
 [inherit('lib$:rtldef',
 	 'lib$:zk$def',
+	 'lib$:zk$context_def',
 	 'lib$:zk$lex_def',
 	 'lib$:zk$parse_obj_def')]
 module zk$parse;
+
+[global] function zk$parse_command_line(
+        var context : $context_block;
+	var ast : $ast_node_ptr;
+	followers : $symbol_set) : boolean;
+
+var	error : boolean;
+	symbol : $symbol_desc;
+	next_ast : $ast_node_ptr;
 
 const	directions = [north_keyword, south_keyword, east_keyword,
 			west_keyword, north_east_keyword,
@@ -666,8 +676,13 @@ begin
 	pick_keyword, get_keyword:
 		error:=parse_verb_prep_obj(ast, please, followers);
 
-	say_keyword, save_keyword, restore_keyword:
+	say_keyword:
 		error:=parse_verb_string(ast, please, followers);
+	save_keyword, restore_keyword:
+		if (context.flags.multi_user) then
+			error:=parse_verb_string(ast, please, followers)
+		else
+			error:=parse_verb_string(ast, please, followers);
 	tell_keyword:
 		error:=parse_verb_object_phrase(ast, please, followers);
 	type_keyword:
@@ -682,13 +697,6 @@ begin
 	parse_command:=error;
 end;
 
-[global] function zk$parse_command_line(
-	var ast : $ast_node_ptr;
-	followers : $symbol_set) : boolean;
-
-var	error : boolean;
-	symbol : $symbol_desc;
-	next_ast : $ast_node_ptr;
 begin
 	$advance_symbol;
 
