@@ -3,7 +3,7 @@
 	 'lib$:zk$context_def',
 	 'lib$:zk$lex_def',
 	 'lib$:zk$parse_obj_def')]
-module zk$parse;
+module zk$parse(output);
 
 [global] function zk$parse_command_line(
         var context : $context_block;
@@ -400,6 +400,49 @@ begin
 	parse_verb_string:=error;
 end;
 
+function parse_verb_word(
+	var ast : $ast_node_ptr;
+	var please : boolean;
+	followers : $symbol_set) : boolean;
+
+var	error : boolean;
+	i : integer;
+	symbol : $symbol_desc;
+	string_ast : $ast_node_ptr;
+	temp : $symbol_string;
+begin
+	error:=false;
+	$get_symbol(symbol);
+
+	new(ast, command_node);
+	ast^.node_type:=command_node; ast^.list:=nil;
+	ast^.keyword1:=symbol.token; ast^.keyword2:=nil_keyword;
+	ast^.left:=nil; ast^.right:=nil; ast^.please:=please;
+
+	$advance_symbol;
+	$get_symbol(symbol);
+	if (symbol.token in followers) then
+		error:=$test_symbol([])
+	else
+	  begin
+		if (symbol.token<>unknown) then
+			error:=$test_symbol([])
+		else
+		  begin
+			new(string_ast, string_node);
+			string_ast^.node_type:=string_node;
+			string_ast^.list:=nil;
+			string_ast^.string:=''; ast^.left:=string_ast;
+			$upcase(temp, temp);
+			for i:=1 to temp.length do
+				string_ast^.string:=string_ast^.string +
+					temp[i];
+		  end;
+	  end;
+
+	parse_verb_word:=error;
+end;
+
 function parse_verb_prep_obj(
 	var ast : $ast_node_ptr;
 	var please : boolean;
@@ -679,10 +722,11 @@ begin
 	say_keyword:
 		error:=parse_verb_string(ast, please, followers);
 	save_keyword, restore_keyword:
-		if (context.flags.multi_user) then
-			error:=parse_verb_string(ast, please, followers)
+		if ( context.flags.multi_user ) then
+			error:=parse_verb_word(ast, please, followers)
 		else
 			error:=parse_verb_string(ast, please, followers);
+
 	tell_keyword:
 		error:=parse_verb_object_phrase(ast, please, followers);
 	type_keyword:
