@@ -8,6 +8,10 @@
 	 'ifc$library:ifc$rtl_def')]
 module zk$init;
 
+(* Edit History:							    *)
+(* 19-JUL-2013 TES  Add multi-user support.				    *)
+(* 									    *)
+
 const	max_links = 100;
 	number_to_answer = 6;
 	zk$k_save_level = 8;
@@ -268,15 +272,36 @@ begin
 
 	initialize_run_time(context);
 
-	item_list[1].buffer_length:=12;
-	item_list[1].item_code:=jpi$_username;
-	item_list[1].buffer_address:=iaddress(context.username);
-	item_list[1].return_length_address:=0;
-	item_list[2].buffer_length:=0;
-	item_list[2].item_code:=0;
+	(* The ZK$MULTI_USER logical is used for the ZK punlic access login.
+	 * Defining it will swich on the multi_user flag in the context
+	 * block that changes certain security sensitive actions (like save
+	 * and restore).
+	 *
+	 * It will also set the username, that appears on the user's badge
+	 * However, if the equivalence is empty, it will revert to the
+	 * actual process username, like it originaly did.
+	 *)
+	return:=$get_logical('ZK$MULTI_USER',context.username,
+			     context.username_length);
+	if ( odd(return) ) then
+	 begin
+		context.flags.multi_user:=true;
+		if ( context.username_length=0 ) then
+		  return:=return+1;
+	 end;
 
-	return:=$getjpiw(,,,item_list);
-	if (not odd(return)) then $signal(return);
+	if ( not odd(return) ) then
+	 begin
+		item_list[1].buffer_length:=12;
+		item_list[1].item_code:=jpi$_username;
+		item_list[1].buffer_address:=iaddress(context.username);
+		item_list[1].return_length_address:=iaddress(context.username_length);
+		item_list[2].buffer_length:=0;
+		item_list[2].item_code:=0;
+
+		return:=$getjpiw(,,,item_list);
+		if (not odd(return)) then $signal(return);
+	 end;
 
 	$describe_room(context, start, false, false);
 	context.room[start].seen:=true;

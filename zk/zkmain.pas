@@ -63,7 +63,7 @@ begin
 	return:=$init_lex;
 	if (odd(return)) then
 	  begin
-		error:=$parse_command_line(ast, [end_of_line]);
+		error:=$parse_command_line(context, ast, [end_of_line]);
 		if ( (not error) and (ast<>nil) ) then
 		  begin
 (*			$print_ast(ast, 1); *)

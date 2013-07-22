@@ -3,6 +3,12 @@
 	 'lib$:zk$room')]
 module zk$context_def;
 
+(* Edit History:							    *)
+
+(* 19-JUL-2013 TES Changed to add a length for username and full buffer of  *)
+(*		   32 characters.					    *)
+(*									    *)
+
 type	$object_flags = [long, unsafe] record
 				case integer of
 				1: (long : unsigned);
@@ -59,6 +65,7 @@ type	$object_flags = [long, unsafe] record
 				interview :	[bit, pos(17)] boolean;
 				elevator_unlocked : [bit, pos(18)] boolean;
 				messages_pending : [bit, pos(19)] boolean;
+				multi_user :	[bit, pos(20)] boolean;
 				)
 			  end;
 
@@ -88,7 +95,8 @@ type	$object_flags = [long, unsafe] record
 	$room_array = array[1..zk$room_max] of $room_info;
 
 	$context_block = record
-				username : packed array[1..12] of char;
+				username : packed array[1..32] of char;
+				username_length : $uword;
 				flags : $context_flags;
 				room : $room_array;
 

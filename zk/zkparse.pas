@@ -1,8 +1,18 @@
 [inherit('lib$:rtldef',
 	 'lib$:zk$def',
+	 'lib$:zk$context_def',
 	 'lib$:zk$lex_def',
 	 'lib$:zk$parse_obj_def')]
-module zk$parse;
+module zk$parse(output);
+
+[global] function zk$parse_command_line(
+        var context : $context_block;
+	var ast : $ast_node_ptr;
+	followers : $symbol_set) : boolean;
+
+var	error : boolean;
+	symbol : $symbol_desc;
+	next_ast : $ast_node_ptr;
 
 const	directions = [north_keyword, south_keyword, east_keyword,
 			west_keyword, north_east_keyword,
@@ -390,6 +400,51 @@ begin
 	parse_verb_string:=error;
 end;
 
+function parse_verb_word(
+	var ast : $ast_node_ptr;
+	var please : boolean;
+	followers : $symbol_set) : boolean;
+
+var	error : boolean;
+	i : integer;
+	symbol : $symbol_desc;
+	string_ast : $ast_node_ptr;
+	err : text;
+begin
+	error:=false;
+	$get_symbol(symbol);
+
+	new(ast, command_node);
+	ast^.node_type:=command_node; ast^.list:=nil;
+	ast^.keyword1:=symbol.token; ast^.keyword2:=nil_keyword;
+	ast^.left:=nil; ast^.right:=nil; ast^.please:=please;
+
+	$advance_symbol;
+	$get_symbol(symbol);
+	if (symbol.token in followers) then
+		error:=$test_symbol([])
+	else
+	  begin
+		if (symbol.token=unknown) then
+		  begin
+			new(string_ast, string_node);
+			string_ast^.node_type:=string_node;
+			string_ast^.list:=nil;
+			$upcase(string_ast^.string, symbol.string);
+			ast^.left:=string_ast;
+
+			$advance_symbol;
+			$get_symbol(symbol);
+			if (not (symbol.token in followers)) then
+				error:=$test_symbol([]);
+		  end
+		else
+			error:=$test_symbol([]);
+	  end;
+
+	parse_verb_word:=error;
+end;
+
 function parse_verb_prep_obj(
 	var ast : $ast_node_ptr;
 	var please : boolean;
@@ -666,8 +721,14 @@ begin
 	pick_keyword, get_keyword:
 		error:=parse_verb_prep_obj(ast, please, followers);
 
-	say_keyword, save_keyword, restore_keyword:
+	say_keyword:
 		error:=parse_verb_string(ast, please, followers);
+	save_keyword, restore_keyword:
+		if ( context.flags.multi_user ) then
+			error:=parse_verb_word(ast, please, followers)
+		else
+			error:=parse_verb_string(ast, please, followers);
+
 	tell_keyword:
 		error:=parse_verb_object_phrase(ast, please, followers);
 	type_keyword:
@@ -682,13 +743,6 @@ begin
 	parse_command:=error;
 end;
 
-[global] function zk$parse_command_line(
-	var ast : $ast_node_ptr;
-	followers : $symbol_set) : boolean;
-
-var	error : boolean;
-	symbol : $symbol_desc;
-	next_ast : $ast_node_ptr;
 begin
 	$advance_symbol;
 
