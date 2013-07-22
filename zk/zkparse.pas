@@ -409,7 +409,7 @@ var	error : boolean;
 	i : integer;
 	symbol : $symbol_desc;
 	string_ast : $ast_node_ptr;
-	temp : $symbol_string;
+	err : text;
 begin
 	error:=false;
 	$get_symbol(symbol);
@@ -425,19 +425,21 @@ begin
 		error:=$test_symbol([])
 	else
 	  begin
-		if (symbol.token<>unknown) then
-			error:=$test_symbol([])
-		else
+		if (symbol.token=unknown) then
 		  begin
 			new(string_ast, string_node);
 			string_ast^.node_type:=string_node;
 			string_ast^.list:=nil;
-			string_ast^.string:=''; ast^.left:=string_ast;
-			$upcase(temp, temp);
-			for i:=1 to temp.length do
-				string_ast^.string:=string_ast^.string +
-					temp[i];
-		  end;
+			$upcase(string_ast^.string, symbol.string);
+			ast^.left:=string_ast;
+
+			$advance_symbol;
+			$get_symbol(symbol);
+			if (not (symbol.token in followers)) then
+				error:=$test_symbol([]);
+		  end
+		else
+			error:=$test_symbol([]);
 	  end;
 
 	parse_verb_word:=error;
