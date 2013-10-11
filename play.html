@@ -52,6 +52,36 @@ title: How to Play
     </p>
     <h4>Play Locally</h4>
     <p>
+          <p>
+            Alternatively, if you would rather install ZK on your local VAX, Alpha
+            or I64 OpenVMS system, the individual software packages can be
+            downloaded below:
+          </p>
+          <dl>
+            <dt><a href="ftp://ftp.hallsofzk.org/pub/zk/zk011-a.zip">A</a>
+            <dd>VMSINSTAL kit</dd>
+            <dt><a href="ftp://ftp.hallsofzk.org/pub/zk/zk011-b.zip">B</a>
+            <dd>OpenVMS VAX Images</dd>
+            <dt><a href="ftp://ftp.hallsofzk.org/pub/zk/zk011-c.zip">C</a>
+            <dd>OpenVMS Alpha Images</dd>
+            <dt><a href="ftp://ftp.hallsofzk.org/pub/zk/zk011-d.zip">D</a>
+            <dd>OpenVMS I64 Images</dd>
+          </dl>
+          Alternatively a zip file containing all parts of the kit is available
+          <a href="ftp://ftp.hallsofzk.org/pub/zk/zk011.zip">here</a>.
+          <p>
+            The complete source code can be downloaded from the Github project
+            page <a href="https://github.com/tesneddon/zk">here</a>.
+          </p>
+        </p>
+        <p>
+          Although ZK is shipped as a VMSINSTAL kit, it can be extracted from
+          the relevant, architecture specific savset and run without installing
+          system-wide.  To do this, execute the following commands:
+          <pre>
+$ BACKUP ZKnnn.x/SAVE_SET []
+$ RUN ZK$MAIN.EXE
+          </pre>
     </p>
   </div>
 </div>
