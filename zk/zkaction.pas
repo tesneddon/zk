@@ -223,7 +223,7 @@ begin
 	  begin
 		safe_object:=zk$obj_safe;
 		$lookup_object_list(safe_object,
-			context.room[context.location].room, safe_ptr);
+			context.room[room].room, safe_ptr);
 		if (safe_ptr^.flags.open) then
 			description1:=zk$desc_petty_cash_ransacked
 		else	description1:=zk$desc_petty_cash_stocked;
