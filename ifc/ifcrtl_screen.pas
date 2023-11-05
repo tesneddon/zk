@@ -151,9 +151,9 @@ begin
 end;
 
 [global] function put_scroll_dx(
-	column_number : [truncate] integer;
-	var string : [truncate] $uquad;
-	new_attributes : [truncate] unsigned) : unsigned;
+	column_number : (* [truncate] *) integer;
+	var string : (* [truncate] *) $uquad;
+	new_attributes : (* [truncate] *) unsigned) : unsigned;
 
 var	return : unsigned;
 	attributes : unsigned;
@@ -176,11 +176,11 @@ begin
 	line_count:=line_count + 1;
 
 	attributes:=0;
-	if (present(new_attributes)) then attributes:=new_attributes;
+	(* if (present(new_attributes)) then *) attributes:=new_attributes;
 
-	if (not present(column_number)) then
+	(* if (not present(column_number)) then
 		return:=$put_with_scroll(main_display)
-	else
+	else *)
 	if (column_number=1) then
 		return:=$put_with_scroll_dx(main_display,string,,attributes,,1)
 	else
@@ -296,11 +296,13 @@ var	fao_desc, desc : $descriptor;
 	line_fao_count : integer;
 	fao_buffer : varying[132] of char;
 begin
+	desc.dsc$w_length:=0;
 	desc.dsc$b_dtype:=dsc$k_dtype_t;
 	desc.dsc$b_class:=dsc$k_class_s;
+	desc.dsc$a_pointer:=0;
 
 	if (message_ptr.address=0) then
-		put_scroll_dx
+		put_scroll_dx(1, desc, 0)
 	else
 	while (message_ptr.word_ptr^<>0) do
 	  begin
