@@ -10,12 +10,14 @@
 
 .PSECT CODE,NOWRT,SHR,PIC,EXE,RD
 
-IFC$MESSAGE:: .CALL_ENTRY PRESERVE=<>,MAX_ARGS=10,HOME_ARGS=TRUE,output=<r0>
+; Max args used is 9, in read_start_record (zk/zkinit.pas)
+IFC$MESSAGE:: .CALL_ENTRY PRESERVE=<>,MAX_ARGS=9,HOME_ARGS=TRUE,output=<r0>
         PUSHL AP
         CALLS #1,G^IFC$MESSAGE_LIST
         RET
 
-IFC$MESSAGE_INDENT:: .CALL_ENTRY PRESERVE=<>,MAX_ARGS=10,HOME_ARGS=TRUE,output=<r0>
+; Max args used is 7, in zk$print_ast (zk/zkast.pas)
+IFC$MESSAGE_INDENT:: .CALL_ENTRY PRESERVE=<>,MAX_ARGS=7,HOME_ARGS=TRUE,output=<r0>
         PUSHL AP
         CALLS #1,G^IFC$MESSAGE_INDENT_LIST
         RET
