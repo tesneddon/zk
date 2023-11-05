@@ -39,6 +39,9 @@ begin
 		version:=version*10+ord(p.char_ptr^)-48;
 	  end;
 
+	if version < 0 then
+		version := 0;
+
 	writeln(options_file, 'SYMBOL=ZK$K_BASELEVEL, ', version:0);
 
 	close(options_file);

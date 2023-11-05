@@ -584,12 +584,12 @@ begin
 	message:=get_console_message(context.console_message);
 	$message(zk$text_object_reads, 2,
 			name.length, iaddress(name.body),
-			0, 0, message);
+			message);
 
 	if ( (context.console_message=3) and
 		(not context.flags.field_service) ) then
 	  begin
-		$message(0, 0, zk$text_fs_arrives);
+		$message(zk$text_fs_arrives);
 		fs_ptr:=$create_object(zk$obj_field_service_rep);
 		$connect_object(fs_ptr,
 			context.room[context.location].room, true);
@@ -629,13 +629,13 @@ begin
 		if (list) then
 			$message(zk$text_examining_reveals, 2, 
 				name.length, iaddress(name.body),
-				0, 0, detail)
+				detail)
 		else	$message(detail);
 	  end
 	else
 		$message(zk$text_object_reads, 2, 
 			name.length, iaddress(name.body),
-			0, 0, detail);
+			detail);
 
 	$list_contents_empty(object_ptr, 1);
 
@@ -718,7 +718,7 @@ begin
 	if (detail<>0) then
 		$message(zk$text_object_reads, 2,
 			name.length, iaddress(name.body),
-			0, 0, detail)
+			detail)
 	else
 		$message(zk$text_nothing_special, 2,
 			name.length, iaddress(name.body));
