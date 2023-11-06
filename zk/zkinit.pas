@@ -230,6 +230,7 @@ begin
 	context.crew_location:=zk$room_top_of_stairs_4;
 	context.crew_last_location:=zk$room_top_of_stairs_4;
 	context.question_asked::unsigned:=0;
+	context.card_ptr:=nil;
 
 	context.self:=$create_object(zk$obj_self);
 	context.self^.location:=start;
