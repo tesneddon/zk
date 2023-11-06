@@ -3,9 +3,11 @@
 const	lib$m_cli_ctrlt = %x00100000;
 	lib$m_cli_ctrly = %x02000000;
 
+(* Incompatible with IEEE FP; use Pascal RANDOM instead
 [asynchronous, external(mth$random)] function $random(
 	var seed : unsigned) : real;
 	extern;
+*)
 
 [asynchronous, external(lib$day_of_week)] function $day_of_week(
 	var time : $uquad := %immed 0;
