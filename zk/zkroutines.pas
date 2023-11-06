@@ -31,7 +31,7 @@ end;
 	var seed : unsigned;
 	upper : integer) : integer;
 begin
-	zk$random_integer:=trunc($random(seed)*upper)+1;
+	zk$random_integer:=trunc(RANDOM*upper)+1;
 end;
 
 [global] function zk$compare_date(
