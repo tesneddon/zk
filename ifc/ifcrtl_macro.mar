@@ -1,0 +1,34 @@
+	.TITLE	IFC$RTL_MACRO - IFC run-time wrappers in MACRO-32
+	.IDENT	/X01.00-01/
+;
+; MACRO-32 replacement for IFCRTL_BLISS.BLI, for systems without BLISS
+; (x86-64 by default; see [.IFC]DESCRIP.MMS).  It uses the .CALL_ENTRY
+; directive of the MACRO-32 compiler, so it is for Alpha, I64 and x86-64,
+; not VAX MACRO.
+;
+; Edit History:
+; 31-Oct-2026  Added for builds on OpenVMS x86-64 V9.2-3 without BLISS.
+;
+; IFC$MESSAGE and IFC$MESSAGE_INDENT are called from Pascal with a variable
+; length argument list.  Each one passes the address of its own argument
+; list (VAX format: a longword count followed by longword arguments) to the
+; Pascal routine that does the work.
+;
+; HOME_ARGS=TRUE makes the MACRO-32 compiler build that VAX-style argument
+; list in memory, so AP can be passed as its address.
+;
+	.PSECT	$CODE$, PIC, CON, REL, LCL, SHR, EXE, RD, NOWRT, QUAD
+
+IFC$MESSAGE::
+	.CALL_ENTRY	MAX_ARGS=255, HOME_ARGS=TRUE
+	PUSHL	AP
+	CALLS	#1, G^IFC$MESSAGE_LIST
+	RET
+
+IFC$MESSAGE_INDENT::
+	.CALL_ENTRY	MAX_ARGS=255, HOME_ARGS=TRUE
+	PUSHL	AP
+	CALLS	#1, G^IFC$MESSAGE_INDENT_LIST
+	RET
+
+	.END
