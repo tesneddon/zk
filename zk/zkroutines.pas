@@ -1,4 +1,4 @@
-[inherit('lib$:typedef',
+ainherit('lib$:typedef',
 	 'lib$:rtldef',
 	 'lib$:zk$context_def',
 	 'lib$:zk$text', 'lib$:zk$obj', 'lib$:zk$room',
@@ -31,7 +31,7 @@ end;
 	var seed : unsigned;
 	upper : integer) : integer;
 begin
-	zk$random_integer:=trunc($random(seed)*upper)+1;
+	zk$random_integer:=trunc(random(seed)*upper)+1;
 end;
 
 [global] function zk$compare_date(
