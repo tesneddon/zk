@@ -1,0 +1,27 @@
+!+
+!   MD5DEF.R32
+!
+!   Definitions for callers of the MD5 routines.
+!   07-JUN-1997 mdm
+!-
+
+    MACRO
+       INIT_SDESC (STR, LEN, PTR) =
+            BEGIN
+                BIND __D = STR : BLOCK [DSC$K_S_BLN,BYTE];
+                __D [DSC$B_DTYPE] = DSC$K_DTYPE_T;
+                __D [DSC$B_CLASS] = DSC$K_CLASS_S;
+                __D [DSC$W_LENGTH] = LEN;
+                __D [DSC$A_POINTER] = PTR;
+            END%,
+        G_HAT (RTN) [] =
+            RTN : BLISS ADDRESSING_MODE (GENERAL)
+            %IF NOT %NULL (%REMAINING) %THEN , G_HAT (%REMAINING) %FI%;
+
+    LITERAL
+    	MD5_S_MD5CTXDEF	= 88,
+    	MD5_S_MD5SUMDEF	= 16;
+
+    MACRO
+    	MD5CTXDEF   = BLOCK [MD5_S_MD5CTXDEF,BYTE]%,
+    	MD5SUMDEF   = VECTOR [MD5_S_MD5SUMDEF,BYTE]%;
