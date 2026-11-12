@@ -59,6 +59,7 @@ $ top_of_scroll	= csi + "5;1H"
 $
 $!@sys$library:$rmsdef
 $ RMS$_RNF = 98994
+$ RMS$_RLK = 98986
 $
 $ ! Field definitions for ZKUAF...
 $ !
@@ -86,7 +87,7 @@ $ zk_t_first = ""
 $ zk_l_last  = zk_l_first + zk_s_first          ! Last Name
 $ zk_s_last  = 32
 $ zk_t_last  = ""
-$ zk_l_spare = zk_t_last + zk_s_last            ! Spare
+$ zk_l_spare = zk_l_last + zk_s_last            ! Spare
 $ zk_s_spare = 262
 $ zk_t_spare = f$fao("!#* ", zk_s_spare)
 $
@@ -141,7 +142,7 @@ $ deck
 $ eod
 $ endif ! zk_t_logged_in
 $
-$ ask " Please chose an option: [1] " answer
+$ ask " Please choose an option: [1] " answer
 $ answer = f$extract(0,1,f$edit(answer,"UPCASE,UNCOMMENT,TRIM,COLLAPSE"))
 $ if (answer .eqs. "") then answer = "1"
 $ if (zk_t_logged_in)
@@ -182,9 +183,14 @@ $ say "  tested for validity, so you must specify a valid email address."
 $ say ""
 $ask_email:
 $ ask "Email address: " answer
-$ answer = f$edit(answer, "TRIM,COLLAPSE")
+$ answer = f$edit(answer, "TRIM,COLLAPSE,LOWERCASE")
 $ if (answer .eqs. "") then goto ask_email
 $ if (f$extract(0,1,answer) .eqs. "?") then goto help_email
+$ if (f$length(answer) .gt. zk_s_user)
+$ then
+$   err W TOOLONG "email addresses over ''zk_s_user' characters cannot be used"
+$   goto ask_email
+$ endif
 $ zk_t_user = answer
 $ domain = f$element(1,"@",zk_t_user)
 $ if (domain .eqs. "") then goto help_email_valid
@@ -193,6 +199,19 @@ $ define/user sys$error nla0:
 $ define/user sys$output nla0:
 $ ucx show mx_record 'domain'
 $ if (.not. $status) then goto help_email_valid
+$
+$ ! Is it taken?  /NOLOCK, as the account may be in play, holding its lock.
+$ key = f$fao("!#AS",zk_s_user,zk_t_user)
+$ close/nolog uaf
+$ open/read/share=write/error=err_uafopen uaf 'zk_t_default']ZKUAF.DAT
+$ read/nolock/index=0/key="''key'"/match=eq/error=email_rnf uaf record
+$ close/nolog uaf
+$ err W EXISTS "an account for this email address already exists"
+$ goto ask_email
+$email_rnf:
+$ status = $status
+$ if (status .ne. RMS$_RNF) then goto err_uafread_status
+$ close/nolog uaf
 $ goto ask_firstname
 $
 $help_firstname:
@@ -259,11 +278,12 @@ $ getmd5 'password'
 $ key = f$fao("!#AS",zk_s_user,zk_t_user)
 $ close/nolog uaf
 $ open/read/write/share=write/error=err_uafopen uaf 'zk_t_default']ZKUAF.DAT
-$ read/index=0/key="''key'"/match=eq -
+$ read/nolock/index=0/key="''key'"/match=eq -
       /end_of_file=register_rnf/error=register_rnf uaf record
 $ goto err_exists
 $register_rnf:
-$ if ($status .ne. RMS$_RNF) then goto err_uafdread
+$ status = $status
+$ if (status .ne. RMS$_RNF) then goto err_uafread_status
 $ getuid
 $ zk_t_uid  = uid_uid
 $ zk_t_hash = md5_md5
@@ -303,19 +323,20 @@ $ say "  Enter a registered email address to log in and play ZK!"
 $ say ""
 $ask_username:
 $ ask "Email address: " answer
-$ answer = f$edit(answer, "TRIM,COLLAPSE")
+$ answer = f$edit(answer, "TRIM,COLLAPSE,LOWERCASE")
 $ if (answer .eqs. "") then goto ask_username
 $ username = answer
 $
 $ set terminal/noecho
 $ ask "Password: " answer
+$ say ""
 $ set terminal/echo
 $ password = f$edit(answer,"TRIM")
 $
 $ key = f$fao("!#AS",zk_s_user,username)
 $ open/read/write/share=write/error=err_uafopen uaf 'zk_t_default']ZKUAF.DAT
-$ read/index=0/key="''key'"/match=eq -
-      /end_of_file=err_authfail/error=err_authfail uaf record
+$ read/nolock/index=0/key="''key'"/match=eq -
+      /end_of_file=err_authfail/error=signin_rnf uaf record
 $ 
 $ zk_t_user  = f$edit(f$extract(zk_l_user, zk_s_user, record),"TRIM")
 $ zk_t_uid   = f$extract(zk_l_uid,  zk_s_uid,  record)
@@ -329,9 +350,35 @@ $
 $ getmd5 'password'
 $
 $ if (zk_t_hash .nes. md5_md5) then goto err_authfail
+$
+$
+$ ! The password is right: now lock the record, and hold the lock while
+$ ! this sign-in is in play.  RLK is another sign-in holding it.  Only a
+$ ! caller with the password learns that.
+$ read/index=0/key="''key'"/match=eq/error=signin_lock uaf record
+$
+$ ! One more login, and when.  The update drops the lock, so read the
+$ ! record again to take it back.
+$ zk_i_lgic = f$integer(f$extract(zk_l_lgic, zk_s_lgic, record)) + 1
+$ zk_n_rdt  = f$cvtime(,"COMPARISON")
+$ record = f$extract(0,zk_l_rdt,record) + zk_n_rdt + -
+	   f$fao("!#UL",zk_s_lgic,zk_i_lgic) + -
+	   f$extract(zk_l_first,f$length(record)-zk_l_first,record)
+$ write/update/symbol/error=err_uafwrite uaf record
+$ read/index=0/key="''key'"/match=eq/error=signin_lock uaf record
 $ zk_t_logged_in = "Y"
 $ err S LOGIN "you successfully logged in"
 $ goto start
+$
+$signin_rnf:
+$ status = $status
+$ if (status .eq. RMS$_RNF) then goto err_authfail
+$ goto err_uafread_status
+$
+$signin_lock:
+$ status = $status
+$ if (status .eq. RMS$_RLK) then goto err_inuse
+$ goto err_uafread_status
 $
 $play:
 $ save_spec = "''zk_t_default'.USERS.''zk_t_uid']*.ZKO"
@@ -364,7 +411,9 @@ $ saysym message
 $ goto bail_out
 $
 $err_uafread:
-$ message = "-" + f$message($status) - "%"
+$ status = $status
+$err_uafread_status:
+$ message = "-" + f$message(status) - "%"
 $ err F UAFREAD "unable to read UAF file"
 $ saysym message
 $ goto bail_out
@@ -378,6 +427,12 @@ $
 $err_exists:
 $ close/nolog uaf
 $ err F EXISTS "an account for this email address already exists"
+$ ask "  Press RETURN to continue" answer
+$ goto start
+$
+$err_inuse:
+$ close/nolog uaf
+$ err E INUSE "this account is already signed in elsewhere"
 $ ask "  Press RETURN to continue" answer
 $ goto start
 $
@@ -406,4 +461,12 @@ $ !
 $ ! History:
 $ !		26-JUN-2013, TES; Version V1-001
 $ !	001 -	Original version.
+$ !
+$ !		12-NOV-2026, TES; Version V1-002
+$ !	002 -	Count logins and record the last one.  Email addresses are
+$ !		lower case, at most 64 characters, and checked for an
+$ !		existing account before anything else is asked.  Fixed the
+$ !		err_uafread label, zk_l_spare and the prompts.  A second
+$ !		sign-in to an account in play is told so, once its password
+$ !		is right.
 $ !-==========================================================================

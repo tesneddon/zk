@@ -10,6 +10,9 @@
  - Phone: type a number at the safe and its keypad
  - Phone: say something, spoken or spelled on the keypad
  - Add ifc-hear: speech to text with whisper.cpp, on the Linux side
+ - LOGIN.COM: count logins, lower-case email addresses, check them early,
+   and tell a second sign-in the account is in use
+ - Add TIDY_ZKUAF.COM, to lower-case the email addresses in ZKUAF.DAT
 
 * 2-Nov-2026 -- Tim Sneddon <tim@sneddon.id.au>
  - Changes to remove use of MTH$RANDOM
