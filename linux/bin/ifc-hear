@@ -1,0 +1,35 @@
+#!/bin/sh
+# ifc-hear DIR NAME: print what the caller said in
+# /var/spool/ifc-hear/NAME.wav, in capitals and digits with one space
+# between words, then delete the recording.  Prints nothing if nothing
+# was understood.
+#
+# Called from the [ifc-hear] dialplan subroutine, through SHELL(), which
+# has just recorded the caller.  Only DIR and NAME reach a command line,
+# and both must be [a-z0-9_].  The recording is upsampled to the 16 kHz
+# that whisper.cpp wants.  /etc/ifc-say/DIR-hear.prompt, if there is
+# one, is a vocabulary hint for the recogniser; /etc/ifc-say/DIR-hear.sed
+# fixes words in capitals.  The VAX reads the words back to the caller,
+# then runs them together for the game.
+
+dir=$1 name=$2
+case "$dir" in ''|*[!a-z0-9_]*) exit 1;; esac
+case "$name" in ''|*[!a-z0-9_]*) exit 1;; esac
+
+in=/var/spool/ifc-hear/$name.wav
+model=/usr/local/share/whisper/ggml-base.en.bin
+prompt=$(cat "/etc/ifc-say/$dir-hear.prompt" 2>/dev/null)
+
+tmp=$(mktemp -d) || exit 1
+trap 'rm -rf "$tmp" "$in"' EXIT
+[ -f "$in" ] || exit 0
+
+sox "$in" -r 16000 -c 1 -e signed -b 16 "$tmp/in.wav" 2>/dev/null &&
+whisper-cli -m "$model" -l en -nt -np -t 4 --prompt "$prompt" \
+	-f "$tmp/in.wav" 2>/dev/null |
+tr '\n' ' ' |
+sed -e 's/\[[^]]*\]//g' -e 's/([^)]*)//g' |	# [BLANK_AUDIO], (coughs)
+tr a-z A-Z |
+sed -f "/etc/ifc-say/$dir-hear.sed" |
+tr -cs A-Z0-9 ' ' |
+sed -e 's/^ //' -e 's/ $//'

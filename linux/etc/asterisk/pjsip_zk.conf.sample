@@ -1,0 +1,83 @@
+; pjsip_zk.conf: SIP for The Halls of ZK by Telephone.  Copy this to
+; /etc/asterisk/pjsip_zk.conf, fill in the capitals, make it readable by
+; asterisk only (it holds passwords), and add one line to pjsip.conf:
+;
+;   #include pjsip_zk.conf
+;
+; The trunk registers outwards, so no port forward is needed on the
+; router: calls come back along the path the registration opens, and
+; qualify_frequency keeps it open.  Do not forward 5060 to this box;
+; SIP scanners find it within hours.
+
+[transport-udp]
+type = transport
+protocol = udp
+bind = 0.0.0.0:5060
+
+; ---- The trunk (Crazytel; others are much the same) ------------------
+
+[crazytel-reg]
+type = registration
+outbound_auth = crazytel-auth
+transport = transport-udp
+server_uri = sip:sip.biz.crazytel.net.au
+client_uri = sip:ACCOUNT@sip.biz.crazytel.net.au
+contact_user = ACCOUNT
+retry_interval = 60
+forbidden_retry_interval = 600
+expiration = 190
+line = yes                      ; calls on this registration are ...
+endpoint = crazytel-trunk       ; ... from this endpoint
+
+[crazytel-auth]
+type = auth
+auth_type = userpass
+username = ACCOUNT
+password = TRUNK-PASSWORD
+
+[crazytel-aor]
+type = aor
+contact = sip:sip.biz.crazytel.net.au:5060
+qualify_frequency = 60          ; keeps the NAT path to the provider open
+
+[crazytel-trunk]
+type = endpoint
+transport = transport-udp
+context = from-trunk
+disallow = all
+allow = alaw,ulaw
+outbound_auth = crazytel-auth
+aors = crazytel-aor
+direct_media = no
+rtp_symmetric = yes             ; these three get calls through NAT
+force_rport = yes               ; and CGNAT
+rewrite_contact = yes
+dtmf_mode = rfc4733
+
+[crazytel-identify]
+type = identify
+endpoint = crazytel-trunk
+match = sip.biz.crazytel.net.au
+
+; ---- A softphone on the LAN, for testing -----------------------------
+
+[tes-phone]
+type = endpoint
+transport = transport-udp
+context = from-lan
+disallow = all
+allow = ulaw,alaw
+auth = tes-phone
+aors = tes-phone
+direct_media = no
+dtmf_mode = rfc4733
+
+[tes-phone]
+type = auth
+auth_type = userpass
+username = tes-phone
+password = PHONE-PASSWORD
+
+[tes-phone]
+type = aor
+max_contacts = 1

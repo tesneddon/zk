@@ -1,0 +1,29 @@
+#!/bin/sh
+# ifc-say DIR NAME: render /var/spool/ifc-say/NAME.txt to
+# /var/lib/asterisk/sounds/DIR/NAME.sln, unless it is already cached.
+#
+# Called from the [ifc-say] dialplan subroutine, which has written the
+# text to the spool file.  The text never reaches a command line: only
+# DIR and NAME do, and both must be [a-z0-9_].  DECtalk treats bracketed
+# text as commands, so [ and ] are stripped from the game's text; then
+# /etc/ifc-say/DIR.sed, the pronunciation fixes, may add commands of its
+# own.  The cached .txt beside each .sln is compared, so a CRC clash in
+# the name just renders again.  Each render works in its own temporary
+# directory and ends with mv, so no call ever plays a half-written file.
+
+dir=$1 name=$2
+case "$dir" in ''|*[!a-z0-9_]*) exit 1;; esac
+case "$name" in ''|*[!a-z0-9_]*) exit 1;; esac
+
+in=/var/spool/ifc-say/$name.txt
+out=/var/lib/asterisk/sounds/$dir
+[ -f "$out/$name.sln" ] && cmp -s "$in" "$out/$name.txt" && exit 0
+
+tmp=$(mktemp -d) || exit 1
+trap 'rm -rf "$tmp"' EXIT
+tr -d '[]' < "$in" | sed -f "/etc/ifc-say/$dir.sed" > "$tmp/say.txt" &&
+say -fi "$tmp/say.txt" -fo "$tmp/say.wav" &&
+sox "$tmp/say.wav" -r 8000 -c 1 -e signed -b 16 -t raw "$tmp/say.sln" &&
+cp "$in" "$tmp/say.txt" &&
+mv "$tmp/say.sln" "$out/$name.sln" &&
+mv "$tmp/say.txt" "$out/$name.txt"

@@ -1,0 +1,60 @@
+#!/bin/sh
+# make-zk-prompts [DIR]: render the fixed prompt files for game DIR
+# (default zk) with ifc-say, so they are in the same voice as the game,
+# then check that every one exists.  Run as root or as asterisk.
+#
+# These are the only sounds not rendered during a call.  A missing one
+# ends a call the first time it is played, which may be well into it
+# (sys_still_there, or a letter when spelling), so the check matters.
+
+dir=${1:-zk}
+case "$dir" in ''|*[!a-z0-9_]*) echo "bad directory name: $dir" >&2; exit 1;; esac
+spool=/var/spool/ifc-say
+sounds=/var/lib/asterisk/sounds/$dir
+
+if [ "$(id -un)" = asterisk ]; then
+	as_asterisk() { "$@"; }
+elif [ "$(id -u)" = 0 ]; then
+	as_asterisk() { runuser -u asterisk -- "$@"; }
+else
+	echo "run this as root or as asterisk" >&2; exit 1
+fi
+
+# mk NAME TEXT: render one prompt
+mk() {
+	printf '%s' "$2" | as_asterisk tee "$spool/$1.txt" >/dev/null &&
+	as_asterisk /usr/local/bin/ifc-say "$dir" "$1" ||
+	echo "failed: $1" >&2
+}
+
+mk sys_welcome     'Hello and welcome to the interactive fiction game, The Halls of Z K.'
+mk sys_goodbye     'Goodbye.'
+mk sys_still_there 'Are you still there?  Press any key to carry on.'
+mk sys_confirm     'Are you sure?  Press 1 for yes, 2 for no.'
+mk sys_error       'Sorry, something went wrong.'
+mk sys_deleted     'Deleted.'
+for d in 0 1 2 3 4 5 6 7 8 9; do
+	mk key$d "$d"
+done
+for l in a b c d e f g h i j k l m n o p q r s t u v w x y z; do
+	mk letter_$l "$(printf '%s' "$l" | tr a-z A-Z)."
+done
+
+# sys_pause is silence, not speech: half a second, 4000 16-bit samples
+as_asterisk sh -c "head -c 8000 /dev/zero > '$sounds/sys_pause.sln'"
+
+missing=0
+for f in sys_welcome sys_goodbye sys_still_there sys_confirm sys_error \
+	 sys_pause sys_deleted \
+	 key0 key1 key2 key3 key4 key5 key6 key7 key8 key9 \
+	 letter_a letter_b letter_c letter_d letter_e letter_f letter_g \
+	 letter_h letter_i letter_j letter_k letter_l letter_m letter_n \
+	 letter_o letter_p letter_q letter_r letter_s letter_t letter_u \
+	 letter_v letter_w letter_x letter_y letter_z; do
+	if [ ! -s "$sounds/$f.sln" ]; then
+		echo "missing: $sounds/$f.sln" >&2
+		missing=1
+	fi
+done
+[ $missing = 0 ] && echo "all prompts present in $sounds"
+exit $missing
