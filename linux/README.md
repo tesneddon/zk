@@ -1,7 +1,7 @@
 # The Linux side of ZK by Telephone
 
-These are the files that run on the Asterisk box.  `ASTERISK.md` in the
-top directory explains the setup in order.  This file says what each
+These are the files that run on the Asterisk box.  `doc/ASTERISK.md`
+explains the setup in order.  This file says what each
 one is and where it goes.
 
 | File | Installed as | What it is |
