@@ -7,8 +7,20 @@ const	dvi$_unit = 12;
 	syi$_node_swtype = 4309;
 	syi$_node_swvers = 4310;
 	syi$_node_hwtype = 4311;
+	lck$k_exmode = 5;
 
-type	$exit_block = record
+type	$uid = packed array[1..16] of $ubyte;	(* an octaword *)
+
+	$lock_status = record
+			status : $uword;
+			reserved : $uword;
+			lock_id : unsigned;
+		end;
+
+	$numeric_time = array[1..7] of $uword;	(* year, month, day, hour,  *)
+						(* minute, second, hundredths *)
+
+	$exit_block = record
 			forward_link : unsigned;
 			exit_handler : unsigned;
 			arg_count : unsigned;
@@ -145,6 +157,11 @@ var	ss$_normal,
 	%immed cvtflg : unsigned := %immed 0) : unsigned;
 	extern;
 
+[asynchronous, external(sys$numtim)] function $numtim(
+	var timbuf : $numeric_time;
+	%ref timadr : $quad := %immed 0) : unsigned;
+	extern;
+
 [asynchronous, external(sys$schdwk)] function $schdwk(
 	%ref pidadr : unsigned := %immed 0;
 	%stdescr prcnam : packed array[$l1..$u1:integer]
@@ -176,6 +193,43 @@ var	ss$_normal,
 
 [asynchronous, external(sys$cancel)] function $cancel(
 	%immed chan : [unsafe] $uword) : unsigned;
+	extern;
+
+[asynchronous, external(sys$create_uid)] function $create_uid(
+	var uid : $uid) : unsigned;
+	extern;
+
+[asynchronous, external(lib$uid_to_ascii)] function $uid_to_ascii(
+	var uid : $uid;
+	%stdescr ascii : packed array[$l1..$u1:integer] of char) : unsigned;
+	extern;
+
+[asynchronous, external(sys$setddir)] function $setddir(
+	new_dir : [class_s] packed array[$l1..$u1:integer] of char;
+	%immed len_addr : unsigned := %immed 0;
+	%immed cur_dir_addr : unsigned := %immed 0) : unsigned;
+	extern;
+
+[asynchronous, external(sys$enqw)] function $enqw(
+	%immed efn : unsigned := %immed 0;
+	%immed lkmode : unsigned;
+	var lksb : $lock_status;
+	%immed flags : unsigned := %immed 0;
+	resnam : [class_s] packed array[$l1..$u1:integer] of char;
+	%immed parid : unsigned := %immed 0;
+	%immed astadr : unsigned := %immed 0;
+	%immed astprm : unsigned := %immed 0;
+	%immed blkast : unsigned := %immed 0;
+	%immed acmode : unsigned := %immed 0;
+	%immed rsdm_id : unsigned := %immed 0;
+	%immed nullarg : unsigned := %immed 0) : unsigned;
+	extern;
+
+[asynchronous, external(sys$deq)] function $deq(
+	%immed lkid : unsigned;
+	%immed valblk : unsigned := %immed 0;
+	%immed acmode : unsigned := %immed 0;
+	%immed flags : unsigned := %immed 0) : unsigned;
 	extern;
 
 [asynchronous, external(sys$faol)] function $faol(
