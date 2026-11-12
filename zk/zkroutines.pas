@@ -1,4 +1,4 @@
-ainherit('lib$:typedef',
+[inherit('lib$:typedef',
 	 'lib$:rtldef',
 	 'lib$:zk$context_def',
 	 'lib$:zk$text', 'lib$:zk$obj', 'lib$:zk$room',

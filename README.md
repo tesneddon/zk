@@ -16,7 +16,7 @@ await you. Exercise your computer-related skills to solve the
 myriad of obstacles that lead to the acquisition of the ultimate
 treasure!
 
-The Halls of ZK was written by William Lees and Edmund Sulliva
+The Halls of ZK was written by William Lees and Edmund Sullivan
 sometime in August 1985. Since that time a VAX binary and a VEST'd
 Alpha binary (with some source) has been floating around the 'net
 at various websites. Recently the full source code, including the
