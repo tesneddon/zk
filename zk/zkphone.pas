@@ -26,6 +26,7 @@ program zk$phone; (* ZK main program for the telephone *)
 (*                   passed to the game as TYPE and the digits.             *)
 (* 12-Nov-2026  TES  "Say something" in the action menu, said or spelled on *)
 (*                   the keypad, and passed to the game as SAY.             *)
+(* 13-Nov-2026  TES  Added developer credits to the player menu.            *)
 (*                                                                          *)
 
 const	save_name = 'PHONE';			(* one slot per player *)
@@ -624,8 +625,10 @@ var	key : char;
 begin
 	done:=false; create:=false;
 	repeat
-		$phone_say('Press 1 to start a new game, 2 to hear about ' +
-			   'The Halls of ZK, or star to go back.');
+		$phone_say('Press 1 to start a new game, ' +
+                                 '2 to hear about The Halls of ZK, ' +
+                                 '3 to hear the developer credits, ' +
+                              'or star to go back.');
 		key:=$phone_get_key;
 		if (key='1') then
 		  begin
@@ -635,6 +638,10 @@ begin
 		if (key='2') then
 			say_logical('ZK$PHONE_INTRO', 'Sorry, the introduction ' +
 				    'is not available just now.')
+		else
+                if (key='3') then
+			say_logical('ZK$PHONE_CREDITS', 'Sorry, the developer ' +
+				    'credits are not available just now.')
 		else
 		if (key='*') then done:=true;
 	until done;
