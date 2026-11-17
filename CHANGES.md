@@ -13,6 +13,8 @@
  - LOGIN.COM: count logins, lower-case email addresses, check them early,
    and tell a second sign-in the account is in use
  - Add TIDY_ZKUAF.COM, to lower-case the email addresses in ZKUAF.DAT
+ - Phone: hear the developer credits from the new player menu
+ - Move the history from README.md to a new CREDITS.md
 
 * 2-Nov-2026 -- Tim Sneddon <tim@sneddon.id.au>
  - Changes to remove use of MTH$RANDOM

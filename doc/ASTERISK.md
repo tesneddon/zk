@@ -313,9 +313,11 @@ over Wi-Fi.
   running `ZKPHONE_RUN.COM`.  `/LIMIT` is the most callers at once.
 - **Who can connect:** anyone who can reach port 4573 can play and make
   new players.  Limit the service to the Asterisk box.
-- **The logicals** `ZK$PHONE_WELCOME` and `ZK$PHONE_INTRO` are set in
-  `ZKPHONE_RUN.COM` unless already defined.  Each holds either the text
-  itself or `@` and a file spec.
+- **The logicals** `ZK$PHONE_WELCOME`, `ZK$PHONE_INTRO` and
+  `ZK$PHONE_CREDITS` are set in `ZKPHONE_RUN.COM` unless already defined.
+  Each holds either the text itself or `@` and a file spec.  By default
+  `README.MD` and `CREDITS.MD` are read from the directory
+  `ZKPHONE_RUN.COM` is in.
 - **ZK's `LOGIN.COM`** must leave network logins alone: `if (f$mode()
   .eqs. "NETWORK") then exit` at the top.
 - **After changing the IFC or environment sources, rebuild the phone
