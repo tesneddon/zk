@@ -1,0 +1,9 @@
+main: proc options(main);
+
+    dcl generate_passwords entry;
+
+    put skip list('TEsting');
+    call generate_passwords();
+    put skip list('Done testing');
+
+end main;

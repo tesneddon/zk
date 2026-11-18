@@ -1,0 +1,68 @@
+                      THE HALLS OF ZK BY TELEPHONE
+                      ============================
+
+Call +61 8 6186 3484.  The game is read aloud by DECtalk and you play
+it with your phone's keypad; there is nothing to type.
+
+
+STARTING
+--------
+
+When asked for your passcode, a new player presses # and then:
+
+    1   to start a new game
+    2   to hear about the game first
+
+You will be given a six digit passcode, read out twice.  Keep it safe:
+it is how you get back to your saved game the next time you call.
+Returning players just key in their passcode.
+
+
+IN A ROOM
+---------
+
+The keypad is a compass.  5 describes the room again and # lists the
+ways out.
+
+        +-------+-------+-------+
+        |   1   |   2   |   3   |
+        |  NW   |   N   |  NE   |
+        +-------+-------+-------+
+        |   4   |   5   |   6   |
+        |   W   | LOOK  |   E   |
+        +-------+-------+-------+
+        |   7   |   8   |   9   |
+        |  SW   |   S   |  SE   |
+        +-------+-------+-------+
+        |   *   |   0   |   #   |
+        |       | MENU  | EXITS |
+        +-------+-------+-------+
+
+
+THE MENU
+--------
+
+Press 0 for the menu:
+
+    1   Objects here: pick one, then take, examine, open and so on
+    2   Go up, where you can
+    3   Inventory: pick an object you carry to use it
+    4   Score
+    5   Save your game
+    6   Restore your game
+    7   Quit
+    8   Go down, where you can
+    9   Help
+    *   Back to the game
+
+
+HOW IT WORKS
+------------
+
+The game runs on OpenVMS VAX as a FastAGI server.  Calls are answered
+by Asterisk on a small Linux box, which connects each caller to the
+VAX.  The VAX sends the game's text; the Linux box speaks it with
+DECtalk, plays it down the line and passes the caller's keys back.
+Only text and key presses cross the network.
+
+ASTERISK.md describes how to set up the Linux side.

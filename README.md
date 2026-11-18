@@ -1,4 +1,4 @@
-                        The Halls of ZK
+# The Halls of ZK
 
 Tired of the same old pirates, thieves, Cyclops, wizards, dragons,
 horsemen, chiefs, spiders, weasel-like aliens and dungeon masters?
@@ -15,12 +15,3 @@ personalities! Incredible treasures and mind-boggling encounters
 await you. Exercise your computer-related skills to solve the
 myriad of obstacles that lead to the acquisition of the ultimate
 treasure!
-
-The Halls of ZK was written by William Lees and Edmund Sulliva
-sometime in August 1985. Since that time a VAX binary and a VEST'd
-Alpha binary (with some source) has been floating around the 'net
-at various websites. Recently the full source code, including the
-source for the Interactive Fiction Compiler (IFC) was located by
-John Reagan. The code generator for IFC was re-written to output
-MACRO-32 source modules by Tim Sneddon and as such there are now
-native versions for all OpenVMS supported architectures available.

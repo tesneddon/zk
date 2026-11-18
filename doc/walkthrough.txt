@@ -1,0 +1,332 @@
+==============================================================================
+                         THE HALLS OF ZK WALKTHROUGH
+==============================================================================
+                             By Slartibartfast
+
+To win, install VMS, CDD and DTR on the prototype VAX, pass your physical and
+exit interview, then smuggle the system disk out to the helicopter pad and
+WAIT, for 175 points. Several things are random, so SAVE often.
+
+BEFORE YOU START
+----------------
+
+A few game rules shape the whole route, so read these first.
+
+  * Doors: use IN and OUT to go through doors. They open the door for you; a
+    compass direction stops at a closed door.
+  * Moves: every command is a move. SCORE shows your move count, which matters
+    for the petty cash safe in Part 5.
+  * Darkness: the game is always set at night, and on about one turn in twenty
+    the lights go out in a random room and every room next to it. Any indoor
+    room can go dark this way, including the catwalks and mazes, and it stays
+    dark until the lights are turned back on. The Lab of Implementors and the
+    Tape Library are dark all the time; the four outdoor rooms never go dark.
+    Walking from one dark room into another dark room kills you, so turn the
+    lamp on before you move.
+  * The lamp: the brass lantern has 120 turns of power in total. Keep it off
+    unless you are in the dark. Every time you pass through the Lobby, TELL
+    GUARD, PLEASE START BUILDING LIGHTS. He switches every room back on except
+    the Lab and Tape Library, which saves lamp power.
+  * The guard: after move 30 he wanders the building and throws you out to the
+    entrance unless you are WEARING your badge (Part 2). DROP ALL takes the
+    badge off and GET ALL only picks it up again, so always WEAR BADGE after a
+    DROP ALL.
+  * Travelling light: you can drop things once they've done their job: the
+    crystal ball after Part 5, and the VMS and CDD tapes after installing
+    them. The ASCII table in the sack is never needed. Bills, coins, the Coke,
+    the scratch disk and the card are used up automatically.
+  * Shortcuts: GET works the same as TAKE and is shorter to type. You can name
+    several things at once, as in GET SACK AND LAMP. Short names work when
+    only one thing matches, such as DISK, CARD, DOOR and DOC, and so do short
+    directions, as in PUSH DOC N.
+  * The maze: a cleaning crew roams the maze and moves anything you leave
+    there. Never drop things in a maze room.
+  * Talking to people: use TELL, for example TELL GUARD, PLEASE GIVE KEYS TO
+    ME. The guard only obeys if you say PLEASE.
+  * Saving: SAVE ZK1 and RESTORE ZK1. The officer's timing, the safe
+    combination, the coin machine and the lights are all random, so save
+    before each part.
+
+PART 1: INTO THE BUILDING
+-------------------------
+
+The crystal door opens when you say the phrase spelled out by the rods on the
+wall: DIGITAL SOFTWARE ENGINEERING (25 points).
+
+You start at the Helicopter Pad.
+
+   1. E to the Woods. GET SACK AND LAMP. The sack holds an ASCII table. Leave
+      the heavy sword behind; it isn't needed.
+   2. E to the Clearing, then N to the Building Entrance.
+   3. EXAMINE WALL if you want the puzzle. The wall shows 26 blocks of seven
+      black and white rods: each block is one character in 7-bit binary.
+   4. SAY DIGITAL SOFTWARE ENGINEERING. The crystal door clicks open.
+   5. IN to the Antechamber, then IN to the Lobby. The newspapers in the
+      Antechamber are optional reading.
+   6. TELL GUARD, PLEASE START BUILDING LIGHTS.
+
+PART 2: PHYSICAL AND BADGE
+--------------------------
+
+The guard won't let you go west or north from the Lobby until you've had a
+physical, but east is open (25 points).
+
+   1. E, E, E to Blue Hall, then N, N to the Blue Hall with the health sign. W
+      into Health Services.
+   2. DROP ALL. The scale only works with empty hands.
+   3. STAND ON SCALE.
+   4. PUT ARM IN BLOOD PRESSURE MACHINE.
+   5. GET ALL.
+   6. E to leave. The nurse passes you, and a temporary badge is left at the
+      reception desk.
+   7. S, S, W, W, W back to the Lobby.
+   8. WEAR BADGE. This picks the badge up from the desk and puts it on in one
+      go.
+   9. TELL GUARD, PLEASE START BUILDING LIGHTS.
+
+PART 3: KEYS, ELEVATOR AND CRYSTAL BALLS
+----------------------------------------
+
+This part unlocks the elevators for later, and plants a glowing crystal ball
+in Petty Cash so you can spy on the safe combination. Finish it well before
+move 85: the petty cash officer leaves at a random time between moves 90 and
+109, and you can't get in while he's leaving.
+
+The two crystal balls are linked: when both glow, looking into one shows you
+the room the other one is in.
+
+   1. In the Lobby: TELL GUARD, PLEASE GIVE KEYS TO ME.
+   2. W, W to Blue Hall, then N to the Non-descript Hall with the elevator.
+   3. UNLOCK ELEVATOR DOOR WITH KEYS. This unlocks all three elevators. Then
+      GET KEYS out of the lock; you must return them to the guard at the end.
+   4. N to Blue Hall, IN to the stairwell, D, then OUT to the End of Yellow
+      Corridor.
+   5. E, E, then N into Ed's Office. GET FLUORESCENT BALL.
+   6. E, N, then W into Will's Office. GET NEON BALL.
+   7. RUB NEON BALL, then RUB FLUORESCENT BALL. Both should now glow.
+   8. Back the way you came: E, S, S, W, W, W, IN, U, OUT to Blue Hall.
+   9. E, E, then S to the Non-descript Hall with the petty cash sign. IN to
+      Petty Cash.
+  10. GIVE FLUORESCENT BALL TO OFFICER. He puts it on his desk. Then OUT.
+
+Keep the neon ball in your hands from now on: it's quicker to type than
+fluorescent, and inside the closed sack it can't see anything.
+
+PART 4: FIELD SERVICE AND THE SYSTEM DISK
+-----------------------------------------
+
+Booting the VAX from a scratch disk fails and brings out a field service rep,
+who swaps the scratch disk for the system disk you need for both the install
+and the ending.
+
+   1. From the petty cash hall: N, W, W to Blue Hall, IN, D, D to the bottom
+      of the stairwell, OUT to the End of Red Passage.
+   2. E, E, then S into the VMS Lab. S into the Operator's Room.
+   3. GET DISK. It's the only disk in the game at this point. READ NOTES if
+      you like: they say START, BOOT, STOP. Then N back to the lab.
+   4. OPEN DISK DRIVE, PUT DISK IN DISK DRIVE, CLOSE DISK DRIVE.
+   5. START COMPUTER, then BOOT COMPUTER.
+   6. READ CONSOLE. The boot has failed, and the field service rep arrives.
+   7. OPEN DISK DRIVE, GET DISK, then GIVE DISK TO REP. He leaves. Leave the
+      disk drive open and the computer on; Part 9 picks up from there.
+   8. WAIT three times. He comes back and hands you the system disk.
+
+Never open the media cabinet in the VMS Lab: it kills you.
+
+PART 5: THE PETTY CASH SAFE
+---------------------------
+
+Watch the officer through the crystal ball as he locks up, read the four-digit
+combination off the keypad, then open the safe after he leaves (10 points).
+The combination is different every game.
+
+   1. Wait inside the building. Between moves 90 and 109 a message says the
+      petty cash officer is leaving.
+   2. From then on, LOOK IN NEON BALL every turn. For three turns it shows him
+      getting ready.
+   3. On the fourth turn the ball shows him at the safe, keying in the
+      combination. Write it down.
+   4. One turn later he leaves and the lights in Petty Cash go off.
+   5. Go back to the petty cash hall: from the VMS Lab that is N, W, W, IN, U,
+      U, OUT, E, E, S.
+   6. TURN ON LAMP, then IN to Petty Cash.
+   7. TYPE followed by the combination, for example TYPE 4721. The safe
+      clicks.
+   8. OPEN SAFE, GET BILLS, DROP NEON BALL, then OUT.
+   9. TURN OFF LAMP.
+
+PART 6: COINS, COKE AND THE CDD TAPE
+------------------------------------
+
+Change the bills into coins in the maze, buy a Coke, and trade it unopened to
+the CDD developer for the CDD tape (15 points in all).
+
+   1. From the petty cash hall: S to the Lobby. TELL GUARD, PLEASE START
+      BUILDING LIGHTS, then E, E, E to Blue Hall.
+   2. E into the maze, then W, E, S, SW. You're now in the maze room with the
+      working coin machine.
+   3. PUT BILLS IN COIN MACHINE. It only works one time in four, but you keep
+      the bills when it fails, so repeat until it works.
+   4. GET COINS.
+   5. N, N, E, then IN to the stairwell. D, then OUT into the lower maze.
+   6. SW, NW, then SW to Yellow Corridor. S to the Corridor Stub with the Coke
+      machine.
+   7. PUT COINS IN COKE MACHINE, then GET COKE.
+   8. N, E into the maze, SE, N, N into CDD Development.
+   9. GIVE COKE TO CDD DEVELOPER. He gives you the CDD tape.
+
+Don't open, shake or drink the Coke: an opened or shaken can only annoys the
+developer. The coin machine in Yellow Corridor, near Ed's office, is broken
+and never pays out.
+
+PART 7: THE DTR TAPE
+--------------------
+
+The DTR tape sits in a hanging plant that's out of reach, so push the huge
+documentation set over to DTR Development and stand on it (25 points). The set
+is too big to carry and too big for the stairwell doors, so it travels by
+elevator.
+
+   1. From CDD Development: S, S, NW, SW to Yellow Corridor.
+   2. W, W across the catwalk, then W, W, W, W along Yellow Corridor.
+   3. SW to the Corridor Stub, then IN to the elevator.
+   4. PUSH BLUE BUTTON. OUT to the Non-descript Hall.
+   5. S to Blue Hall, E, then S into RSX Development, where the documentation
+      set is.
+   6. PUSH DOC N, PUSH DOC W, PUSH DOC N. You're back at the elevator.
+   7. OPEN DOOR, then PUSH DOC W into the elevator.
+   8. PUSH YELLOW BUTTON. The elevator takes you and the documentation set
+      together.
+   9. OPEN DOOR. PUSH DOC E, then PUSH DOC NE.
+  10. PUSH DOC E seven times: along Yellow Corridor, across the catwalk, and
+      into the maze.
+  11. PUSH DOC N into DTR Development.
+  12. STAND ON DOC. Now you can reach the plant.
+  13. GET DTR TAPE, then STEP OFF DOC.
+
+You can't walk anywhere while you're standing on the documentation set.
+
+PART 8: THE VMS TAPE
+--------------------
+
+Expose a blank card to the strange light in the dark tape library, then rush
+the card to the VMS product manager before it fades (25 points). The card goes
+blank again after 15 moves.
+
+   1. From DTR Development: S, SW to Yellow Corridor. W, W across the catwalk,
+      W, W, then S, E into the Rest Room.
+   2. DROP ALL. The stall door is too narrow to squeeze through carrying
+      anything.
+   3. IN to the stall, GET CARD, then OUT.
+   4. GET ALL, then WEAR BADGE. GET ALL only picks the badge up, and the guard
+      throws you out if you aren't wearing it. Then W to Yellow Corridor.
+   5. TURN ON LAMP. W into the Lab of Implementors, then W into the Tape
+      Library. Both are always dark.
+   6. TURN OFF LAMP. The strange light exposes the card.
+   7. TURN ON LAMP straight away. Moving between the two dark rooms in the
+      dark kills you.
+   8. Now hurry, with no detours: E, N, W, W, IN, D, OUT, E, N, N into VMS
+      Development.
+   9. GIVE CARD TO MANAGER. He gives you the VMS tape.
+  10. TURN OFF LAMP.
+
+PART 9: INSTALLING THE SOFTWARE
+-------------------------------
+
+Boot the VAX from the system disk and install the three tapes, in the order
+VMS, CDD, DTR (25 points on the last one). The tape drive holds one tape at a
+time.
+
+   1. From VMS Development: S, S, E, then S into the VMS Lab.
+   2. PUT DISK IN DISK DRIVE, then CLOSE DISK DRIVE. The drive is still open
+      from Part 4.
+   3. BOOT COMPUTER. It's still on from Part 4. READ CONSOLE should report a
+      successful boot.
+   4. OPEN TAPE DRIVE, PUT VMS TAPE IN TAPE DRIVE, CLOSE TAPE DRIVE, then
+      INSTALL.
+   5. OPEN TAPE DRIVE, GET VMS TAPE, DROP VMS TAPE, PUT CDD TAPE IN TAPE
+      DRIVE, CLOSE TAPE DRIVE, then INSTALL.
+   6. OPEN TAPE DRIVE, GET CDD TAPE, DROP CDD TAPE, PUT DTR TAPE IN TAPE
+      DRIVE, CLOSE TAPE DRIVE, then INSTALL.
+   7. STOP COMPUTER. This releases the disk drive.
+   8. OPEN DISK DRIVE, then GET DISK.
+   9. OPEN SACK, PUT DISK IN SACK, CLOSE SACK. The guard searches you on the
+      way out but can't see inside a closed sack.
+
+READ CONSOLE after any step that seems to fail; it says what's wrong.
+
+PART 10: THE EXIT INTERVIEW
+---------------------------
+
+Once all three products are installed, Personnel asks you six questions drawn
+at random from twelve; answer each with SAY (25 points). Only the keyword
+matters, so SAY DARK works as well as a full sentence.
+
+   1. From the VMS Lab: N, W, W, IN, U, U, OUT to Blue Hall.
+   2. S, S, E, E to the Lobby. TELL GUARD, PLEASE START BUILDING LIGHTS, then
+      E, E, E to Blue Hall.
+   3. N, then IN to Personnel. The interview starts.
+   4. Answer each question with SAY and the keyword from the table.
+
+If you get one wrong, go OUT and back IN to carry on. Correct answers so far
+still count.
+
+  Question asks about                                     Say
+  -----------------------------------------------------   -------
+  The light on the working coin machine                   DARK
+  Waiting in line at the DCU                              NOTHING
+  The colour of the rectangular bars                      BLACK
+  Where the picture of Bill the Cat is                    ED
+  How many computers you saw                              4
+  A C-word that's ambiguous in four letters               COMP
+  What the ZK Enquirer is worth                           1 BIT
+  What the CDD developer wishes on you for a shaken can   BUG
+  The colour of the corridors                             YELLOW
+  What the sword can be used for                          NOTHING
+  What happens when you push the orange button            DIE
+  What you can ask the hacker in the maze to do           FIND
+
+PART 11: ESCAPE AND WIN
+-----------------------
+
+Hand back the keys and badge, slip past the guard with the system disk hidden
+in the closed sack, then wait at the helicopter pad with the disk in hand.
+
+   1. OUT of Personnel. S, then W, W, W to the Lobby.
+   2. GIVE KEYS TO GUARD, then GIVE BADGE TO GUARD.
+   3. Check the sack is closed with the system disk inside. The guard stops
+      you if he can see it.
+   4. OUT to the Antechamber, OUT to the Building Entrance.
+   5. S to the Clearing, W to the Woods, W to the Helicopter Pad.
+   6. OPEN SACK, then GET DISK.
+   7. WAIT. The helicopter arrives and you win.
+
+The guard also refuses to let you leave if you finished the installs but
+skipped the interview, or still have his keys.
+
+POINTS AND WAYS TO DIE
+----------------------
+
+The full 175 points earns the top rank, ZK Grand Master.
+
+  Event                                                  Points
+  ----------------------------------------------------   ------
+  Opening the crystal door                               25
+  Passing the physical                                   25
+  Standing on the documentation set in DTR Development   25
+  Giving the SDC card to the VMS manager                 25
+  Installing DTR                                         25
+  Finishing the exit interview                           25
+  Opening the petty cash safe                            10
+  Getting coins from the coin machine                    5
+  Buying a Coke                                          5
+  Getting the CDD tape                                   5
+
+These all kill you:
+
+  * Opening the media cabinet in the VMS Lab.
+  * Pushing the orange elevator button.
+  * Walking from one dark room into another without a light.
+  * Attacking someone twice, or once after you've annoyed them.
+  * Smashing a crystal ball while it's glowing.
+  * Attacking yourself.

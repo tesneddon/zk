@@ -1,0 +1,149 @@
+!
+! Copyright (c) 2008, Matthew Madison.
+! 
+! All rights reserved.
+! 
+! Redistribution and use in source and binary forms, with or without
+! modification, are permitted provided that the following conditions
+! are met:
+! 
+!     * Redistributions of source code must retain the above
+!       copyright notice, this list of conditions and the following
+!       disclaimer.
+!     * Redistributions in binary form must reproduce the above
+!       copyright notice, this list of conditions and the following
+!       disclaimer in the documentation and/or other materials provided
+!       with the distribution.
+!     * Neither the name of the copyright owner nor the names of any
+!       other contributors may be used to endorse or promote products
+!       derived from this software without specific prior written
+!       permission.
+! 
+! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+! "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+! LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+! A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+! OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+! SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+! LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+! DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+! THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+! (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+! OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+COMPILETIME
+    _FLD_CUR_BYT    = 0,
+    _FLD_CUR_BIT    = 0,
+    _FLD_SAV_BYT    = 0,
+    _FLD_SAV_BIT    = 0,
+    _FLD_WRK_SIZE   = 0,
+    _FLD_WRK_BITS   = 0,
+    _FLD_FLD_COUNT  = 0;
+
+MACRO
+    _DEF (NAM) =
+    	%ASSIGN (_FLD_CUR_BYT, 0)
+    	%ASSIGN (_FLD_CUR_BIT, 0)
+    	%ASSIGN (_FLD_FLD_COUNT, 0)
+    	FIELD
+    	    %QUOTENAME (NAM, '_FIELDS') = SET
+    %,
+
+    _ENDDEF (NAM) =
+    	TES;
+    	%IF _FLD_CUR_BIT GTR 0 %THEN
+    	    %ASSIGN (_FLD_CUR_BYT, _FLD_CUR_BYT + 1)
+    	%FI
+    	LITERAL %NAME (NAM, '_S_', NAM, 'DEF') = _FLD_CUR_BYT;
+    	%MESSAGE ('Structure ', NAM, 'DEF size: ',
+    	    %SIZE (BLOCK[_FLD_CUR_BYT,BYTE]), ' bytes')
+    	%PRINT ('Structure ', NAM, 'DEF size: ',
+    	    %SIZE (BLOCK[_FLD_CUR_BYT,BYTE]), ' bytes')
+    	MACRO %NAME (NAM, 'DEF') =
+    	    BLOCK [%NAME (NAM, '_S_', NAM, 'DEF'), BYTE]
+    	    FIELD (%NAME (NAM, '_FIELDS')) %QUOTE %
+    %,
+
+    _FIELD (SIZ) =
+    	%ASSIGN (_FLD_FLD_COUNT, _FLD_FLD_COUNT+1)
+    	%ASSIGN (_FLD_WRK_BITS, %IF SIZ GTR 32 %THEN 0 %ELSE SIZ %FI)
+
+    	[_FLD_CUR_BYT,_FLD_CUR_BIT,_FLD_WRK_BITS,0]
+
+    	%ASSIGN (_FLD_WRK_BITS, _FLD_CUR_BYT * 8 + _FLD_CUR_BIT + SIZ)
+    	%ASSIGN (_FLD_CUR_BYT, _FLD_WRK_BITS / 8)
+    	%ASSIGN (_FLD_CUR_BIT, _FLD_WRK_BITS MOD 8)
+    %,
+
+    _BYTE = 
+    	_ALIGN (BYTE)
+    	_FIELD (8)
+    %,
+
+    _BYTES (COUNT) =
+    	_ALIGN (BYTE)
+    	_FIELD ((COUNT) * 8)
+    %,
+
+    _WORD =
+    	_ALIGN (BYTE)
+    	_FIELD (16)
+    %,
+
+    _LONG =
+    	_ALIGN (BYTE)
+    	_FIELD (32)
+    %,
+
+    _QUAD =
+    	_ALIGN (BYTE)
+    	_FIELD (64)
+    %,
+
+    _BIT =
+    	_FIELD (1)
+    %,
+
+    _BITS (N) =
+    	_FIELD ((N))
+    %,
+
+    _OVERLAY (NAM) =
+    	%ASSIGN (_FLD_SAV_BYT, _FLD_CUR_BYT)
+    	%ASSIGN (_FLD_SAV_BIT, _FLD_CUR_BIT)
+    	%ASSIGN (_FLD_CUR_BYT, %FIELDEXPAND (NAM, 0))
+    	%ASSIGN (_FLD_CUR_BIT, %FIELDEXPAND (NAM, 1))
+    %,
+
+    _ENDOVERLAY =
+    	%ASSIGN (_FLD_CUR_BYT, _FLD_SAV_BYT)
+    	%ASSIGN (_FLD_CUR_BIT, _FLD_SAV_BIT)
+    %,
+
+    _ALIGN (ATYPE) =
+    	%ASSIGN (_FLD_WRK_BITS, 0)
+    	%ASSIGN (_FLD_WRK_SIZE,
+    	    %IF %IDENTICAL (ATYPE, BYTE) %THEN 1
+    	    %ELSE %IF %IDENTICAL (ATYPE, WORD) %THEN 2
+    	    %ELSE %IF %IDENTICAL (ATYPE, LONG) %THEN 4
+    	    %ELSE %IF %IDENTICAL (ATYPE, QUAD) %THEN 8
+    	    %ELSE ATYPE %FI %FI %FI %FI)
+
+    	%IF _FLD_CUR_BIT NEQ 0 %THEN
+    	    %ASSIGN (_FLD_WRK_BITS, 8 - _FLD_CUR_BIT)
+    	    %IF _FLD_CUR_BYT+1 MOD _FLD_WRK_SIZE NEQ 0 %THEN
+    	    	%ASSIGN (_FLD_WRK_BITS, _FLD_WRK_BITS +
+    	    	    (_FLD_WRK_SIZE - (_FLD_CUR_BYT+1) MOD _FLD_WRK_SIZE) * 8)
+    	    %FI
+    	%ELSE
+    	    %IF _FLD_CUR_BYT MOD _FLD_WRK_SIZE NEQ 0 %THEN
+    	    	%ASSIGN (_FLD_WRK_BITS,
+    	    	    (_FLD_WRK_SIZE - _FLD_CUR_BYT MOD _FLD_WRK_SIZE) * 8)
+    	    %FI
+    	%FI
+    	%IF _FLD_WRK_BITS GTR 0 %THEN
+    	    %ASSIGN (_FLD_WRK_BITS,
+    	    	_FLD_CUR_BYT * 8 + _FLD_CUR_BIT + _FLD_WRK_BITS)
+    	    %ASSIGN (_FLD_CUR_BYT, _FLD_WRK_BITS / 8)
+    	    %ASSIGN (_FLD_CUR_BIT, 0)
+    	%FI
+    %;

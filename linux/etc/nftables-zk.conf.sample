@@ -1,0 +1,31 @@
+#!/usr/sbin/nft -f
+# nftables-zk.conf: a firewall for the Asterisk box.  SIP and RTP are
+# accepted only from the LAN and from the provider; everything else
+# that was not asked for is dropped.  Copy to /etc/nftables.conf, fill
+# in the LAN range and the provider's addresses, then
+#
+#   systemctl enable --now nftables
+#
+# Keep a second SSH session open while you try it, in case the LAN
+# range is wrong.  The provider may send calls and audio from more
+# addresses than the one its server name resolves to: take the list of
+# signalling and media addresses from its knowledge base.
+
+flush ruleset
+
+table inet filter {
+	set provider {
+		type ipv4_addr; flags interval
+		elements = { PROVIDER-ADDRESS }
+	}
+
+	chain input {
+		type filter hook input priority 0; policy drop;
+		ct state established,related accept
+		iif lo accept
+		ip saddr LAN-RANGE accept		# e.g. 192.168.1.0/24
+		ip saddr @provider udp dport 5060 accept
+		ip saddr @provider udp dport 10000-20000 accept
+		icmp type echo-request accept
+	}
+}

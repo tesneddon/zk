@@ -3,10 +3,6 @@
 const	lib$m_cli_ctrlt = %x00100000;
 	lib$m_cli_ctrly = %x02000000;
 
-[asynchronous, external(mth$random)] function $random(
-	var seed : unsigned) : real;
-	extern;
-
 [asynchronous, external(lib$day_of_week)] function $day_of_week(
 	var time : $uquad := %immed 0;
 	var day_number : integer) : unsigned;
@@ -146,6 +142,26 @@ function lib$get_input : unsigned; extern;
 	index : unsigned := %immed 0;
 	acmode : $ubyte := %immed 0;
 	flags : unsigned := %immed 0) : unsigned;
+	extern;
+
+[external(lib$crc_table)] procedure $crc_table(
+        %ref polynomial : unsigned;
+        %ref table : array[$l1..$u1:integer] of unsigned);
+        extern;
+
+[external(lib$crc)] function $crc(
+        %ref table : array[$l1..$u1:integer] of unsigned;
+        %ref initial : integer;
+        stream : [class_s] packed array[$l2..$u2:integer] of char) : unsigned;
+        extern;
+
+[asynchronous, external(lib$create_dir)] function $create_dir(
+	spec : [class_s] packed array[$l1..$u1:integer] of char) : unsigned;
+	extern;
+
+[asynchronous, external(lib$set_logical)] function $set_logical(
+	log_nam : [class_s] packed array[$l1..$u1:integer] of char;
+	value : [class_s] packed array[$l2..$u2:integer] of char) : unsigned;
 	extern;
 
 end.

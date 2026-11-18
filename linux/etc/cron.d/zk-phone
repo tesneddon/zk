@@ -1,0 +1,3 @@
+# zk-phone: prune game text not heard for 90 days from the speech cache.
+# Only rendered text (t*) is pruned; the fixed prompts are kept.
+30 4 * * *	asterisk	find /var/lib/asterisk/sounds/zk -name 't*' -atime +90 -delete

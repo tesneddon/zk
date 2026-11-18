@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Play | The Halls Of ZK</title>
+  <meta name="description" content="Play The Halls of ZK, the original OpenVMS adventure, in your browser.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- The same icons as hallsofzk.org.  ?2 makes browsers fetch them afresh
+       rather than reuse the old play.hallsofzk.org icon from their cache. -->
+  <link rel="icon" href="favicon.ico?2" sizes="16x16 32x32 48x48">
+  <link rel="icon" type="image/png" href="favicon-32x32.png?2" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?2">
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+
+  <script>
+    // DCLinabox configuration.  The terminal page inside the <iframe> reads
+    // any DCLinabox* variable defined here, in its parent, ahead of its own
+    // defaults (see loadinabox.js).  It is the same host, so this works.
+
+    // Connect as soon as the page opens, rather than waiting for CONNECT
+    var DCLinaboxImmediate = true;
+    var DCLinaboxWxH = '80x24';
+    var DCLinaboxTheme = 'green';
+    var DCLinaboxScroll = 0;
+
+    // Loaded inside the terminal before it connects, to answer the
+    // Username: prompt.  It has to be an absolute URL, because the terminal
+    // page sets <base href="/dclinabox/-/">.
+    var DCLinaboxConfig = new URL('zk-autologin.js', location.href).href;
+
+    // The account zk-autologin.js logs in as.  Set to '' to turn it off and
+    // let players type the username themselves.
+    var ZKAutoLoginUser = 'ZK';
+
+    // DCLinabox (v1.7) calls this from inside the <iframe> whenever it lays
+    // out the terminal, having removed its own page margin, with the
+    // terminal's size plus 20px.  Fit the frame to the terminal exactly.
+    var terminalSize = null;
+
+    function resizeDCLinaboxIframe(frame, width, height) {
+      terminalSize = { w: width - 20, h: height - 20 };
+      fitTerminal();
+    }
+
+    // Where 80 columns won't fit even at DCLinabox's smallest font (phones),
+    // shrink the whole terminal to the space there is.  The negative margins
+    // take back the room the frame still occupies at full size.
+    function fitTerminal() {
+      if (!terminalSize) return;
+      var frame = document.getElementById('terminal');
+      var crt = frame.parentNode, main = crt.parentNode;
+      var cs = getComputedStyle(crt), ms = getComputedStyle(main);
+      var bezel = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight) +
+                  parseFloat(cs.borderLeftWidth) + parseFloat(cs.borderRightWidth);
+      var room = main.clientWidth - parseFloat(ms.paddingLeft) -
+                 parseFloat(ms.paddingRight) - bezel;
+      var w = terminalSize.w, h = terminalSize.h;
+      var k = Math.min(1, room / w);
+
+      frame.style.maxWidth = 'none';
+      frame.style.width = w + 'px';
+      frame.style.height = h + 'px';
+      frame.style.transformOrigin = 'top left';
+      frame.style.transform = k < 1 ? 'scale(' + k + ')' : '';
+      frame.style.marginRight = k < 1 ? (w * k - w) + 'px' : '';
+      frame.style.marginBottom = k < 1 ? (h * k - h) + 'px' : '';
+
+      var controls = document.getElementById('controls');
+      if (controls) controls.style.width = Math.floor(w * k) + 'px';
+    }
+
+    window.addEventListener('resize', fitTerminal);
+
+    // Pick a font size that fits 80 columns across the screen, so phones
+    // get a smaller terminal rather than a sideways scroll.
+    var DCLinaboxFontSize = (function () {
+      var room = Math.min(window.innerWidth, 900) - 64;  // gutters and bezel
+      return Math.max(8, Math.min(16, Math.floor(room / 80 / 0.6)));
+    })();
+  </script>
+
+  <style>
+    :root {
+      --primary: #28c3ab;
+      --primary-dark: #176e61;
+      --light: #fff;
+      --dark: #000;
+      --muted: rgba(255, 255, 255, .6);
+      --rule: rgba(255, 255, 255, .2);
+      --heading: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --body: "Lora", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      min-height: 100svh;
+      font-family: var(--body);
+      color: var(--light);
+      background: linear-gradient(rgba(0, 0, 0, .55), rgba(0, 0, 0, .55)),
+                  url(img/play-bg.jpg) no-repeat center center fixed;
+      background-color: var(--dark);
+      background-size: cover;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: all .2s ease-in-out;
+    }
+
+    a:hover, a:focus { color: var(--primary-dark); }
+
+    ::selection { background: rgba(255, 255, 255, .2); }
+
+    /* Navigation, as on hallsofzk.org once scrolled */
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0 16px;
+      padding: 0 16px;
+      font-family: var(--heading);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background-color: var(--dark);
+      border-bottom: 1px solid rgba(255, 255, 255, .3);
+    }
+
+    .navbar a { color: var(--light); }
+
+    .brand {
+      display: inline-block;
+      padding: 8px 0;
+      font-size: 18px;
+      line-height: 20px;
+      font-weight: 400;
+    }
+
+    /* The zk logo: "z" and "k" in boxes, after Digital's logo, as in the
+       favicon.  Copied from hallsofzk.org's _custom.scss. */
+    .zk-logo {
+      display: inline-flex;
+      gap: 2px;
+      margin-right: 4px;
+      vertical-align: 1px;
+    }
+
+    .zk-logo span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 15px;
+      height: 20px;
+      padding-bottom: 2px;
+      font: 700 15px/1 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      text-transform: none;
+      color: #fff;
+      background-color: #1f3f8f;
+    }
+
+    .brand .light { font-weight: 400; }
+
+    .nav-links {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 8px 15px;
+      line-height: 20px;
+      transition: background .3s ease-in-out;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--light);
+      background-color: rgba(255, 255, 255, .2);
+      outline: none;
+    }
+
+    .ext {
+      display: inline-block;
+      margin-left: 4px;
+      font-size: .8em;
+      opacity: .7;
+    }
+
+    /* The terminal, centred on the stairwell */
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-family: var(--heading);
+      font-size: 40px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .tagline {
+      margin: 0 0 28px;
+      font-size: 18px;
+      font-style: italic;
+      text-align: center;
+      color: rgba(255, 255, 255, .85);
+    }
+
+    .crt {
+      width: fit-content;
+      max-width: 100%;
+      padding: 14px;
+      background-color: #000;
+      border: 1px solid rgba(255, 255, 255, .3);
+      border-radius: 6px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .6);
+    }
+
+    .crt iframe {
+      display: block;
+      width: 760px;            /* replaced by fitTerminal() once laid out */
+      max-width: 100%;         /* until then */
+      height: 460px;
+      border: 0;
+      background-color: #000;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 24px;
+      width: 100%;
+      max-width: 100%;
+      margin-top: 18px;
+    }
+
+    .hint {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .hint kbd {
+      padding: 1px 6px;
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 14px;
+      color: #fff;
+      background-color: #000;
+      border: 1px solid rgba(255, 255, 255, .35);
+      border-radius: 3px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      font-family: var(--heading);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary);
+      background: transparent;
+      border: 1px solid var(--primary);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all .3s ease-in-out;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      color: var(--dark);
+      background-color: var(--primary);
+      outline: none;
+    }
+
+    /* Footer, as on hallsofzk.org */
+
+    .site-footer {
+      padding: 24px 16px;
+      text-align: center;
+      color: var(--muted);
+      background-color: var(--dark);
+      border-top: 1px solid rgba(255, 255, 255, .15);
+    }
+
+    .site-footer p {
+      margin: 0 0 5px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    @media (min-width: 768px) {
+      .navbar { padding: 0 32px; }
+      h1 { font-size: 56px; }
+      .tagline { font-size: 21px; }
+      .crt { padding: 20px; }
+    }
+
+    @media (max-width: 560px) {
+      .nav-links .optional { display: none; }
+      .crt { padding: 8px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a class="brand" href="https://hallsofzk.org/" target="_blank" rel="noopener">
+      <span class="zk-logo" aria-hidden="true"><span>z</span><span>k</span></span>
+      <span class="light">The Halls of ZK</span>
+    </a>
+    <ul class="nav-links">
+      <li class="optional">
+        <a href="https://hallsofzk.org/commands.html" target="_blank" rel="noopener">Commands</a>
+      </li>
+      <li class="optional">
+        <a href="https://hallsofzk.org/map.html" target="_blank" rel="noopener">Map</a>
+      </li>
+      <li>
+        <a href="https://hallsofzk.org/" target="_blank" rel="noopener">hallsofzk.org<span class="ext" aria-hidden="true">&#x2197;</span><span class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"> (opens in a new tab)</span></a>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Halls of ZK</h1>
+    <p class="tagline">Have we got an escape for you?!</p>
+
+    <div class="crt">
+      <!-- The query string makes this a URL no browser has cached: browsers
+           that saw the old DCLinabox v1.1.1 page here kept reusing its
+           scripts, which reject the newer executable.  It must be a real
+           DCLinabox directive (a bare version number raises an alert), so
+           it repeats the Immediate setting above.  After a future DCLinabox
+           upgrade, change it again, e.g. add &Splash=0 or swap the order. -->
+      <iframe id="terminal" title="The Halls of ZK terminal session"
+              src="/dclinabox/-/dclinabox.html?Immediate=true"
+              allow="clipboard-read; clipboard-write"></iframe>
+    </div>
+
+    <div class="controls" id="controls">
+      <p class="hint">
+        Click the screen and start typing.  Stuck?  Try <kbd>HELP</kbd>, or see the
+        <a href="https://hallsofzk.org/commands.html" target="_blank" rel="noopener">commands</a>.
+      </p>
+      <button type="button" class="btn" id="restart">New session</button>
+    </div>
+    <noscript><p class="hint">The terminal needs JavaScript.</p></noscript>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Served by <a href="https://wasd.vsm.com.au" target="_blank" rel="noopener">WASD</a>
+      and <a href="https://wasd.vsm.com.au/wasd_root/src/dclinabox/readmore.html"
+             target="_blank" rel="noopener">DCL in a box</a> from Mark Daniel.
+    </p>
+    <p>
+      Website &copy; <span id="year">2026</span>
+      <a href="https://github.com/tesneddon" target="_blank" rel="noopener">Tim Sneddon</a>.
+      Proudly supported by
+      <a href="https://es.solutions" target="_blank" rel="noopener">Endless Software Solutions</a>.
+    </p>
+  </footer>
+
+  <script>
+    (function () {
+      var frame = document.getElementById('terminal');
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // The frame is sized by resizeDCLinaboxIframe() above, called by
+      // DCLinabox itself once the terminal is laid out.
+      frame.addEventListener('load', function () {
+        try { frame.contentWindow.focus(); } catch (err) {}
+      });
+
+      // After LOGOUT (or a dropped connection) start again with a fresh page
+      document.getElementById('restart').addEventListener('click', function () {
+        frame.src = frame.src;
+      });
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,417 @@
+%TITLE 'MD5'
+MODULE MD5 (IDENT='V1.1',MAIN=MD5) =
+BEGIN
+!++
+! FACILITY: 	    MGLICENSE
+!
+! ABSTRACT: 	    RSA MD5 Message Digest routines.
+!
+! MODULE DESCRIPTION:
+!
+!   This module implements the MD5 message-digest algorithm.
+!
+!   Derived from the RSA Data Security, Inc. MD5 Message-Digest Algorithm.
+!
+! AUTHOR:   	    M. Madison
+!
+! Copyright (c) 2008, Matthew Madison.
+! Copyright (c) 2013, Tim E. Sneddon.
+! 
+! All rights reserved.
+! 
+! Redistribution and use in source and binary forms, with or without
+! modification, are permitted provided that the following conditions
+! are met:
+! 
+!     * Redistributions of source code must retain the above
+!       copyright notice, this list of conditions and the following
+!       disclaimer.
+!     * Redistributions in binary form must reproduce the above
+!       copyright notice, this list of conditions and the following
+!       disclaimer in the documentation and/or other materials provided
+!       with the distribution.
+!     * Neither the name of the copyright owner nor the names of any
+!       other contributors may be used to endorse or promote products
+!       derived from this software without specific prior written
+!       permission.
+! 
+! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+! "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+! LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+! A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+! OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+! SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+! LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+! DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+! THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+! (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+! OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+!
+! CREATION DATE:    07-JUN-1997
+!
+! MODIFICATION HISTORY:
+!
+!   07-JUN-1997	V1.0	Madison	    Initial coding.
+!   28-AUG-1997	V1.0-1	Madison	    Fix stack-trashing bug.
+!   16-JUL-2013	V1.1	Sneddon	    Turn into an executable.
+!--
+
+    LIBRARY 'SYS$LIBRARY:STARLET';
+    LIBRARY 'MD5DEF';
+    LIBRARY 'MD5';
+
+    %IF CTX_S_CTXDEF NEQ MD5_S_MD5CTXDEF %THEN
+    	%WARN ('Context size in MD5DEF.R32 does not match actual size in MD5.R32')
+    %FI
+
+    EXTERNAL ROUTINE
+	G_HAT(LIB$GET_FOREIGN, LIB$SYS_FAO, LIB$SET_SYMBOL);
+
+    FORWARD ROUTINE
+    	MD5,
+    	MD5_INIT    	: NOVALUE,
+    	MD5_UPDATE  	: NOVALUE,
+    	MD5_FINAL   	: NOVALUE,
+    	MD5_TRANSFORM	: NOVALUE;
+
+%SBTTL 'MD5'
+ROUTINE MD5 =
+BEGIN
+!++
+! FUNCTIONAL DESCRIPTION:
+!
+!   Initializes a context for MD5 processing.
+!
+! RETURNS:  	novalue
+!
+! PROTOTYPE:
+!
+!   MD5_INIT  ctx
+!
+!   ctx:    MD5CTXDEF, write only, by reference
+!
+! IMPLICIT INPUTS:  None.
+!
+! IMPLICIT OUTPUTS: None.
+!
+! COMPLETION CODES: None.
+!
+! SIDE EFFECTS:
+!
+!   None.
+!--
+
+    LOCAL
+	md5ctx	: MD5CTXDEF,
+	md5sum	: MD5SUMDEF,
+	md5dsc  : BLOCK [DSC$K_S_BLN,BYTE],
+	rol     : BLOCK [DSC$K_D_BLN,BYTE],
+	result  : BLOCK [DSC$K_S_BLN,BYTE],
+	status;
+
+    $init_dyndesc (rol);
+    $init_dyndesc (result);
+
+    status = lib$get_foreign (rol);
+    if (not .status) then
+	return .status;
+
+    md5_init (md5ctx);
+    md5_update (md5ctx, .rol [DSC$A_POINTER], .rol [DSC$W_LENGTH]);
+    md5_final (md5sum, md5ctx);
+
+    INIT_SDESC(md5dsc, MD5_S_MD5SUMDEF, md5sum);
+
+    lib$sys_fao(%ascid'!XB!XB!XB!XB!XB!XB!XB!XB!XB!XB!XB!XB!XB!XB!XB!XB',
+		0, result,
+		.md5sum[0], .md5sum[1], .md5sum[2], .md5sum[3],
+	        .md5sum[4], .md5sum[5], .md5sum[6], .md5sum[7], .md5sum[8],
+		.md5sum[9], .md5sum[10], .md5sum[11], .md5sum[12],
+		.md5sum[13], .md5sum[14], .md5sum[15]);
+
+    lib$set_symbol (%ascid'MD5_MD5', result)
+END; ! MD5
+
+%SBTTL 'MD5_INIT'
+GLOBAL ROUTINE MD5_INIT (ctx_a) : NOVALUE = 
+BEGIN
+!++
+! FUNCTIONAL DESCRIPTION:
+!
+!   Initializes a context for MD5 processing.
+!
+! RETURNS:  	novalue
+!
+! PROTOTYPE:
+!
+!   MD5_INIT  ctx
+!
+!   ctx:    MD5CTXDEF, write only, by reference
+!
+! IMPLICIT INPUTS:  None.
+!
+! IMPLICIT OUTPUTS: None.
+!
+! COMPLETION CODES: None.
+!
+! SIDE EFFECTS:
+!
+!   None.
+!--
+    BIND
+    	ctx 	= .ctx_a    : CTXDEF;
+
+    ctx [CTX_L_COUNT1] = ctx [CTX_L_COUNT2] = 0;
+
+    ctx [CTX_L_STATE1] = %X'67452301';
+    ctx [CTX_L_STATE2] = %X'EFCDAB89';
+    ctx [CTX_L_STATE3] = %X'98BADCFE';
+    ctx [CTX_L_STATE4] = %X'10325476';
+
+END; ! MD5_INIT
+
+%SBTTL 'MD5_UPDATE'
+GLOBAL ROUTINE MD5_UPDATE (ctx : REF CTXDEF, input : REF VECTOR [,BYTE], inputlen) : NOVALUE = 
+BEGIN
+!++
+! FUNCTIONAL DESCRIPTION:
+!
+!   MD5 block update operation.
+!
+! RETURNS:  	novalue
+!
+! PROTOTYPE:
+!
+!   MD5_UPDATE  ctx, input, inputlen
+!
+!   ctx:    	MD5CTXDEF, modify, by reference
+!   input:  	user_arg, read only, by reference
+!   inputlen:	longword_unsigned, longword (unsigned), read only, by value
+!
+! IMPLICIT INPUTS:  None.
+!
+! IMPLICIT OUTPUTS: None.
+!
+! COMPLETION CODES: None.
+!
+! SIDE EFFECTS:
+!
+!   None.
+!--
+
+    BIND
+    	buffer	= ctx [CTX_X_BUFFER]	: VECTOR [64,BYTE];
+
+    LOCAL
+    	index,
+    	j,
+    	partlen;
+
+! Compute number of bytes MOD 64
+    index = (.ctx [CTX_L_COUNT1] ^ -3) AND %X'3F';
+
+! Update number of bits
+    ctx [CTX_L_COUNT1] = .ctx [CTX_L_COUNT1] + (.inputlen ^ 3);
+    IF .ctx [CTX_L_COUNT1] LSSU (.inputlen ^ 3) THEN
+    	ctx [CTX_L_COUNT2] = .ctx [CTX_L_COUNT2] + 1;
+    ctx [CTX_L_COUNT2] = .ctx [CTX_L_COUNT2] + (.inputlen ^ -29);
+
+    partlen = 64 - .index;
+
+    if .inputlen GEQU .partlen THEN
+    BEGIN
+    	CH$MOVE (.partlen, .input, buffer [.index]);
+    	MD5_TRANSFORM (ctx [CTX_X_STATE], buffer);
+    	j = .partlen;
+    	WHILE (.j + 63 LSSU .inputlen) DO
+    	BEGIN
+    	    MD5_TRANSFORM (ctx [CTX_X_STATE], input [.j]);
+    	    j = .j + 64;
+    	END;
+    	index = 0;
+    END
+    ELSE j = 0;
+
+    CH$MOVE (.inputlen - .j, input [.j], buffer [.index]);
+
+END; ! MD5_UPDATE
+
+%SBTTL 'MD5_FINAL'
+GLOBAL ROUTINE MD5_FINAL (digest : REF VECTOR [16,BYTE], ctx : REF CTXDEF) : NOVALUE = 
+BEGIN
+!++
+! FUNCTIONAL DESCRIPTION:
+!
+!   Finalization.  Ends the message digest operation, writes
+!   the digest, and zeroes the context.
+!
+! RETURNS:  	novalue
+!
+! PROTOTYPE:
+!
+!   MD5_FINAL  digest, ctx
+!
+!   digest: 	MD5SUMDEF, write only, by reference
+!   ctx:    	MD5CTXDEF, modify, by reference
+!
+! IMPLICIT INPUTS:  None.
+!
+! IMPLICIT OUTPUTS: None.
+!
+! COMPLETION CODES: None.
+!
+! SIDE EFFECTS:
+!
+!   None.
+!--
+    LOCAL
+    	bits	: VECTOR [8,BYTE],
+    	index,
+    	padlen;
+
+    OWN
+    	padding	: VECTOR [64,BYTE] INITIAL (BYTE (%X'80'), REP 63 OF BYTE (0));
+
+! Save length
+    CH$MOVE (8, ctx [CTX_Q_COUNT], bits);
+    index = (.ctx [CTX_L_COUNT1] ^ -3) AND %X'3F';
+
+! Pad out to 56 MOD 64.
+    padlen = (IF .index LSS 56 THEN (56 - .index) ELSE (120 - .index));
+    MD5_UPDATE (.ctx, padding, .padlen);
+
+! Append pre-padded length
+    MD5_UPDATE (.ctx, bits, 8);
+
+! Store state in digest
+    CH$MOVE (16, ctx [CTX_X_STATE], .digest);
+
+! Clear the context
+    CH$FILL (%CHAR (0), CTX_S_CTXDEF, .ctx);
+
+END; ! MD5_FINAL
+
+%SBTTL 'MD5_TRANSFORM'
+ROUTINE MD5_TRANSFORM (state : REF VECTOR [4,LONG], blk_a) : NOVALUE = 
+BEGIN
+!++
+! FUNCTIONAL DESCRIPTION:
+!
+!   Performs the basic MD5 transformation.
+!
+! RETURNS:  	novalue
+!
+! PROTOTYPE:
+!
+!   MD5_TRANSFORM  state, blk
+!
+!   state:  MD5 context state area
+!   blk:    data block
+!
+! IMPLICIT INPUTS:  None.
+!
+! IMPLICIT OUTPUTS: None.
+!
+! COMPLETION CODES: None.
+!
+! SIDE EFFECTS:
+!
+!   None.
+!--
+    LOCAL
+    	A, B, C, D,
+    	X   	    	: VECTOR [16,LONG];
+
+! Copy block and state into work area variables
+    CH$MOVE (64, .blk_a, x);
+    a = .state [0];
+    b = .state [1];
+    c = .state [2];
+    d = .state [3];
+
+  FF (a, .b, .c, .d, .x[ 0], S11, %X'D76AA478'); ! 1 
+  FF (d, .a, .b, .c, .x[ 1], S12, %X'E8C7B756'); ! 2 
+  FF (c, .d, .a, .b, .x[ 2], S13, %X'242070DB'); ! 3 
+  FF (b, .c, .d, .a, .x[ 3], S14, %X'C1BDCEEE'); ! 4 
+  FF (a, .b, .c, .d, .x[ 4], S11, %X'F57C0FAF'); ! 5 
+  FF (d, .a, .b, .c, .x[ 5], S12, %X'4787C62A'); ! 6 
+  FF (c, .d, .a, .b, .x[ 6], S13, %X'A8304613'); ! 7 
+  FF (b, .c, .d, .a, .x[ 7], S14, %X'FD469501'); ! 8 
+  FF (a, .b, .c, .d, .x[ 8], S11, %X'698098D8'); ! 9 
+  FF (d, .a, .b, .c, .x[ 9], S12, %X'8B44F7AF'); ! 10 
+  FF (c, .d, .a, .b, .x[10], S13, %X'FFFF5BB1'); ! 11 
+  FF (b, .c, .d, .a, .x[11], S14, %X'895CD7BE'); ! 12 
+  FF (a, .b, .c, .d, .x[12], S11, %X'6B901122'); ! 13 
+  FF (d, .a, .b, .c, .x[13], S12, %X'FD987193'); ! 14 
+  FF (c, .d, .a, .b, .x[14], S13, %X'A679438E'); ! 15 
+  FF (b, .c, .d, .a, .x[15], S14, %X'49B40821'); ! 16 
+
+  ! Round 2 
+  GG (a, .b, .c, .d, .x[ 1], S21, %X'F61E2562'); ! 17 
+  GG (d, .a, .b, .c, .x[ 6], S22, %X'C040B340'); ! 18 
+  GG (c, .d, .a, .b, .x[11], S23, %X'265E5A51'); ! 19 
+  GG (b, .c, .d, .a, .x[ 0], S24, %X'E9B6C7AA'); ! 20 
+  GG (a, .b, .c, .d, .x[ 5], S21, %X'D62F105D'); ! 21 
+  GG (d, .a, .b, .c, .x[10], S22,  %X'2441453'); ! 22 
+  GG (c, .d, .a, .b, .x[15], S23, %X'D8A1E681'); ! 23 
+  GG (b, .c, .d, .a, .x[ 4], S24, %X'E7D3FBC8'); ! 24 
+  GG (a, .b, .c, .d, .x[ 9], S21, %X'21E1CDE6'); ! 25 
+  GG (d, .a, .b, .c, .x[14], S22, %X'C33707D6'); ! 26 
+  GG (c, .d, .a, .b, .x[ 3], S23, %X'F4D50D87'); ! 27 
+  GG (b, .c, .d, .a, .x[ 8], S24, %X'455A14ED'); ! 28 
+  GG (a, .b, .c, .d, .x[13], S21, %X'A9E3E905'); ! 29 
+  GG (d, .a, .b, .c, .x[ 2], S22, %X'FCEFA3F8'); ! 30 
+  GG (c, .d, .a, .b, .x[ 7], S23, %X'676F02D9'); ! 31 
+  GG (b, .c, .d, .a, .x[12], S24, %X'8D2A4C8A'); ! 32 
+
+  ! Round 3 
+  HH (a, .b, .c, .d, .x[ 5], S31, %X'FFFA3942'); ! 33 
+  HH (d, .a, .b, .c, .x[ 8], S32, %X'8771F681'); ! 34 
+  HH (c, .d, .a, .b, .x[11], S33, %X'6D9D6122'); ! 35 
+  HH (b, .c, .d, .a, .x[14], S34, %X'FDE5380C'); ! 36 
+  HH (a, .b, .c, .d, .x[ 1], S31, %X'A4BEEA44'); ! 37 
+  HH (d, .a, .b, .c, .x[ 4], S32, %X'4BDECFA9'); ! 38 
+  HH (c, .d, .a, .b, .x[ 7], S33, %X'F6BB4B60'); ! 39 
+  HH (b, .c, .d, .a, .x[10], S34, %X'BEBFBC70'); ! 40 
+  HH (a, .b, .c, .d, .x[13], S31, %X'289B7EC6'); ! 41 
+  HH (d, .a, .b, .c, .x[ 0], S32, %X'EAA127FA'); ! 42 
+  HH (c, .d, .a, .b, .x[ 3], S33, %X'D4EF3085'); ! 43 
+  HH (b, .c, .d, .a, .x[ 6], S34,  %X'4881D05'); ! 44 
+  HH (a, .b, .c, .d, .x[ 9], S31, %X'D9D4D039'); ! 45 
+  HH (d, .a, .b, .c, .x[12], S32, %X'E6DB99E5'); ! 46 
+  HH (c, .d, .a, .b, .x[15], S33, %X'1FA27CF8'); ! 47 
+  HH (b, .c, .d, .a, .x[ 2], S34, %X'C4AC5665'); ! 48 
+
+  ! Round 4 
+  II (a, .b, .c, .d, .x[ 0], S41, %X'F4292244'); ! 49 
+  II (d, .a, .b, .c, .x[ 7], S42, %X'432AFF97'); ! 50 
+  II (c, .d, .a, .b, .x[14], S43, %X'AB9423A7'); ! 51 
+  II (b, .c, .d, .a, .x[ 5], S44, %X'FC93A039'); ! 52 
+  II (a, .b, .c, .d, .x[12], S41, %X'655B59C3'); ! 53 
+  II (d, .a, .b, .c, .x[ 3], S42, %X'8F0CCC92'); ! 54 
+  II (c, .d, .a, .b, .x[10], S43, %X'FFEFF47D'); ! 55 
+  II (b, .c, .d, .a, .x[ 1], S44, %X'85845DD1'); ! 56 
+  II (a, .b, .c, .d, .x[ 8], S41, %X'6FA87E4F'); ! 57 
+  II (d, .a, .b, .c, .x[15], S42, %X'FE2CE6E0'); ! 58 
+  II (c, .d, .a, .b, .x[ 6], S43, %X'A3014314'); ! 59 
+  II (b, .c, .d, .a, .x[13], S44, %X'4E0811A1'); ! 60 
+  II (a, .b, .c, .d, .x[ 4], S41, %X'F7537E82'); ! 61 
+  II (d, .a, .b, .c, .x[11], S42, %X'BD3AF235'); ! 62 
+  II (c, .d, .a, .b, .x[ 2], S43, %X'2AD7D2BB'); ! 63 
+  II (b, .c, .d, .a, .x[ 9], S44, %X'EB86D391'); ! 64 
+
+! Update state
+
+    state [0] = .state [0] + .a;
+    state [1] = .state [1] + .b;
+    state [2] = .state [2] + .c;
+    state [3] = .state [3] + .d;
+
+! Clear sensitive information
+
+    CH$FILL (%CHAR (0), %ALLOCATION (x), x);
+
+END; ! MD5_TRANSFORM
+
+END
+ELUDOM
