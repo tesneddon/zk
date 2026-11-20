@@ -10,6 +10,7 @@ module zk$init;
 
 (* Edit History:							    *)
 (* 19-JUL-2013 TES  Add multi-user support.				    *)
+(* 19-NOV-2026 TES  Clear card_remaining too.                               *)
 (* 									    *)
 
 const	max_links = 100;
@@ -221,6 +222,7 @@ begin
 	context.combination:=$random_integer(context.seed, 8999) + 1000;
 	context.officer_leave_time:=$random_integer(context.seed, 20) + 90;
 	context.lamp_remaining:=120;
+	context.card_remaining:=0;
 	context.console_message:=1; (* console_initial *)
 	context.fs_remaining:=0;
 	context.lights_ptr:=$create_object(zk$obj_building_lights);
@@ -230,6 +232,7 @@ begin
 	context.crew_location:=zk$room_top_of_stairs_4;
 	context.crew_last_location:=zk$room_top_of_stairs_4;
 	context.question_asked::unsigned:=0;
+	context.card_ptr:=nil;
 
 	context.self:=$create_object(zk$obj_self);
 	context.self^.location:=start;

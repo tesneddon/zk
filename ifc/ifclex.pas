@@ -2,6 +2,10 @@
 	 'lib$:ifc$def')]
 module ifc$lex(output);
 
+(* Edit History                                                             *)
+(* 19-Nov-2026  TES  Open the source read-only, so its date is unchanged.   *)
+(*                                                                          *)
+
 const	number_keywords = 46;
 
 type	$error_ptr = ^$error_node;
@@ -405,7 +409,7 @@ end;
 [global] procedure ifc$open_lex(
 	source_filename : varying[$u1] of char);
 begin
-	open(source_file, source_filename, history:=old);
+	open(source_file, source_filename, history:=readonly);
 end;
 
 [global] procedure ifc$close_lex;

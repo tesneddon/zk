@@ -10,11 +10,12 @@ $ version = f$integer(f$extract(1,1,f$getsyi("VERSION")))
 $ if (version .ge. 6)
 $ then
 $    _arch_type = f$getsyi("ARCH_TYPE")
-$    _arch_name = f$element(_arch_type,",","OTHER,VAX,ALPHA,I64") - ","
+$    _arch_name = f$element(_arch_type,",","OTHER,VAX,ALPHA,I64,X86_64") - ","
 $    _vax = (_arch_type .eq. 1)
 $    _axp = (_arch_type .eq. 2)
 $    _i64 = (_arch_type .eq. 3)
-$    _other = (.not. (_vax .or. _axp .or. _i64))
+$    _x86 = (_arch_type .eq. 4)
+$    _other = (.not. (_vax .or. _axp .or. _i64 .or. _x86))
 $ else
 $    _vax = (f$search("SYS$SYSTEM:VMB.EXE") .nes. "")
 $    if (_vax)
@@ -46,8 +47,8 @@ $ type sys$input:
   halls of Digital's Spitbrook software engineering facility.
 
         Installation of this product is supported on OpenVMS VAX,
-  Alpha and I64.  If you have an unsupported architecture, consider
-  downloading the source kit and have a shot at building it.
+  Alpha, I64 and x86-64.  If you have an unsupported architecture,
+  consider downloading the source kit and have a shot at building it.
 
         For support, downloads and other things related to ZK, visit
   the ZK webpage, here:
@@ -55,13 +56,13 @@ $ type sys$input:
         http://hallsofzk.org
 
 $
-$ save_set = f$element(_arch_type,",",",B,C,D") - ","
+$ save_set = f$element(_arch_type,",",",B,C,D,E") - ","
 $
 $ if (save_set .eqs. "")
 $ then
 $    vmi$callback message E BADARCH "architecture not supported" -
 		"binary installation is impossible"
-$    exitt 1
+$    exit 1
 $ endif
 $
 $ vmi$callback restore_saveset 'save_set'

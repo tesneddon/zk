@@ -2,6 +2,10 @@
 	 'lib$:ifc$def')]
 module ifc$message(output);
 
+(* Edit History                                                             *)
+(* 19-Nov-2026  TES  Write a .TITLE, so each module has its own name.       *)
+(*                                                                          *)
+
 const	tab = chr(9);
 
 var	prefix : varying[31] of char;
@@ -241,6 +245,8 @@ begin
 			  end;
 		  end;
 
+		writeln(macro_file, tab, '.title', tab, prefix, 'DATA');
+		writeln(macro_file, '.psect ZZZ$IFC$DATA noexe,quad,pic,rel,gbl,shr,rd');
 		writeln(def_file, 'module ',prefix,'DEF;');
 		writeln(def_file);
 
@@ -273,8 +279,6 @@ begin
 
 	open(macro_file, macro_filename, history:=new);
 	rewrite(macro_file);
-
-	writeln(macro_file, '.psect ZZZ$IFC$DATA noexe,quad,pic,rel,gbl,shr,rd');
 
 	parse_message_file([end_of_file]);
 

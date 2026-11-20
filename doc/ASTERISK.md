@@ -320,9 +320,11 @@ over Wi-Fi.
   `ZKPHONE_RUN.COM` is in.
 - **ZK's `LOGIN.COM`** must leave network logins alone: `if (f$mode()
   .eqs. "NETWORK") then exit` at the top.
-- **After changing the IFC or environment sources, rebuild the phone
-  image clean.**  An old `ZK$PHONE.OBJ` linked with a newer RTL fails
-  in confusing ways, such as hanging up after the first room.
+- **To build,** run `MMK DEFINE`, then `MMK/MACRO=VERSION=1.4` (or the same
+  with MMS) at the top of the tree.  The images go in `[<arch>_EXE]`, for
+  example `[VAX_EXE]`.  If a build ever looks stale, `MMK CLEAN` and build
+  again: an old object linked with a newer RTL fails in confusing ways,
+  such as hanging up after the first room.
 
 ## 8. When something goes wrong
 

@@ -1,3 +1,11 @@
+* 20-Nov-2026 -- Tim Sneddon <tim@sneddon.id.au>
+ - Fix the crash on SAVE on Alpha, I64 and x86-64 (Jake Hamby, #9, #4)
+ - Build with one top-level DESCRIP.MMS, with MMK or MMS (after #11 from
+   Brian Chiha); output goes to [<arch>_EXE], _LIB, _LIS and _OBJ
+ - Kit and install the x86-64 binaries
+ - IFC: give each generated MACRO module its own .TITLE
+ - IFC: open sources read-only, so they no longer look changed
+
 * 12-Nov-2026 -- Tim Sneddon <tim@sneddon.id.au>
  - Add the phone server, ZK$PHONE, played over Asterisk FastAGI
  - New phone players get a passcode, a ZKUAF.DAT record and their own directory

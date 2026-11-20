@@ -1,6 +1,10 @@
 alpha
 ia64
 vax
+alpha_*
+ia64_*
+vax_*
+x86_64_*
 kit/zk*/
 .\$ADF\$*
 *\;*
