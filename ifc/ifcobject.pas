@@ -7,6 +7,7 @@ module ifc$object(output);
 
 (* Edit History                                                             *)
 (* 13-Sep-2009  TES  Converted to generate MACRO-32, not VAX objects.       *)
+(* 19-Nov-2026  TES  Write a .TITLE, so each module has its own name.       *)
 (*                                                                          *)
 
 const	object_attributes = [detail_keyword, name_keyword, mass_keyword,
@@ -128,6 +129,7 @@ begin
 
 	open(macro_file, macro_filename, history:=new);
 	rewrite(macro_file);
+	writeln(macro_file, tab, '.title', tab, ast.prefix, 'DATA');
 	writeln(macro_file, '.psect ZZZ$IFC$DATA noexe,quad,pic,rel,gbl,shr,rd');
 
 	writeln(def_file,'const',tab,ast.prefix,'MAX = ',ast.number:0,';');
