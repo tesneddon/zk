@@ -68,7 +68,7 @@ $
 $ vmi$callback restore_saveset 'save_set'
 $
 $ vmi$callback provide_image zk$main zk$main.exe vmi$root:[sysexe]
-$ vmi$callback provide_dcl_command zk$cld.cld
-$ vmi$callback provide_dcl_help zk$dcl_help.hlp
+$ vmi$callback provide_dcl_command zkcld.cld
+$ vmi$callback provide_dcl_help zkdcl_help.hlp
 $
 $ exit $status

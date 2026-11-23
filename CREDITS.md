@@ -9,7 +9,7 @@ Then, in about 2013 the full source code, including the
 source for the Interactive Fiction Compiler (IFC) was located by
 John Reagan.
 
-To make the IFC portable the code generator for was re-written
+To make the IFC portable the code generator was re-written
 to output MACRO-32 source modules by Tim Sneddon and as such
 there are now native versions for all OpenVMS supported
 architectures available.
