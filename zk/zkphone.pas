@@ -27,9 +27,19 @@ program zk$phone; (* ZK main program for the telephone *)
 (* 12-Nov-2026  TES  "Say something" in the action menu, said or spelled on *)
 (*                   the keypad, and passed to the game as SAY.             *)
 (* 13-Nov-2026  TES  Added developer credits to the player menu.            *)
+(* 21-Nov-2026  TES  A phone account linked in LOGIN.COM's account          *)
+(*                   maintenance plays in the linked account's directory,   *)
+(*                   under its name, so its games are shared.               *)
+(* 21-Nov-2026  TES  The record of the account in play is kept locked for   *)
+(*                   the call, as LOGIN.COM keeps it while signed in, so    *)
+(*                   an account is played in one place at a time.           *)
+(* 21-Nov-2026  TES  Saved games have names, said or spelled; restore       *)
+(*                   reads the names out against keypad numbers.            *)
 (*                                                                          *)
 
-const	save_name = 'PHONE';			(* one slot per player *)
+const	save_name = 'PHONE';			(* until another is given *)
+	max_save_name = 20;
+	max_save_names = 32;
 	max_menu_objects = 32;
 	uaf_name = 'SYS$LOGIN:ZKUAF.DAT';
 	uaf_user_length = 64;
@@ -38,6 +48,7 @@ const	save_name = 'PHONE';			(* one slot per player *)
 	max_passcode_tries = 3;
 	max_new_passcode_tries = 10;
 	new_player_lock = 'ZK$PHONE_NEW_PLAYER';
+	uaf_link_offset = 22;			(* in spare: see follow_link *)
 
 type	$menu_objects = record
 			count : integer;
@@ -62,7 +73,15 @@ type	$menu_objects = record
 	$uaf_file = file of $uaf_record;
 
 	$login_result = (login_new, login_found, login_failed);
+	$find_result = (find_found, find_missing, find_busy);
 	$text_line = varying[255] of char;
+
+	$save_names = record
+			count : integer;
+			name : array[1..max_save_names] of varying[39] of char;
+		end;
+
+var	current_save : varying[39] of char;	(* last saved or restored *)
 
 [unbound, asynchronous] procedure broadcast_handler(
 	var context : $context_block);
@@ -129,21 +148,35 @@ end;
 
 (* Free text, for what the menus can't build as nodes: through the
  * lexer as zk$main does it *)
-procedure free_text(
+function try_text(
 	var context : $context_block;
-	line : varying[$u1] of char);
+	line : varying[$u1] of char) : boolean;
 
 var	ast : $ast_node_ptr;
-	error : boolean;
+	error, done : boolean;
 begin
+	done:=false;
 	$phone_set_line(line);
 	if (odd($init_lex)) then
 	  begin
 		error:=$parse_command_line(context, ast, [end_of_line]);
 		if ( (not error) and (ast<>nil) ) then
-			dispatch(context, ast)
+		  begin
+			dispatch(context, ast); done:=true;
+		  end
 		else	$dispose_ast(ast);
 	  end;
+	try_text:=done;
+end;
+
+(* The same, when it does not matter whether the parser took it *)
+procedure free_text(
+	var context : $context_block;
+	line : varying[$u1] of char);
+
+var	done : boolean;
+begin
+	done:=try_text(context, line);
 end;
 
 (* The phone's keypad is the safe's: TYPE and the digits, through the
@@ -157,12 +190,14 @@ begin
 		if (digits.length>0) then free_text(context, 'TYPE ' + digits);
 end;
 
-(* SAY, through the parser as at a terminal.  Spoken words are read back
- * first, since the recogniser can be wrong.  The game wants the words
- * run together, as the keypad gives them. *)
-procedure say_something(var context : $context_block);
+(* A word, said or spelled; empty if the caller gives up.  Spoken words
+ * are read back first, since the recogniser can be wrong, and are run
+ * together, as the keypad gives them. *)
+procedure get_word(
+	var word : varying[$u1] of char;
+	max : integer);
+
 var	heard : varying[80] of char;
-	word : varying[40] of char;
 	key : char;
 	i : integer;
 	done : boolean;
@@ -179,15 +214,15 @@ begin
 				$phone_say('Sorry, that was not clear.')
 			else
 			  begin
-				$phone_say('I heard: ' + heard + '.  Press 1 to ' +
-					   'say it, 2 to try again, or star to ' +
-					   'go back.');
+				$phone_say('I heard: ' + heard + '.  Press 1 if ' +
+					   'that is right, 2 to try again, or ' +
+					   'star to go back.');
 				key:=$phone_get_key;
 				if (key='1') then
 				  begin
 					for i:=1 to heard.length do
 						if ( (heard[i]<>' ') and
-						     (word.length<40) ) then
+						     (word.length<max) ) then
 							word:=word + heard[i];
 					done:=true;
 				  end
@@ -201,17 +236,170 @@ begin
 			$phone_say('Spell it on the keypad: 2 once for A, twice ' +
 				   'for B.  Pound when you are done, star to ' +
 				   'rub out.');
-			if (not odd($phone_get_spelled(word, 40))) then word:='';
+			if (not odd($phone_get_spelled(word, max))) then word:='';
 			done:=true;
 		  end
 		else
 		if (key='*') then done:=true;
 	until done;
+end;
+
+(* SAY, through the parser as at a terminal *)
+procedure say_something(var context : $context_block);
+var	word : varying[40] of char;
+begin
+	get_word(word, 40);
 	if (word.length>0) then free_text(context, 'SAY "' + word + '"');
 end;
 
-(* "Exits: north, east and south west."  Nothing in the dark, and
- * nothing in a maze: there the player has to try, as at a terminal. *)
+(* What was said or spelled, as the name of a saved game: its letters and
+ * digits, in capitals, and no more than max_save_name of them *)
+function save_file_name(word : varying[$u1] of char) : $text_line;
+var	name : $text_line;
+	c : char;
+	i : integer;
+begin
+	name:='';
+	for i:=1 to word.length do
+	  begin
+		c:=word[i];
+		if ( (c>='a') and (c<='z') ) then
+			c:=chr(ord(c) - ord('a') + ord('A'));
+		if ( ((c>='A') and (c<='Z')) or ((c>='0') and (c<='9')) ) then
+			if (name.length<max_save_name) then name:=name + c;
+	  end;
+	save_file_name:=name;
+end;
+
+(* SAVE under a name, through the parser as at a terminal.  Pound keeps
+ * the name last saved or restored, PHONE to begin with; 1 asks for a new
+ * one.  The parser takes only a word the game does not know as a name,
+ * at a terminal too, so one it turns down is asked for again. *)
+procedure save_game(var context : $context_block);
+var	word : varying[40] of char;
+	name : $text_line;
+	key : char;
+	done : boolean;
+begin
+	done:=false;
+	repeat
+		name:='';
+		$phone_say('Press pound to save this game as ' + current_save +
+			   ', 1 to give it a new name, or star to go back.');
+		key:=$phone_get_key;
+		if (key='#') then name:=current_save
+		else
+		if (key='1') then
+		  begin
+			get_word(word, 40);
+			if (word.length>0) then
+			  begin
+				name:=save_file_name(word);
+				if (name.length=0) then
+					$phone_say('Sorry, a name needs letters ' +
+						   'or digits.');
+			  end;
+		  end
+		else
+		if (key='*') then done:=true;
+
+		if (name.length>0) then
+			if (try_text(context, 'SAVE ' + name)) then
+			  begin
+				current_save:=name; done:=true;
+			  end
+			else
+				$phone_say('Sorry, ' + name + ' cannot be used ' +
+					   'as a name.  Please try another.');
+	until done;
+end;
+
+(* The saved games in the player's directory, the newest version of each *)
+procedure find_saves(var list : $save_names);
+var	spec : varying[255] of char;
+	name : varying[39] of char;
+	find_context : unsigned;
+	i, start : integer;
+	more : boolean;
+begin
+	list.count:=0; find_context:=0; more:=true;
+	while (more) do
+	  begin
+		more:=(list.count<max_save_names);
+		if (more) then
+			more:=odd($find_file('*.ZKO;', spec, find_context));
+		if (more) then
+		  begin
+			(* dev:[dir]NAME.ZKO;n *)
+			start:=1;
+			for i:=1 to spec.length do
+				if (spec[i]=']') then start:=i+1;
+			name:=''; i:=start;
+			while (i<=spec.length) do
+				if ( (spec[i]='.') or (name.length=39) ) then
+					i:=spec.length+1
+				else
+				  begin
+					name:=name + spec[i]; i:=i+1;
+				  end;
+			list.count:=list.count+1;
+			list.name[list.count]:=name;
+		  end;
+	  end;
+	$find_file_end(find_context);
+end;
+
+(* A saved game's name, or empty on star: eight at a time, each against
+ * a key, as choose_object does *)
+function choose_save(var list : $save_names) : $text_line;
+var	prompt : varying[600] of char;
+	first, last, i : integer;
+	choice : $text_line;
+	key : char;
+	done : boolean;
+begin
+	first:=1; choice:=''; done:=false;
+	repeat
+		last:=first+7;
+		if (last>list.count) then last:=list.count;
+
+		prompt:='';
+		for i:=first to last do
+			prompt:=prompt + chr(ord('0')+i-first+1) + ' for ' +
+					list.name[i] + ', ';
+		if (last<list.count) then prompt:=prompt + '9 for more, ';
+		$phone_say(prompt + 'or star to go back.');
+
+		key:=$phone_get_key;
+		if ( (key>='1') and (key<=chr(ord('0')+last-first+1)) ) then
+		  begin
+			choice:=list.name[first+ord(key)-ord('1')]; done:=true;
+		  end
+		else
+		if ( (key='9') and (last<list.count) ) then first:=last+1
+		else
+		if (key='*') then done:=true;
+	until done;
+	choose_save:=choice;
+end;
+
+(* RESTORE one of the saved games, picked from their names *)
+procedure restore_game(var context : $context_block);
+var	list : $save_names;
+	name : $text_line;
+begin
+	find_saves(list);
+	if (list.count=0) then $phone_say('You have no saved games.')
+	else
+	  begin
+		$phone_say('Which game?');
+		name:=choose_save(list);
+		if (name.length>0) then
+			if (try_text(context, 'RESTORE ' + name)) then
+				current_save:=name;
+	  end;
+end;
+
 procedure say_exits(var context : $context_block);
 var	link : packed array[1..14] of $ubyte;
 	detail : unsigned;
@@ -470,8 +658,8 @@ begin
 				  end;
 			end;
 		'4':	dispatch(context, command(score_keyword));
-		'5':	free_text(context, 'SAVE ' + save_name);
-		'6':	free_text(context, 'RESTORE ' + save_name);
+		'5':	save_game(context);
+		'6':	restore_game(context);
 		'7':	dispatch(context, command(quit_keyword));
 		'9':	say_help;
 		'0':	say_something(context);
@@ -526,19 +714,33 @@ begin
 	phone_key:=pad(phone_prefix + passcode, ' ', uaf_user_length);
 end;
 
-(* Find a record by user; the record lock is dropped straight away *)
+(* Find a record by user; the record lock is dropped straight away.  A
+ * record that is there but cannot be read is taken to be locked: an
+ * account in play, signed in at a terminal or on another call. *)
+function find_record(
+	var uaf : $uaf_file;
+	key : $uaf_key;
+	var rec : $uaf_record) : $find_result;
+var	result : $find_result;
+begin
+	findk(uaf, 0, key, eql, error:=continue);
+	if (status(uaf)<>0) then result:=find_busy
+	else
+	if (ufb(uaf)) then result:=find_missing
+	else
+	  begin
+		rec:=uaf^; result:=find_found;
+	  end;
+	unlock(uaf, error:=continue);
+	find_record:=result;
+end;
+
 function find_user(
 	var uaf : $uaf_file;
 	key : $uaf_key;
 	var rec : $uaf_record) : boolean;
-var	found : boolean;
 begin
-	findk(uaf, 0, key, eql, error:=continue);
-	found:=(status(uaf)=0);
-	if (found) then found:=not ufb(uaf);
-	if (found) then rec:=uaf^;
-	unlock(uaf, error:=continue);
-	find_user:=found;
+	find_user:=(find_record(uaf, key, rec)=find_found);
 end;
 
 (* Now, as F$CVTIME(,"COMPARISON"): yyyy-mm-dd hh:mm:ss.cc *)
@@ -656,6 +858,7 @@ function ask_passcode(
 var	passcode : varying[passcode_length] of char;
 	tries : integer;
 	result : $login_result;
+	found : $find_result;
 begin
 	tries:=0; result:=login_failed;
 	repeat
@@ -668,13 +871,19 @@ begin
 			  end
 			else
 			  begin
+				found:=find_missing;
 				if (passcode.length=passcode_length) then
-					if (find_user(uaf, phone_key(passcode), rec)) then
-						result:=login_found;
-				if (result=login_failed) then
+					found:=find_record(uaf,
+							phone_key(passcode), rec);
+				if (found=find_found) then result:=login_found
+				else
 				  begin
 					tries:=tries+1;
-					$phone_say('That passcode is not known.');
+					if (found=find_busy) then
+						$phone_say('That passcode is in use ' +
+							   'on another call.')
+					else
+						$phone_say('That passcode is not known.');
 				  end;
 			  end;
 	until ( (result<>login_failed) or (tries=max_passcode_tries) );
@@ -727,7 +936,8 @@ begin
 	repeat
 		passcode:=dec(trunc(random(seed)*1000000.0) mod 1000000,
 			      passcode_length, passcode_length);
-		found:=find_user(uaf, phone_key(passcode), rec);
+		found:=(find_record(uaf, phone_key(passcode), rec) <>
+			find_missing);		(* locked is taken too *)
 		tries:=tries+1;
 	until ( (not found) or (tries=max_new_passcode_tries) );
 	new_passcode:=not found;
@@ -790,6 +1000,61 @@ begin
 	unlock(uaf, error:=continue);
 end;
 
+(* A phone account linked in LOGIN.COM's account maintenance plays as
+ * the account it is linked to: in that account's directory and under its
+ * names, so a game saved on the phone can be restored at the terminal
+ * and the other way about.  LOGIN.COM keeps the linked account's user in
+ * the spare, after the 22 characters of its last password change date.
+ * Blank is not linked.  If the account cannot be found the phone account
+ * plays as itself.  If it is signed in at a terminal the call cannot go
+ * on: false. *)
+function follow_link(var uaf : $uaf_file; var rec : $uaf_record) : boolean;
+var	key : $uaf_key;
+	linked : $uaf_record;
+	found : $find_result;
+	i : integer;
+	blank, ok : boolean;
+begin
+	ok:=true; blank:=true;
+	for i:=1 to uaf_user_length do
+	  begin
+		key[i]:=rec.spare[uaf_link_offset+i];
+		if (key[i]<>' ') then blank:=false;
+	  end;
+	if (not blank) then
+	  begin
+		found:=find_record(uaf, key, linked);
+		if (found=find_found) then rec:=linked
+		else
+		if (found=find_busy) then
+		  begin
+			$phone_say('Your account is signed in at a terminal ' +
+				   'just now.  Please sign out there and ' +
+				   'call again.');
+			ok:=false;
+		  end;
+	  end;
+	follow_link:=ok;
+end;
+
+(* Lock the record of the account in play and keep it locked: RMS holds
+ * the lock until the file is closed at the end of the call, so nothing
+ * more may be done with the file after this.  LOGIN.COM does the same
+ * while signed in, so an account is played in one place at a time: a
+ * sign-in at a terminal is told the account is in use, and so is a
+ * second call. *)
+function hold_record(var uaf : $uaf_file; var rec : $uaf_record) : boolean;
+var	ok : boolean;
+begin
+	findk(uaf, 0, rec.user, eql, error:=continue);
+	ok:=(status(uaf)=0);
+	if (ok) then ok:=not ufb(uaf);
+	if (not ok) then
+		$phone_say('Sorry, that account is in use just now.  ' +
+			   'Please call again later.');
+	hold_record:=ok;
+end;
+
 (* SYS$LOGIN:[.USERS.<uid>], made if need be, as LOGIN.COM does.  Only
  * the directory is set: the device is SYS$LOGIN's, from ZKPHONE_RUN.COM.
  * ZK$MULTI_USER gives the badge the record's names. *)
@@ -840,6 +1105,7 @@ begin
 			    'the original interactive fiction game written ' +
 			    'exclusively for OpenVMS.');
 
+		current_save:=save_name;
 		login:=login_failed;
 		if (open_uaf(uaf)) then login:=ask_passcode(uaf, rec)
 		else	$phone_say('Sorry, saved games are not available ' +
@@ -848,6 +1114,10 @@ begin
 		if (login=login_new) then
 			if (not new_player(uaf, rec)) then login:=login_failed;
 		if (login=login_found) then count_login(uaf, rec);
+		if (login=login_found) then
+			if (not follow_link(uaf, rec)) then login:=login_failed;
+		if (login<>login_failed) then
+			if (not hold_record(uaf, rec)) then login:=login_failed;
 		if (login<>login_failed) then
 			if (not enter_directory(rec)) then login:=login_failed;
 

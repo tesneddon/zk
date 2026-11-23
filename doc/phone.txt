@@ -14,8 +14,14 @@ When asked for your passcode, a new player presses # and then:
     2   to hear about the game first
 
 You will be given a six digit passcode, read out twice.  Keep it safe:
-it is how you get back to your saved game the next time you call.
+it is how you get back to your saved games the next time you call.
 Returning players just key in their passcode.
+
+If you also play at a terminal, sign in there and link your phone
+account from account maintenance, using your passcode.  Your saved
+games are then shared: save at the terminal and restore on the phone,
+or the other way about.  A linked account can be played in one place
+at a time, so sign out at the terminal before you call.
 
 
 IN A ROOM
@@ -48,12 +54,17 @@ Press 0 for the menu:
     2   Go up, where you can
     3   Inventory: pick an object you carry to use it
     4   Score
-    5   Save your game
-    6   Restore your game
+    5   Save your game: # keeps its name, 1 gives it a new one
+    6   Restore a game: the names are read out, each with a key
     7   Quit
     8   Go down, where you can
     9   Help
     *   Back to the game
+
+A saved game is called PHONE until you name it.  Say the name after
+the tone, or spell it on the keypad; what was heard is read back
+before it is used.  A name is letters and digits, and cannot be a word
+the game itself knows, such as NORTH.
 
 
 HOW IT WORKS
