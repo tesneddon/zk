@@ -14,10 +14,17 @@ to output MACRO-32 source modules by Tim Sneddon and as such
 there are now native versions for all OpenVMS supported
 architectures available.
 
+Thanks also go to Joe Ferraro for starting the quest to find
+and port the game from OpenVMS VAX to I64.
+
 Then, in 2021 The Halls of ZK became the first computer game
 to be built and played on the newly ported OpenVMS x86-64,
 beating the original ADVENT text adventure significantly due
 to the early delivery of the Pascal compiler.
+
+Thanks too to Jake Hamby, who fixed saving games and random
+numbers on Alpha, I64 and x86-64, and to Brian Chiha, who
+delivered an excellent walkthrough.
 
 The Halls of ZK is now an open source project maintained by
 Tim Sneddon with the grateful support of Endless Software
