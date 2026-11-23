@@ -1,3 +1,28 @@
+* 22-Nov-2026 -- Tim Sneddon <tim@sneddon.id.au>
+ - LOGIN.COM: forgotten password: a code is mailed to the account's address,
+   and entered in the same session within 15 minutes sets a new password; at
+   most one code every 10 minutes for an account
+ - ZKUAF.DAT: the date the last reset code was sent is a new field, taken
+   from the spare; existing files need no conversion
+ - Status badges for the website and the phone line: utils/zkstatus.com, a
+   batch job that requeues itself, writes status.html and mails a change
+
+* 21-Nov-2026 -- Tim Sneddon <tim@sneddon.id.au>
+ - LOGIN.COM: add account maintenance: change your password or name, and
+   link or unlink a phone account by its passcode
+ - LOGIN.COM: list your saved games and delete them, from account maintenance
+ - A linked phone account plays in the linked account's directory, under its
+   name; linking moves the phone's saved games there, so a game can be
+   carried on at the terminal or on the phone
+ - Phone: keep the account's record locked for the call, as LOGIN.COM does
+   while signed in, so an account is played in one place at a time
+ - Phone: save under a name, said or spelled; restore reads the names out,
+   each against a key
+ - LOGIN.COM: show the previous login, the last password change, the login
+   count and whether a phone account is linked
+ - ZKUAF.DAT: the date of the last password change and the linked account
+   are new fields, taken from the spare; existing files need no conversion
+
 * 20-Nov-2026 -- Tim Sneddon <tim@sneddon.id.au>
  - Fix the crash on SAVE on Alpha, I64 and x86-64 (Jake Hamby, #9, #4)
  - Build with one top-level DESCRIP.MMS, with MMK or MMS (after #11 from

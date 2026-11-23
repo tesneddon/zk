@@ -1,0 +1,25 @@
+; manager_zk.conf: the Asterisk manager (AMI) user that ZKSTATUS.COM on
+; VMS logs in as, to see that the trunk is registered.  Copy this to
+; /etc/asterisk/manager_zk.conf, fill in the capitals, make it readable
+; by asterisk only (it holds a secret), and in manager.conf
+;
+;   - set  enabled = yes  in [general] (make samples leaves it no), and
+;   - add  #include manager_zk.conf  at the end.
+;
+; Then  asterisk -rx 'manager reload'.  The [general] section is left to
+; manager.conf, as Asterisk would not merge a second one: it listens on
+; 5038, on all addresses; the firewall takes AMI from the LAN only.
+;
+; PJSIPShowRegistrationsOutbound needs write = system or reporting, and
+; reporting is the lesser.  It also lets this user register and
+; unregister the trunk (PJSIPRegister, PJSIPUnregister), so only the
+; VMS nodes that run ZKSTATUS are let in.  The secret must match
+; ami_secret in ZKSTATUS.INI.
+
+[zkstatus]
+secret = CHANGEME
+deny = 0.0.0.0/0.0.0.0
+permit = BENDER-ADDRESS/255.255.255.255
+permit = LEELA-ADDRESS/255.255.255.255
+read =
+write = reporting

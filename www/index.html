@@ -172,6 +172,32 @@
 
     .brand .light { font-weight: 400; }
 
+    /* Up/down badges, as on hallsofzk.org.  status.html is written by a
+       batch job (utils/zkstatus.com), so it is not part of the site's
+       source.  The width fits its two badges ("play.hallsofzk.org up",
+       "phone up"); the iframe's width and height attributes say the
+       same, so it keeps its size even under a stale stylesheet.  Beside
+       the brand on desktops: margin-right: auto keeps the links on the
+       right. */
+    .status-badge {
+      width: 218px;
+      height: 20px;
+      margin-right: auto;
+      border: 0;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    /* Phones and tablets are too narrow for brand, badges and links on
+       one line: the badges get a row of their own, under the others */
+    @media (max-width: 991.98px) {
+      .status-badge {
+        order: 3;
+        flex-basis: 100%;
+        margin: 0 0 6px;
+      }
+    }
+
     .nav-links {
       display: flex;
       margin: 0;
@@ -335,6 +361,9 @@
       <span class="zk-logo" aria-hidden="true"><span>z</span><span>k</span></span>
       <span class="light">The Halls of ZK</span>
     </a>
+    <!-- Up/down badges, written by a batch job (utils/zkstatus.com) -->
+    <iframe class="status-badge" src="status.html"
+            width="218" height="20" title="Game server status"></iframe>
     <ul class="nav-links">
       <li class="optional">
         <a href="https://hallsofzk.org/commands.html" target="_blank" rel="noopener">Commands</a>

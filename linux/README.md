@@ -14,6 +14,7 @@ one is and where it goes.
 | `etc/ifc-say/zk-hear.prompt` | `/etc/ifc-say/zk-hear.prompt` | A vocabulary hint for the recogniser |
 | `etc/asterisk/extensions_zk.conf` | `/etc/asterisk/extensions_zk.conf` | The dialplan: `[zk]`, `[ifc-say]`, `[ifc-hear]`, `[from-trunk]`, `[from-lan]` |
 | `etc/asterisk/pjsip_zk.conf.sample` | `/etc/asterisk/pjsip_zk.conf`, mode 640 | The trunk and a test softphone; fill in the capitals |
+| `etc/asterisk/manager_zk.conf.sample` | `/etc/asterisk/manager_zk.conf`, mode 640 | The AMI user that `utils/zkstatus.com` checks the trunk with; fill in the capitals |
 | `etc/nftables-zk.conf.sample` | `/etc/nftables.conf` | Firewall: SIP and RTP only from the LAN and the provider |
 | `etc/cron.d/zk-phone` | `/etc/cron.d/zk-phone` | Prunes rendered text not heard for 90 days |
 
@@ -23,6 +24,15 @@ Asterisk's own files, which are otherwise left alone:
 ```
 #include extensions_zk.conf       ; in /etc/asterisk/extensions.conf
 #include pjsip_zk.conf            ; in /etc/asterisk/pjsip.conf
+```
+
+The status badges on play.hallsofzk.org (`utils/zkstatus.com`, on VMS)
+also need the manager user.  That takes a third line, and the one
+change to an Asterisk file: `enabled = yes` in the `[general]` section
+of `manager.conf`.
+
+```
+#include manager_zk.conf          ; in /etc/asterisk/manager.conf
 ```
 
 ## Installing by hand
@@ -37,13 +47,15 @@ install -d /etc/ifc-say
 install -m 644 etc/ifc-say/zk.sed etc/ifc-say/zk-hear.sed etc/ifc-say/zk-hear.prompt /etc/ifc-say/
 install -m 644 -o asterisk -g asterisk etc/asterisk/extensions_zk.conf /etc/asterisk/
 install -m 640 -o asterisk -g asterisk etc/asterisk/pjsip_zk.conf.sample /etc/asterisk/pjsip_zk.conf
+install -m 640 -o asterisk -g asterisk etc/asterisk/manager_zk.conf.sample /etc/asterisk/manager_zk.conf   # for the status badges
 install -m 644 etc/cron.d/zk-phone /etc/cron.d/
 ```
 
 Then:
 1. Change `VAX-ADDRESS` in `extensions_zk.conf`, and the capitals in
-   `pjsip_zk.conf`.
-2. Add the two `#include` lines above.
+   `pjsip_zk.conf` (and `manager_zk.conf`).
+2. Add the `#include` lines above (and, for the badges, set
+   `enabled = yes` in `manager.conf`).
 3. Run `asterisk -rx 'core reload'`.
 4. Run `make-zk-prompts`.
 
